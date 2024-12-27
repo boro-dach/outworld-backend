@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Put } from '@nestjs/common';
+import { Role, User } from '@prisma/client';
 import { hash } from 'argon2';
 import { AuthDto } from 'src/auth/dto/auth.dto';
 import { PrismaService } from 'src/prisma.service';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -35,5 +37,34 @@ export class UserService {
                 password: await hash(dto.password)
             }
         })
+    }
+
+    async updateUserRole(
+        adminUser: User,
+        userId: number,
+        dto: UpdateUserDto
+    ) {
+        if (adminUser.role !== 'ADMIN') {
+            throw new ForbiddenException('Only admins can update user roles');
+        }
+
+        const targetUser = await this.getUserById(userId);
+        if (!targetUser) {
+            throw new Error('User not found');
+        }
+
+        const updatedUser = await this.prisma.user.update({
+            where: { id: userId },
+            data: { role: dto.role },
+            select: {
+                id: true,
+                email: true,
+                username: true,
+                role: true,
+                createdAt: true
+            }
+        });
+
+        return updatedUser;
     }
 }

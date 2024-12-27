@@ -4,6 +4,7 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CurrentUser } from 'src/user/decorators/user.decorator';
 import { UpdateApplicationDto } from './dto/update-application.dto';
 import { CreateApplicationDto } from './dto/create-application.dto';
+import { Role } from '@prisma/client';
 
 @Controller('application')
 export class ApplicationController {
@@ -19,7 +20,7 @@ export class ApplicationController {
     return this.applicationService.createApplication(dto, user.id);
   }
 
-  @Auth()
+  @Auth(Role.ADMIN)
   @HttpCode(200)
   @Post('update/:id')
   async updateApplication(
