@@ -20,7 +20,7 @@ export class ApplicationService {
             }
         })
 
-        await this.sendEmail(application)
+        await this.sendEmail(application, 'Новая заявка на рассмотрение')
 
         return application
     }
@@ -46,6 +46,12 @@ export class ApplicationService {
             include: { user: true } 
         })
 
+        await this.sendEmail({
+            id: updatedApplication.id,
+            text: updatedApplication.text,
+            userId: updatedApplication.userId
+        }, 'Статус вашей заявки был изменен')
+
         return {
             text: updatedApplication.text,
             status: updatedApplication.status,
@@ -57,7 +63,7 @@ export class ApplicationService {
         return this.prisma.application.findMany();
     }
 
-    private async sendEmail(application: { id: number, text: string, userId: number}) {
+    private async sendEmail(application: { id: number, text: string, userId: number, }, subject: string) {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -69,7 +75,7 @@ export class ApplicationService {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: 'monstriqq1@gmail.com',
-            subject: 'New application',
+            subject: subject,
             text: `A new application has been created:\n\n
                     Application ID: ${application.id}\n
                     User ID: ${application.userId}\n
