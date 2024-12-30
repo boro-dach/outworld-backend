@@ -60,6 +60,22 @@ export class AuthController {
     return response
   }
 
+  @Post('validate-token')
+  async validateToken(@Req() req: Request) {
+    const authHeader = req.headers['authorization'];
+
+    if (!authHeader) {
+      throw new UnauthorizedException('Заголовок авторизации отсутствует');
+    }
+
+    const token = authHeader.split(' ')[1];
+    if (!token) {
+      throw new UnauthorizedException('Неправильный формат токена');
+    }
+
+    return await this.authService.validateToken(token);
+  }
+
   @HttpCode(200)
   @Post('logout')
   async logout(@Res({ passthrough: true }) res: Response) {
