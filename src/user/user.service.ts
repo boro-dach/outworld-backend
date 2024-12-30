@@ -45,12 +45,12 @@ export class UserService {
         dto: UpdateUserDto
     ) {
         if (adminUser.role !== 'ADMIN') {
-            throw new ForbiddenException('Only admins can update user roles');
+            throw new ForbiddenException('Только администраторы могут изменять роли пользователей');
         }
 
         const targetUser = await this.getUserById(userId);
         if (!targetUser) {
-            throw new Error('User not found');
+            throw new Error('Пользователь не найден');
         }
 
         const updatedUser = await this.prisma.user.update({

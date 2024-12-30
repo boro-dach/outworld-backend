@@ -28,7 +28,7 @@ export class AuthService {
         const oldUser = await this.userService.getUserByEmail(dto.email)
 
         if (oldUser) {
-            throw new BadRequestException('User with this email already exists')
+            throw new BadRequestException('Пользователь с такой почтой уже существует')
         }
 
         const user = await this.userService.create(dto)
@@ -40,7 +40,7 @@ export class AuthService {
 
     async getNewTokens(refreshToken: string) {
         const result = await this.jwt.verifyAsync(refreshToken)
-        if (!result) throw new UnauthorizedException('refresh token not valid')
+        if (!result) throw new UnauthorizedException('токен обновления не валиден')
 
         const user = await this.userService.getUserById(result.id)
 
@@ -67,10 +67,26 @@ export class AuthService {
         const user = await this.userService.getUserByEmail(dto.email)
 
         if (!user) {
-            throw new UnauthorizedException('User not found')
+            throw new UnauthorizedException('Пользователь не найден')
         }
 
         return user
+    }
+
+    async validateToken(token: string) {
+        try {
+            const decoded = this.jwt.verify(token)
+
+            const user = await this.userService.getUserById(decoded.sub)
+
+            if (!user) {
+                throw new UnauthorizedException('Пользователь не найден')
+            }
+            return user
+
+        } catch (error) {
+            throw new UnauthorizedException('Токен не валидный или истёк его срок')
+        }
     }
 
     addRefreshTokenToResponse(res: Response, refreshToken: string) {
