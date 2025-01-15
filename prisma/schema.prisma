@@ -16,6 +16,7 @@ model User {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   applications Application[]
+  cards Card[]
 }
 
 enum Role {
@@ -46,4 +47,46 @@ model Event {
   description String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
+}
+
+model New {
+  id         Int       @id @default(autoincrement())
+  title      String
+  content    String
+  date       DateTime
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Card {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  cardNumber String   @unique // Номер виртуальной карты
+  balance    Int      @default(0) // Баланс на карте
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Обратные связи
+  fromTransactions Money[] @relation("FromCard")
+  toTransactions   Money[] @relation("ToCard")
+}
+
+model Money {
+  id         Int      @id @default(autoincrement())
+  fromCardId Int
+  toCardId   Int
+  amount     Int      // Сумма транзакции
+  type       MoneyType // Тип транзакции (например, пополнение или вывод)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  fromCard   Card     @relation("FromCard", fields: [fromCardId], references: [id])
+  toCard     Card     @relation("ToCard", fields: [toCardId], references: [id])
+}
+
+enum MoneyType {
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
 }
