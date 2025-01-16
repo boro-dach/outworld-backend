@@ -8,15 +8,17 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  username  String      @unique
-  email     String      @unique
-  password  String
-  role      Role        @default(USER)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  applications Application[]
-  cards Card[]
+  id            Int           @id @default(autoincrement())
+  username      String        @unique
+  email         String        @unique
+  password      String
+  role          Role          @default(USER)
+  accessToken   String?       @unique
+  tokenExpires  DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  applications  Application[]
+  cards         Card[]
 }
 
 enum Role {
@@ -41,12 +43,12 @@ enum Status {
 }
 
 model Event {
-  id         Int       @id @default(autoincrement())
-  title      String
-  date   DateTime
+  id          Int       @id @default(autoincrement())
+  title       String
+  date        DateTime
   description String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model New {
@@ -59,30 +61,27 @@ model New {
 }
 
 model Card {
-  id         Int      @id @default(autoincrement())
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id])
-  cardNumber String   @unique // Номер виртуальной карты
-  balance    Int      @default(0) // Баланс на карте
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  // Обратные связи
-  fromTransactions Money[] @relation("FromCard")
-  toTransactions   Money[] @relation("ToCard")
+  id               Int      @id @default(autoincrement())
+  userId           Int
+  user             User     @relation(fields: [userId], references: [id])
+  cardNumber       String   @unique
+  balance          Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  fromTransactions Money[]  @relation("FromCard")
+  toTransactions   Money[]  @relation("ToCard")
 }
 
 model Money {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   fromCardId Int
   toCardId   Int
-  amount     Int      // Сумма транзакции
-  type       MoneyType // Тип транзакции (например, пополнение или вывод)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  fromCard   Card     @relation("FromCard", fields: [fromCardId], references: [id])
-  toCard     Card     @relation("ToCard", fields: [toCardId], references: [id])
+  amount     Int
+  type       MoneyType
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  fromCard   Card      @relation("FromCard", fields: [fromCardId], references: [id])
+  toCard     Card      @relation("ToCard", fields: [toCardId], references: [id])
 }
 
 enum MoneyType {
