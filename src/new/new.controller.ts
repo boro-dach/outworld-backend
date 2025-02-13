@@ -16,6 +16,7 @@ export class NewController {
     return this.newService.createNew(dto)
   }
 
+  @Auth()
   @Get('get')
   async getNews() {
     return this.newService.getNews()
