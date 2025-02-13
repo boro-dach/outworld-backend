@@ -46,11 +46,7 @@ export class ApplicationService {
             include: { user: true } 
         })
 
-        await this.sendEmail({
-            id: updatedApplication.id,
-            text: updatedApplication.text,
-            userId: updatedApplication.userId
-        }, 'Статус вашей заявки был изменен')
+        await this.sendEmail(application, 'Статус вашей заявки был изменен')
 
         return {
             text: updatedApplication.text,
