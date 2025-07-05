@@ -37,4 +37,12 @@ export class ApplicationService {
 
     return application;
   }
+
+  async get(userId: string) {
+    const application = await this.prisma.application.findMany({
+      where: { userId: userId },
+    });
+
+    return application;
+  }
 }

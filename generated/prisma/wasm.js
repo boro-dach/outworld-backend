@@ -138,6 +138,15 @@ exports.Prisma.ApplicationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ArticleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  text: 'text',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -165,7 +174,8 @@ exports.ApplicationStatus = exports.$Enums.ApplicationStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Application: 'Application'
+  Application: 'Application',
+  Article: 'Article'
 };
 
 /**

@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ApplicationModule } from './application/application.module';
+import { ArticlesModule } from './articles/articles.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ApplicationModule } from './application/application.module';
       signOptions: { expiresIn: '7d' },
     }),
     ApplicationModule,
+    ArticlesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

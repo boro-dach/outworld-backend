@@ -42,4 +42,13 @@ export class ApplicationController {
 
     return application;
   }
+
+  @Auth(UserRole.USER, UserRole.ADMIN)
+  @HttpCode(200)
+  @Post('get')
+  async get(@CurrentUser('id') userId: string) {
+    const application = await this.applicationService.get(userId);
+
+    return application;
+  }
 }
