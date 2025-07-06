@@ -147,6 +147,23 @@ exports.Prisma.ArticleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  playerUuid: 'playerUuid',
+  status: 'status',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  quantity: 'quantity',
+  price: 'price',
+  orderId: 'orderId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -172,10 +189,20 @@ exports.ApplicationStatus = exports.$Enums.ApplicationStatus = {
   REJECTED: 'REJECTED'
 };
 
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  CREATED: 'CREATED',
+  PROCESSING: 'PROCESSING',
+  EN_ROUTE: 'EN_ROUTE',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Application: 'Application',
-  Article: 'Article'
+  Article: 'Article',
+  Order: 'Order',
+  OrderItem: 'OrderItem'
 };
 
 /**
