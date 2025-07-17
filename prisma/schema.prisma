@@ -31,8 +31,6 @@ model User {
   articles Article[]
   orders Order[]
 
-  accessToken String? @unique
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

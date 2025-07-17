@@ -24,21 +24,13 @@ export class UserService {
     return user;
   }
 
-  async create(dto: RegisterDto, token: string) {
+  async create(dto: RegisterDto) {
     return this.prisma.user.create({
       data: {
         login: dto.login,
         email: dto.email,
         password: await hash(dto.password),
-        accessToken: token,
       },
-    });
-  }
-
-  async updateToken(id: string, token: string) {
-    await this.prisma.user.update({
-      where: { id },
-      data: { accessToken: token },
     });
   }
 

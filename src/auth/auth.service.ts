@@ -7,69 +7,120 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { UserRole } from 'generated/prisma';
 import { UserService } from 'src/user/user.service';
-import { LoginDto, RegisterDto } from './dto/auth.dto';
+import { LoginDto, RegisterDto, TokenPayload } from './dto/auth.dto';
 import * as argon2 from 'argon2';
-
-export interface TokenPayload {
-  role: UserRole;
-  login: string;
-}
+import { PrismaService } from 'src/prisma.service';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
+  EXPIRE_DAY_REFRESH_TOKEN = 1;
+  REFRESH_TOKEN_NAME = 'refreshToken';
+
   constructor(
     private readonly jwt: JwtService,
-    private readonly user: UserService,
+    private readonly userService: UserService,
+    private readonly prisma: PrismaService,
   ) {}
 
-  issueToken({ role, login }: TokenPayload) {
-    const token = this.jwt.sign(
-      { role, login },
-      {
-        expiresIn: '7d',
-      },
-    );
+  async login(dto: LoginDto) {
+    const user = await this.validateUser(dto.login);
+    const tokens = this.issueTokens({
+      userId: user.id,
+      login: user.login,
+      role: user.role,
+      email: user.email,
+    });
 
-    return token;
-  }
-
-  private async validate(dto: LoginDto) {
-    const user = await this.user.getByLogin(dto.login);
-
-    if (!user) throw new NotFoundException('User not found');
-
-    const isValidPassword = await argon2.verify(user.password, dto.password);
-    if (!isValidPassword) throw new UnauthorizedException('Wrong password');
-
-    return user;
+    return { user, ...tokens };
   }
 
   async register(dto: RegisterDto) {
-    const oldUser = await this.user.getByEmail(dto.email);
+    const oldUser = await this.userService.getByEmail(dto.email);
 
-    if (oldUser)
-      throw new BadRequestException('User with this email already exists');
+    if (oldUser) throw new BadRequestException('Пользователь уже существует');
 
-    const token = this.issueToken({
-      role: UserRole.USER,
-      login: dto.login,
+    const user = await this.userService.create(dto);
+    const tokens = this.issueTokens({
+      userId: user.id,
+      login: user.login,
+      role: user.role,
+      email: user.email,
     });
 
-    const user = await this.user.create(dto, token);
+    return { user, ...tokens };
+  }
+
+  async getNewTokens(refreshToken: string) {
+    const result = await this.jwt.verifyAsync(refreshToken);
+    if (!result) throw new UnauthorizedException('Невалидный refresh токен');
+
+    const user = await this.userService.getByLogin(result.login);
+    const tokens = this.issueTokens({
+      userId: user.id,
+      login: user.login,
+      role: user.role,
+      email: user.email,
+    });
+
+    return { user, ...tokens };
+  }
+
+  issueTokens(payload: TokenPayload) {
+    const data = { payload };
+
+    const accessToken = this.jwt.sign(payload, {
+      expiresIn: '1h',
+    });
+
+    const refreshToken = this.jwt.sign(data, {
+      expiresIn: '7d',
+    });
+
+    return { accessToken, refreshToken };
+  }
+
+  private async validateUser(login: string) {
+    const user = await this.userService.getByLogin(login);
+
+    if (!user) throw new NotFoundException('Пользователь не найден');
 
     return user;
   }
 
-  async login(dto: LoginDto) {
-    const user = await this.validate(dto);
+  addRefreshTokenToResponse(res: Response, refreshToken: string) {
+    const expiresIn = new Date();
+    expiresIn.setDate(expiresIn.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN);
 
-    const token = this.issueToken({
-      role: user.role,
-      login: dto.login,
+    res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
+      httpOnly: true,
+      expires: expiresIn,
+      secure: true,
+      sameSite: 'none',
     });
+  }
 
-    await this.user.updateToken(user.id, token);
+  removeRefreshTokenFromResponse(res: Response) {
+    res.cookie(this.REFRESH_TOKEN_NAME, '', {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: true,
+      sameSite: 'none',
+    });
+  }
 
-    return user;
+  async verifyUser(accessToken: string) {
+    try {
+      const payload = await this.jwt.verifyAsync(accessToken);
+      const user = await this.userService.getByLogin(payload.login);
+
+      if (!user) {
+        throw new UnauthorizedException('Пользователь не найден');
+      }
+
+      return user;
+    } catch (error) {
+      throw new UnauthorizedException('Невалидный access токен');
+    }
   }
 }

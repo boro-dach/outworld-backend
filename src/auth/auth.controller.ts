@@ -10,7 +10,6 @@ export class AuthController {
   @Post('register')
   async register(@Body() dto: RegisterDto) {
     const user = await this.authService.register(dto);
-
     return user;
   }
 
@@ -18,7 +17,13 @@ export class AuthController {
   @Post('login')
   async login(@Body() dto: LoginDto) {
     const user = await this.authService.login(dto);
+    return user;
+  }
 
+  @HttpCode(200)
+  @Post('verify')
+  async verify(@Body() accessToken: string) {
+    const user = await this.authService.verifyUser(accessToken);
     return user;
   }
 }

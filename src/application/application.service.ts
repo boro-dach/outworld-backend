@@ -5,10 +5,15 @@ import {
   DeleteApplicationDto,
   UpdateApplicationStatusDto,
 } from './dto/application.dto';
+import { ApplicationStatus } from 'generated/prisma';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class ApplicationService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly user: UserService,
+  ) {}
 
   async create(dto: CreateApplicationDto, userId: string) {
     const application = await this.prisma.application.create({
@@ -26,6 +31,13 @@ export class ApplicationService {
       where: { id: dto.id },
       data: { status: dto.status },
     });
+
+    if (application.status === ApplicationStatus.APPROVED) {
+      await this.user.updateIsVerified({
+        id: application.userId,
+        isVerified: true,
+      });
+    }
 
     return application;
   }

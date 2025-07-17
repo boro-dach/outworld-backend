@@ -1,4 +1,5 @@
 import { IsEmail, IsString, Min } from 'class-validator';
+import { UserRole } from 'generated/prisma';
 
 export class RegisterDto {
   @IsString()
@@ -22,4 +23,11 @@ export class LoginDto {
   @IsString()
   @Min(6)
   password: string;
+}
+
+export interface TokenPayload {
+  userId: string;
+  login: string;
+  role: UserRole;
+  email: string;
 }
