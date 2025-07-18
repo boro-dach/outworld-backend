@@ -26,7 +26,7 @@ export class UserController {
   @Auth(UserRole.USER, UserRole.ADMIN)
   @HttpCode(200)
   @Post('is-verified')
-  async getIsVerified(@CurrentUser('email') email: string) {
-    return await this.userService.getLogin(email);
+  async getIsVerified(@CurrentUser('id') id: string) {
+    return await this.userService.getIsVerified(id);
   }
 }

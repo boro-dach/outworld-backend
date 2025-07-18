@@ -47,10 +47,11 @@ export class UserService {
     return { login };
   }
 
-  async getIsVerified(email: string) {
+  async getIsVerified(id: string) {
     const user = await this.prisma.user.findUnique({
-      where: { email },
+      where: { id },
     });
+
     return user?.isVerified;
   }
 }
