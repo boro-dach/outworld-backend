@@ -42,4 +42,15 @@ export class UserService {
 
     return user;
   }
+
+  async getLogin(login: string) {
+    return { login };
+  }
+
+  async getIsVerified(email: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+    return user?.isVerified;
+  }
 }
