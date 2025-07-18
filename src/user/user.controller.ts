@@ -9,13 +9,6 @@ import { CurrentUser } from './decorators/user.decorator';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Auth(UserRole.ADMIN)
-  @HttpCode(200)
-  @Post('verify')
-  async updateIsVerified(@Body() dto: UpdateIsVerifiedDto) {
-    const user = await this.userService.updateIsVerified(dto);
-  }
-
   @Auth(UserRole.USER, UserRole.ADMIN)
   @HttpCode(200)
   @Post('get-login')
@@ -28,5 +21,19 @@ export class UserController {
   @Post('is-verified')
   async getIsVerified(@CurrentUser('id') id: string) {
     return await this.userService.getIsVerified(id);
+  }
+
+  @Auth(UserRole.USER, UserRole.ADMIN)
+  @HttpCode(200)
+  @Post('get-role')
+  async getRole(@CurrentUser('role') role: UserRole) {
+    return await this.userService.getRole(role);
+  }
+
+  @Auth(UserRole.ADMIN)
+  @HttpCode(200)
+  @Post('update-is-verified')
+  async updateIsVerified(@Body() dto: UpdateIsVerifiedDto) {
+    return await this.userService.updateIsVerified(dto);
   }
 }

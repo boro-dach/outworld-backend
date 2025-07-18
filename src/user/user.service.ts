@@ -3,6 +3,7 @@ import { hash } from 'argon2';
 import { RegisterDto } from 'src/auth/dto/auth.dto';
 import { PrismaService } from 'src/prisma.service';
 import { UpdateIsVerifiedDto } from './dto/user.dto';
+import { UserRole } from 'generated/prisma';
 
 @Injectable()
 export class UserService {
@@ -53,5 +54,18 @@ export class UserService {
     });
 
     return user?.isVerified;
+  }
+
+  async getRole(role: UserRole) {
+    return { role };
+  }
+
+  async verify(id: string) {
+    const user = await this.prisma.user.update({
+      where: { id },
+      data: { isVerified: true },
+    });
+
+    return user;
   }
 }
