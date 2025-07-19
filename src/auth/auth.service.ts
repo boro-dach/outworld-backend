@@ -25,6 +25,10 @@ export class AuthService {
 
   async login(dto: LoginDto) {
     const user = await this.validateUser(dto.login);
+    const isPasswordValid = await argon2.verify(user.password, dto.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Неверный пароль');
+    }
     const tokens = this.issueTokens({
       userId: user.id,
       login: user.login,
