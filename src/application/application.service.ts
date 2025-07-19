@@ -57,4 +57,18 @@ export class ApplicationService {
 
     return application;
   }
+
+  async getAll() {
+    const applications = await this.prisma.application.findMany({
+      include: {
+        user: {
+          select: {
+            login: true,
+          },
+        },
+      },
+    });
+
+    return applications;
+  }
 }

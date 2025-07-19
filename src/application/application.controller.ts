@@ -51,4 +51,13 @@ export class ApplicationController {
 
     return application;
   }
+
+  @Auth(UserRole.ADMIN)
+  @HttpCode(200)
+  @Post('get-all')
+  async getAll() {
+    const applications = await this.applicationService.getAll();
+
+    return applications;
+  }
 }
