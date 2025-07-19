@@ -20,7 +20,9 @@ export class UserController {
   @HttpCode(200)
   @Post('is-verified')
   async getIsVerified(@CurrentUser('id') id: string) {
-    return await this.userService.getIsVerified(id);
+    const isVerified = await this.userService.getIsVerified(id);
+
+    return { isVerified };
   }
 
   @Auth(UserRole.USER, UserRole.ADMIN)
