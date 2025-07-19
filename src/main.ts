@@ -1,7 +1,8 @@
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as fs from 'fs';
 import * as path from 'path';
+import { AllExceptionsFilter } from './all-exceptions-filter';
 
 async function bootstrap() {
   const port = process.env.PORT ?? 5000;
@@ -29,6 +30,8 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Authorization',
     credentials: true,
   });
+  const httpAdapterHost = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new AllExceptionsFilter(httpAdapterHost));
 
   await app.listen(port);
 

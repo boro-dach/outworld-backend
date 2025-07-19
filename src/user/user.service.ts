@@ -1,19 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { hash } from 'argon2';
 import { RegisterDto } from 'src/auth/dto/auth.dto';
 import { PrismaService } from 'src/prisma.service';
 import { UpdateIsVerifiedDto } from './dto/user.dto';
 import { UserRole } from 'generated/prisma';
+import { firstValueFrom } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {}
+  private readonly logger = new Logger(UserService.name);
+
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly httpService: HttpService,
+  ) {}
 
   async getByLogin(login: string) {
     const user = await this.prisma.user.findFirst({
       where: { login },
     });
-
     return user;
   }
 
@@ -21,7 +27,6 @@ export class UserService {
     const user = await this.prisma.user.findFirst({
       where: { email },
     });
-
     return user;
   }
 
@@ -36,24 +41,102 @@ export class UserService {
   }
 
   async updateIsVerified(dto: UpdateIsVerifiedDto) {
-    const user = await this.prisma.user.update({
-      where: { id: dto.id },
-      data: { isVerified: dto.isVerified },
-    });
+    try {
+      const user = await this.prisma.user.update({
+        where: { id: dto.id },
+        data: { isVerified: dto.isVerified },
+        select: {
+          id: true,
+          login: true,
+          isVerified: true,
+        },
+      });
 
-    return user;
+      if (dto.isVerified && user.login) {
+        await this.addToWhitelist(user.login);
+      }
+
+      if (!dto.isVerified && user.login) {
+        await this.removeFromWhitelist(user.login);
+      }
+
+      return user;
+    } catch (error) {
+      this.logger.error(
+        `Failed to update verification status: ${error.message}`,
+      );
+      throw new BadRequestException('Failed to update verification status');
+    }
+  }
+
+  private async removeFromWhitelist(username: string): Promise<void> {
+    try {
+      this.logger.log(`Removing user ${username} from whitelist`);
+
+      const response = await firstValueFrom(
+        this.httpService.delete(`${process.env.MINECRAFT_API_URL}/whitelist`, {
+          params: { username },
+          timeout: 10000,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${process.env.MINECRAFT_API_KEY}`,
+          },
+        }),
+      );
+
+      this.logger.log(`Successfully removed ${username} from whitelist`);
+      return response.data;
+    } catch (error) {
+      this.logger.error(
+        `Failed to remove ${username} from whitelist: ${error.message}`,
+      );
+      this.logger.warn(
+        `Whitelist API failed for ${username}, but user remains unverified in DB`,
+      );
+    }
+  }
+
+  private async addToWhitelist(username: string): Promise<void> {
+    try {
+      this.logger.log(`Adding user ${username} to whitelist`);
+
+      const response = await firstValueFrom(
+        this.httpService.post(
+          `${process.env.MINECRAFT_API_URL}/whitelist`,
+          {},
+          {
+            params: { username },
+            timeout: 10000,
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `${process.env.MINECRAFT_API_KEY}`,
+            },
+          },
+        ),
+      );
+
+      this.logger.log(`Successfully added ${username} to whitelist`);
+      return response.data;
+    } catch (error) {
+      this.logger.error(
+        `Failed to add ${username} to whitelist: ${error.message}`,
+      );
+      this.logger.warn(
+        `Whitelist API failed for ${username}, but user remains verified in DB`,
+      );
+    }
   }
 
   async getLogin(login: string) {
     return { login };
   }
 
-  async getIsVerified(id: string) {
+  async getIsVerified(id: string): Promise<boolean> {
     const user = await this.prisma.user.findUnique({
       where: { id },
+      select: { isVerified: true },
     });
-
-    return user?.isVerified;
+    return Boolean(user?.isVerified);
   }
 
   async getRole(role: UserRole) {
@@ -65,7 +148,6 @@ export class UserService {
       where: { id },
       data: { isVerified: true },
     });
-
     return user;
   }
 }
