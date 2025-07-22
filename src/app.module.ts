@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ApplicationModule } from './application/application.module';
 import { ArticlesModule } from './articles/articles.module';
 import { OrderModule } from './order/order.module';
+import { BankModule } from './bank/bank.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { OrderModule } from './order/order.module';
     ApplicationModule,
     ArticlesModule,
     OrderModule,
+    BankModule,
   ],
   controllers: [AppController],
   providers: [AppService],

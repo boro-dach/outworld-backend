@@ -30,6 +30,7 @@ model User {
   applications Application[]
   articles Article[]
   orders Order[]
+  cards Card[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -56,7 +57,7 @@ model Application {
 model Article {
   id String @id @default(cuid())
 
-  User User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
   userId String
 
   title String
@@ -95,4 +96,18 @@ model OrderItem {
   price    Float
   order    Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId  String
+}
+
+model Card {
+  id String @id @default(cuid())
+
+  title String
+  credits Int @default(0)
+  cardNumber String @unique
+
+  user User @relation(fields: [userId], references: [id])
+  userId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
