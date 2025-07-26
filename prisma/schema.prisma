@@ -19,6 +19,12 @@ enum UserRole {
   ADMIN
 }
 
+enum Jobs {
+  BANKER
+  BUSINESSMAN
+  OTHER
+}
+
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
@@ -26,11 +32,17 @@ model User {
   password  String
   role      UserRole @default(USER)
   isVerified Boolean @default(false)
+  job Jobs?
 
   applications Application[]
   articles Article[]
   orders Order[]
   cards Card[]
+  vacancies Vacancy[]
+
+
+  initiatedTransactions Transaction[] @relation("InitiatedByUser")
+  confirmedTransactions Transaction[] @relation("ConfirmedByBanker")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -104,6 +116,62 @@ model Card {
   title String
   credits Int @default(0)
   cardNumber String @unique
+
+  user User @relation(fields: [userId], references: [id])
+  userId String
+
+  transactions Transaction[]
+  relatedTransactions   Transaction[] @relation("RelatedCardTransactions")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
+  TRANSFER_IN
+  TRANSFER_OUT
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model Transaction {
+  id String @id @default(cuid())
+
+  type TransactionType
+  status TransactionStatus @default(PENDING)
+  amount Int
+  confirmationCode String?  @unique 
+
+  confirmedByBankerId String?
+  confirmedByBanker   User?  @relation("ConfirmedByBanker", fields: [confirmedByBankerId], references: [id])
+
+  relatedCardId String?
+  relatedCard   Card?    @relation("RelatedCardTransactions", fields: [relatedCardId], references: [id])
+
+  cardId     String
+  card       Card     @relation(fields: [cardId], references: [id])
+  
+  userId     String
+  user       User     @relation("InitiatedByUser", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Vacancy {
+  id String @id @default(cuid())
+
+  title String
+  description String
+  salary Int
+
+  occupation Jobs
 
   user User @relation(fields: [userId], references: [id])
   userId String
