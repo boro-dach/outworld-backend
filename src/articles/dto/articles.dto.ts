@@ -9,3 +9,8 @@ export class CreateArticleDto {
   @Min(1)
   text: string;
 }
+
+export class LikeArticleDto {
+  @IsString()
+  articleId: string;
+}

@@ -127,7 +127,7 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   isVerified: 'isVerified',
-  job: 'job',
+  jobs: 'jobs',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -148,6 +148,12 @@ exports.Prisma.ArticleScalarFieldEnum = {
   text: 'text',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ArticleLikeScalarFieldEnum = {
+  userId: 'userId',
+  articleId: 'articleId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
@@ -224,6 +230,7 @@ exports.UserRole = exports.$Enums.UserRole = {
 exports.Jobs = exports.$Enums.Jobs = {
   BANKER: 'BANKER',
   BUSINESSMAN: 'BUSINESSMAN',
+  JOURNALIST: 'JOURNALIST',
   OTHER: 'OTHER'
 };
 
@@ -258,6 +265,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   Application: 'Application',
   Article: 'Article',
+  ArticleLike: 'ArticleLike',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Card: 'Card',

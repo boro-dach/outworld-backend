@@ -1,8 +1,8 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Auth } from 'src/auth/decorators/auth.decorator';
-import { UserRole } from 'generated/prisma';
-import { UpdateIsVerifiedDto } from './dto/user.dto';
+import { Jobs, UserRole } from 'generated/prisma';
+import { JobAssignDto, UpdateIsVerifiedDto } from './dto/user.dto';
 import { CurrentUser } from './decorators/user.decorator';
 
 @Controller('user')
@@ -32,10 +32,24 @@ export class UserController {
     return await this.userService.getRole(role);
   }
 
+  @Auth(UserRole.USER, UserRole.ADMIN)
+  @HttpCode(200)
+  @Post('get-jobs')
+  async getJobs(@CurrentUser('id') userId: string) {
+    return await this.userService.getJobs(userId);
+  }
+
   @Auth(UserRole.ADMIN)
   @HttpCode(200)
   @Post('update-is-verified')
   async updateIsVerified(@Body() dto: UpdateIsVerifiedDto) {
     return await this.userService.updateIsVerified(dto);
+  }
+
+  @Auth(UserRole.ADMIN)
+  @HttpCode(200)
+  @Post('assign-job')
+  async assignJob(@Body() dto: JobAssignDto) {
+    return await this.userService.assignJob(dto);
   }
 }

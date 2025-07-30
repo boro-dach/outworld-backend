@@ -1,4 +1,5 @@
-import { IsBoolean, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsString } from 'class-validator';
+import { Jobs } from 'generated/prisma';
 
 export class UpdateIsVerifiedDto {
   @IsString()
@@ -6,4 +7,12 @@ export class UpdateIsVerifiedDto {
 
   @IsBoolean()
   isVerified: boolean;
+}
+
+export class JobAssignDto {
+  @IsString()
+  userId: string;
+
+  @IsEnum(Jobs)
+  job: Jobs;
 }

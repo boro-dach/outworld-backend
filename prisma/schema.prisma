@@ -22,6 +22,7 @@ enum UserRole {
 enum Jobs {
   BANKER
   BUSINESSMAN
+  JOURNALIST
   OTHER
 }
 
@@ -32,13 +33,14 @@ model User {
   password  String
   role      UserRole @default(USER)
   isVerified Boolean @default(false)
-  job Jobs?
 
   applications Application[]
   articles Article[]
+  articleLikes ArticleLike[]
   orders Order[]
   cards Card[]
   vacancies Vacancy[]
+  jobs Jobs[]
 
 
   initiatedTransactions Transaction[] @relation("InitiatedByUser")
@@ -75,8 +77,21 @@ model Article {
   title String
   text String
 
+  likes ArticleLike[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ArticleLike {
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId String
+  
+  createdAt DateTime @default(now())
+
+  @@id([userId, articleId])
 }
 
 enum OrderStatus {
