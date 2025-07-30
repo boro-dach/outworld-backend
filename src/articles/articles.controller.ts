@@ -2,7 +2,11 @@ import { Body, Controller, Delete, HttpCode, Post } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { UserRole } from 'generated/prisma';
-import { CreateArticleDto, LikeArticleDto } from './dto/articles.dto';
+import {
+  CreateArticleDto,
+  DeleteArticleDto,
+  LikeArticleDto,
+} from './dto/articles.dto';
 import { CurrentUser } from 'src/user/decorators/user.decorator';
 import { Job } from 'src/jobs/decorators/jobs.decorator';
 
@@ -36,8 +40,8 @@ export class ArticlesController {
   @Job('JOURNALIST')
   @HttpCode(200)
   @Post('delete')
-  async delete(@Body() id: string) {
-    const article = await this.articlesService.delete(id);
+  async delete(@Body() dto: DeleteArticleDto) {
+    const article = await this.articlesService.delete(dto);
 
     return article;
   }

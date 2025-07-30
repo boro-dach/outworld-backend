@@ -146,6 +146,7 @@ exports.Prisma.ArticleScalarFieldEnum = {
   userId: 'userId',
   title: 'title',
   text: 'text',
+  type: 'type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -238,6 +239,12 @@ exports.ApplicationStatus = exports.$Enums.ApplicationStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED'
+};
+
+exports.ArticleType = exports.$Enums.ArticleType = {
+  WEBSITE: 'WEBSITE',
+  TECH: 'TECH',
+  SERVER: 'SERVER'
 };
 
 exports.OrderStatus = exports.$Enums.OrderStatus = {

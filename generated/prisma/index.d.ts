@@ -90,6 +90,15 @@ export const ApplicationStatus: {
 export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus]
 
 
+export const ArticleType: {
+  WEBSITE: 'WEBSITE',
+  TECH: 'TECH',
+  SERVER: 'SERVER'
+};
+
+export type ArticleType = (typeof ArticleType)[keyof typeof ArticleType]
+
+
 export const OrderStatus: {
   CREATED: 'CREATED',
   PROCESSING: 'PROCESSING',
@@ -132,6 +141,10 @@ export const Jobs: typeof $Enums.Jobs
 export type ApplicationStatus = $Enums.ApplicationStatus
 
 export const ApplicationStatus: typeof $Enums.ApplicationStatus
+
+export type ArticleType = $Enums.ArticleType
+
+export const ArticleType: typeof $Enums.ArticleType
 
 export type OrderStatus = $Enums.OrderStatus
 
@@ -4278,6 +4291,7 @@ export namespace Prisma {
     userId: string | null
     title: string | null
     text: string | null
+    type: $Enums.ArticleType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4287,6 +4301,7 @@ export namespace Prisma {
     userId: string | null
     title: string | null
     text: string | null
+    type: $Enums.ArticleType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4296,6 +4311,7 @@ export namespace Prisma {
     userId: number
     title: number
     text: number
+    type: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4307,6 +4323,7 @@ export namespace Prisma {
     userId?: true
     title?: true
     text?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4316,6 +4333,7 @@ export namespace Prisma {
     userId?: true
     title?: true
     text?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4325,6 +4343,7 @@ export namespace Prisma {
     userId?: true
     title?: true
     text?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4407,6 +4426,7 @@ export namespace Prisma {
     userId: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt: Date
     updatedAt: Date
     _count: ArticleCountAggregateOutputType | null
@@ -4433,6 +4453,7 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4445,6 +4466,7 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4455,6 +4477,7 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4465,11 +4488,12 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "text" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "text" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     likes?: boolean | Article$likesArgs<ExtArgs>
@@ -4493,6 +4517,7 @@ export namespace Prisma {
       userId: string
       title: string
       text: string
+      type: $Enums.ArticleType
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["article"]>
@@ -4924,6 +4949,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Article", 'String'>
     readonly title: FieldRef<"Article", 'String'>
     readonly text: FieldRef<"Article", 'String'>
+    readonly type: FieldRef<"Article", 'ArticleType'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
   }
@@ -12186,6 +12212,7 @@ export namespace Prisma {
     userId: 'userId',
     title: 'title',
     text: 'text',
+    type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -12372,6 +12399,20 @@ export namespace Prisma {
    * Reference to a field of type 'ApplicationStatus[]'
    */
   export type ListEnumApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApplicationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ArticleType'
+   */
+  export type EnumArticleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArticleType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ArticleType[]'
+   */
+  export type ListEnumArticleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArticleType[]'>
     
 
 
@@ -12612,6 +12653,7 @@ export namespace Prisma {
     userId?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     text?: StringFilter<"Article"> | string
+    type?: EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -12623,6 +12665,7 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -12637,6 +12680,7 @@ export namespace Prisma {
     userId?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     text?: StringFilter<"Article"> | string
+    type?: EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -12648,6 +12692,7 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ArticleCountOrderByAggregateInput
@@ -12663,6 +12708,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Article"> | string
     title?: StringWithAggregatesFilter<"Article"> | string
     text?: StringWithAggregatesFilter<"Article"> | string
+    type?: EnumArticleTypeWithAggregatesFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
   }
@@ -13259,6 +13305,7 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutArticlesInput
@@ -13270,6 +13317,7 @@ export namespace Prisma {
     userId: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
     likes?: ArticleLikeUncheckedCreateNestedManyWithoutArticleInput
@@ -13279,6 +13327,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutArticlesNestedInput
@@ -13290,6 +13339,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likes?: ArticleLikeUncheckedUpdateManyWithoutArticleNestedInput
@@ -13300,6 +13350,7 @@ export namespace Prisma {
     userId: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13308,6 +13359,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13317,6 +13369,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13978,11 +14031,19 @@ export namespace Prisma {
     _max?: NestedEnumApplicationStatusFilter<$PrismaModel>
   }
 
+  export type EnumArticleTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeFilter<$PrismaModel> | $Enums.ArticleType
+  }
+
   export type ArticleCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13992,6 +14053,7 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14001,8 +14063,19 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumArticleTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeWithAggregatesFilter<$PrismaModel> | $Enums.ArticleType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArticleTypeFilter<$PrismaModel>
+    _max?: NestedEnumArticleTypeFilter<$PrismaModel>
   }
 
   export type ArticleScalarRelationFilter = {
@@ -14812,6 +14885,10 @@ export namespace Prisma {
     connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
   }
 
+  export type EnumArticleTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ArticleType
+  }
+
   export type UserUpdateOneRequiredWithoutArticlesNestedInput = {
     create?: XOR<UserCreateWithoutArticlesInput, UserUncheckedCreateWithoutArticlesInput>
     connectOrCreate?: UserCreateOrConnectWithoutArticlesInput
@@ -15268,6 +15345,23 @@ export namespace Prisma {
     _max?: NestedEnumApplicationStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumArticleTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeFilter<$PrismaModel> | $Enums.ArticleType
+  }
+
+  export type NestedEnumArticleTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeWithAggregatesFilter<$PrismaModel> | $Enums.ArticleType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArticleTypeFilter<$PrismaModel>
+    _max?: NestedEnumArticleTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
@@ -15451,6 +15545,7 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
     likes?: ArticleLikeCreateNestedManyWithoutArticleInput
@@ -15460,6 +15555,7 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
     likes?: ArticleLikeUncheckedCreateNestedManyWithoutArticleInput
@@ -15709,6 +15805,7 @@ export namespace Prisma {
     userId?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     text?: StringFilter<"Article"> | string
+    type?: EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
   }
@@ -16141,6 +16238,7 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutArticlesInput
@@ -16151,6 +16249,7 @@ export namespace Prisma {
     userId: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16224,6 +16323,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutArticlesNestedInput
@@ -16234,6 +16334,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17037,6 +17138,7 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17127,6 +17229,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likes?: ArticleLikeUpdateManyWithoutArticleNestedInput
@@ -17136,6 +17239,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likes?: ArticleLikeUncheckedUpdateManyWithoutArticleNestedInput
@@ -17145,6 +17249,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

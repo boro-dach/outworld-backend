@@ -67,6 +67,12 @@ model Application {
   updatedAt DateTime @updatedAt
 }
 
+enum ArticleType {
+  WEBSITE
+  TECH
+  SERVER
+}
+
 model Article {
   id String @id @default(cuid())
 
@@ -75,6 +81,7 @@ model Article {
 
   title String
   text  String
+  type  ArticleType
 
   likes ArticleLike[]
 
