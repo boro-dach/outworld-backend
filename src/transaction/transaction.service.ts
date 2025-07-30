@@ -55,6 +55,9 @@ export class TransactionService {
         card: {
           select: { id: true, title: true, cardNumber: true },
         },
+        user: {
+          select: { login: true },
+        },
       },
     });
 

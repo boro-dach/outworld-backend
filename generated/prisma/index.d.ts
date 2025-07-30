@@ -29,6 +29,11 @@ export type Application = $Result.DefaultSelection<Prisma.$ApplicationPayload>
  */
 export type Article = $Result.DefaultSelection<Prisma.$ArticlePayload>
 /**
+ * Model ArticleLike
+ * 
+ */
+export type ArticleLike = $Result.DefaultSelection<Prisma.$ArticleLikePayload>
+/**
  * Model Order
  * 
  */
@@ -69,6 +74,7 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 export const Jobs: {
   BANKER: 'BANKER',
   BUSINESSMAN: 'BUSINESSMAN',
+  JOURNALIST: 'JOURNALIST',
   OTHER: 'OTHER'
 };
 
@@ -82,6 +88,15 @@ export const ApplicationStatus: {
 };
 
 export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus]
+
+
+export const ArticleType: {
+  WEBSITE: 'WEBSITE',
+  TECH: 'TECH',
+  SERVER: 'SERVER'
+};
+
+export type ArticleType = (typeof ArticleType)[keyof typeof ArticleType]
 
 
 export const OrderStatus: {
@@ -126,6 +141,10 @@ export const Jobs: typeof $Enums.Jobs
 export type ApplicationStatus = $Enums.ApplicationStatus
 
 export const ApplicationStatus: typeof $Enums.ApplicationStatus
+
+export type ArticleType = $Enums.ArticleType
+
+export const ArticleType: typeof $Enums.ArticleType
 
 export type OrderStatus = $Enums.OrderStatus
 
@@ -293,6 +312,16 @@ export class PrismaClient<
     * ```
     */
   get article(): Prisma.ArticleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.articleLike`: Exposes CRUD operations for the **ArticleLike** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ArticleLikes
+    * const articleLikes = await prisma.articleLike.findMany()
+    * ```
+    */
+  get articleLike(): Prisma.ArticleLikeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.order`: Exposes CRUD operations for the **Order** model.
@@ -786,6 +815,7 @@ export namespace Prisma {
     User: 'User',
     Application: 'Application',
     Article: 'Article',
+    ArticleLike: 'ArticleLike',
     Order: 'Order',
     OrderItem: 'OrderItem',
     Card: 'Card',
@@ -809,7 +839,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "application" | "article" | "order" | "orderItem" | "card" | "transaction" | "vacancy"
+      modelProps: "user" | "application" | "article" | "articleLike" | "order" | "orderItem" | "card" | "transaction" | "vacancy"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1032,6 +1062,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ArticleCountArgs<ExtArgs>
             result: $Utils.Optional<ArticleCountAggregateOutputType> | number
+          }
+        }
+      }
+      ArticleLike: {
+        payload: Prisma.$ArticleLikePayload<ExtArgs>
+        fields: Prisma.ArticleLikeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ArticleLikeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ArticleLikeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>
+          }
+          findFirst: {
+            args: Prisma.ArticleLikeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ArticleLikeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>
+          }
+          findMany: {
+            args: Prisma.ArticleLikeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>[]
+          }
+          create: {
+            args: Prisma.ArticleLikeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>
+          }
+          createMany: {
+            args: Prisma.ArticleLikeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ArticleLikeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>[]
+          }
+          delete: {
+            args: Prisma.ArticleLikeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>
+          }
+          update: {
+            args: Prisma.ArticleLikeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>
+          }
+          deleteMany: {
+            args: Prisma.ArticleLikeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ArticleLikeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ArticleLikeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>[]
+          }
+          upsert: {
+            args: Prisma.ArticleLikeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ArticleLikePayload>
+          }
+          aggregate: {
+            args: Prisma.ArticleLikeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateArticleLike>
+          }
+          groupBy: {
+            args: Prisma.ArticleLikeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ArticleLikeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ArticleLikeCountArgs<ExtArgs>
+            result: $Utils.Optional<ArticleLikeCountAggregateOutputType> | number
           }
         }
       }
@@ -1492,6 +1596,7 @@ export namespace Prisma {
     user?: UserOmit
     application?: ApplicationOmit
     article?: ArticleOmit
+    articleLike?: ArticleLikeOmit
     order?: OrderOmit
     orderItem?: OrderItemOmit
     card?: CardOmit
@@ -1593,6 +1698,7 @@ export namespace Prisma {
   export type UserCountOutputType = {
     applications: number
     articles: number
+    articleLikes: number
     orders: number
     cards: number
     vacancies: number
@@ -1603,6 +1709,7 @@ export namespace Prisma {
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applications?: boolean | UserCountOutputTypeCountApplicationsArgs
     articles?: boolean | UserCountOutputTypeCountArticlesArgs
+    articleLikes?: boolean | UserCountOutputTypeCountArticleLikesArgs
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
     cards?: boolean | UserCountOutputTypeCountCardsArgs
     vacancies?: boolean | UserCountOutputTypeCountVacanciesArgs
@@ -1638,6 +1745,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountArticleLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArticleLikeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput
   }
@@ -1668,6 +1782,37 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountConfirmedTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TransactionWhereInput
+  }
+
+
+  /**
+   * Count Type ArticleCountOutputType
+   */
+
+  export type ArticleCountOutputType = {
+    likes: number
+  }
+
+  export type ArticleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    likes?: boolean | ArticleCountOutputTypeCountLikesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ArticleCountOutputType without action
+   */
+  export type ArticleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleCountOutputType
+     */
+    select?: ArticleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ArticleCountOutputType without action
+   */
+  export type ArticleCountOutputTypeCountLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArticleLikeWhereInput
   }
 
 
@@ -1763,7 +1908,6 @@ export namespace Prisma {
     password: string | null
     role: $Enums.UserRole | null
     isVerified: boolean | null
-    job: $Enums.Jobs | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1775,7 +1919,6 @@ export namespace Prisma {
     password: string | null
     role: $Enums.UserRole | null
     isVerified: boolean | null
-    job: $Enums.Jobs | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1787,7 +1930,7 @@ export namespace Prisma {
     password: number
     role: number
     isVerified: number
-    job: number
+    jobs: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1801,7 +1944,6 @@ export namespace Prisma {
     password?: true
     role?: true
     isVerified?: true
-    job?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1813,7 +1955,6 @@ export namespace Prisma {
     password?: true
     role?: true
     isVerified?: true
-    job?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1825,7 +1966,7 @@ export namespace Prisma {
     password?: true
     role?: true
     isVerified?: true
-    job?: true
+    jobs?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1910,7 +2051,7 @@ export namespace Prisma {
     password: string
     role: $Enums.UserRole
     isVerified: boolean
-    job: $Enums.Jobs | null
+    jobs: $Enums.Jobs[]
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1939,11 +2080,12 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     isVerified?: boolean
-    job?: boolean
+    jobs?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     applications?: boolean | User$applicationsArgs<ExtArgs>
     articles?: boolean | User$articlesArgs<ExtArgs>
+    articleLikes?: boolean | User$articleLikesArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     cards?: boolean | User$cardsArgs<ExtArgs>
     vacancies?: boolean | User$vacanciesArgs<ExtArgs>
@@ -1959,7 +2101,7 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     isVerified?: boolean
-    job?: boolean
+    jobs?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1971,7 +2113,7 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     isVerified?: boolean
-    job?: boolean
+    jobs?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1983,15 +2125,16 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     isVerified?: boolean
-    job?: boolean
+    jobs?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "login" | "password" | "role" | "isVerified" | "job" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "login" | "password" | "role" | "isVerified" | "jobs" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applications?: boolean | User$applicationsArgs<ExtArgs>
     articles?: boolean | User$articlesArgs<ExtArgs>
+    articleLikes?: boolean | User$articleLikesArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     cards?: boolean | User$cardsArgs<ExtArgs>
     vacancies?: boolean | User$vacanciesArgs<ExtArgs>
@@ -2007,6 +2150,7 @@ export namespace Prisma {
     objects: {
       applications: Prisma.$ApplicationPayload<ExtArgs>[]
       articles: Prisma.$ArticlePayload<ExtArgs>[]
+      articleLikes: Prisma.$ArticleLikePayload<ExtArgs>[]
       orders: Prisma.$OrderPayload<ExtArgs>[]
       cards: Prisma.$CardPayload<ExtArgs>[]
       vacancies: Prisma.$VacancyPayload<ExtArgs>[]
@@ -2020,7 +2164,7 @@ export namespace Prisma {
       password: string
       role: $Enums.UserRole
       isVerified: boolean
-      job: $Enums.Jobs | null
+      jobs: $Enums.Jobs[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2419,6 +2563,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     applications<T extends User$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, User$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     articles<T extends User$articlesArgs<ExtArgs> = {}>(args?: Subset<T, User$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    articleLikes<T extends User$articleLikesArgs<ExtArgs> = {}>(args?: Subset<T, User$articleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cards<T extends User$cardsArgs<ExtArgs> = {}>(args?: Subset<T, User$cardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     vacancies<T extends User$vacanciesArgs<ExtArgs> = {}>(args?: Subset<T, User$vacanciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2459,7 +2604,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly isVerified: FieldRef<"User", 'Boolean'>
-    readonly job: FieldRef<"User", 'Jobs'>
+    readonly jobs: FieldRef<"User", 'Jobs[]'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -2895,6 +3040,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ArticleScalarFieldEnum | ArticleScalarFieldEnum[]
+  }
+
+  /**
+   * User.articleLikes
+   */
+  export type User$articleLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    where?: ArticleLikeWhereInput
+    orderBy?: ArticleLikeOrderByWithRelationInput | ArticleLikeOrderByWithRelationInput[]
+    cursor?: ArticleLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ArticleLikeScalarFieldEnum | ArticleLikeScalarFieldEnum[]
   }
 
   /**
@@ -4122,6 +4291,7 @@ export namespace Prisma {
     userId: string | null
     title: string | null
     text: string | null
+    type: $Enums.ArticleType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4131,6 +4301,7 @@ export namespace Prisma {
     userId: string | null
     title: string | null
     text: string | null
+    type: $Enums.ArticleType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4140,6 +4311,7 @@ export namespace Prisma {
     userId: number
     title: number
     text: number
+    type: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4151,6 +4323,7 @@ export namespace Prisma {
     userId?: true
     title?: true
     text?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4160,6 +4333,7 @@ export namespace Prisma {
     userId?: true
     title?: true
     text?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4169,6 +4343,7 @@ export namespace Prisma {
     userId?: true
     title?: true
     text?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4251,6 +4426,7 @@ export namespace Prisma {
     userId: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt: Date
     updatedAt: Date
     _count: ArticleCountAggregateOutputType | null
@@ -4277,9 +4453,12 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    likes?: boolean | Article$likesArgs<ExtArgs>
+    _count?: boolean | ArticleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
   export type ArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4287,6 +4466,7 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4297,6 +4477,7 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4307,13 +4488,16 @@ export namespace Prisma {
     userId?: boolean
     title?: boolean
     text?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "text" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "text" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    likes?: boolean | Article$likesArgs<ExtArgs>
+    _count?: boolean | ArticleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4326,12 +4510,14 @@ export namespace Prisma {
     name: "Article"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      likes: Prisma.$ArticleLikePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       title: string
       text: string
+      type: $Enums.ArticleType
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["article"]>
@@ -4729,6 +4915,7 @@ export namespace Prisma {
   export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    likes<T extends Article$likesArgs<ExtArgs> = {}>(args?: Subset<T, Article$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4762,6 +4949,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Article", 'String'>
     readonly title: FieldRef<"Article", 'String'>
     readonly text: FieldRef<"Article", 'String'>
+    readonly type: FieldRef<"Article", 'ArticleType'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
   }
@@ -5160,6 +5348,30 @@ export namespace Prisma {
   }
 
   /**
+   * Article.likes
+   */
+  export type Article$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    where?: ArticleLikeWhereInput
+    orderBy?: ArticleLikeOrderByWithRelationInput | ArticleLikeOrderByWithRelationInput[]
+    cursor?: ArticleLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ArticleLikeScalarFieldEnum | ArticleLikeScalarFieldEnum[]
+  }
+
+  /**
    * Article without action
    */
   export type ArticleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5175,6 +5387,1046 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ArticleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ArticleLike
+   */
+
+  export type AggregateArticleLike = {
+    _count: ArticleLikeCountAggregateOutputType | null
+    _min: ArticleLikeMinAggregateOutputType | null
+    _max: ArticleLikeMaxAggregateOutputType | null
+  }
+
+  export type ArticleLikeMinAggregateOutputType = {
+    userId: string | null
+    articleId: string | null
+    createdAt: Date | null
+  }
+
+  export type ArticleLikeMaxAggregateOutputType = {
+    userId: string | null
+    articleId: string | null
+    createdAt: Date | null
+  }
+
+  export type ArticleLikeCountAggregateOutputType = {
+    userId: number
+    articleId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ArticleLikeMinAggregateInputType = {
+    userId?: true
+    articleId?: true
+    createdAt?: true
+  }
+
+  export type ArticleLikeMaxAggregateInputType = {
+    userId?: true
+    articleId?: true
+    createdAt?: true
+  }
+
+  export type ArticleLikeCountAggregateInputType = {
+    userId?: true
+    articleId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ArticleLikeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ArticleLike to aggregate.
+     */
+    where?: ArticleLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ArticleLikes to fetch.
+     */
+    orderBy?: ArticleLikeOrderByWithRelationInput | ArticleLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ArticleLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ArticleLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ArticleLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ArticleLikes
+    **/
+    _count?: true | ArticleLikeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ArticleLikeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ArticleLikeMaxAggregateInputType
+  }
+
+  export type GetArticleLikeAggregateType<T extends ArticleLikeAggregateArgs> = {
+        [P in keyof T & keyof AggregateArticleLike]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateArticleLike[P]>
+      : GetScalarType<T[P], AggregateArticleLike[P]>
+  }
+
+
+
+
+  export type ArticleLikeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArticleLikeWhereInput
+    orderBy?: ArticleLikeOrderByWithAggregationInput | ArticleLikeOrderByWithAggregationInput[]
+    by: ArticleLikeScalarFieldEnum[] | ArticleLikeScalarFieldEnum
+    having?: ArticleLikeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ArticleLikeCountAggregateInputType | true
+    _min?: ArticleLikeMinAggregateInputType
+    _max?: ArticleLikeMaxAggregateInputType
+  }
+
+  export type ArticleLikeGroupByOutputType = {
+    userId: string
+    articleId: string
+    createdAt: Date
+    _count: ArticleLikeCountAggregateOutputType | null
+    _min: ArticleLikeMinAggregateOutputType | null
+    _max: ArticleLikeMaxAggregateOutputType | null
+  }
+
+  type GetArticleLikeGroupByPayload<T extends ArticleLikeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ArticleLikeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ArticleLikeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ArticleLikeGroupByOutputType[P]>
+            : GetScalarType<T[P], ArticleLikeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ArticleLikeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["articleLike"]>
+
+  export type ArticleLikeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["articleLike"]>
+
+  export type ArticleLikeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["articleLike"]>
+
+  export type ArticleLikeSelectScalar = {
+    userId?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+  }
+
+  export type ArticleLikeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "articleId" | "createdAt", ExtArgs["result"]["articleLike"]>
+  export type ArticleLikeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+  }
+  export type ArticleLikeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+  }
+  export type ArticleLikeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    article?: boolean | ArticleDefaultArgs<ExtArgs>
+  }
+
+  export type $ArticleLikePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ArticleLike"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      article: Prisma.$ArticlePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userId: string
+      articleId: string
+      createdAt: Date
+    }, ExtArgs["result"]["articleLike"]>
+    composites: {}
+  }
+
+  type ArticleLikeGetPayload<S extends boolean | null | undefined | ArticleLikeDefaultArgs> = $Result.GetResult<Prisma.$ArticleLikePayload, S>
+
+  type ArticleLikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ArticleLikeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ArticleLikeCountAggregateInputType | true
+    }
+
+  export interface ArticleLikeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ArticleLike'], meta: { name: 'ArticleLike' } }
+    /**
+     * Find zero or one ArticleLike that matches the filter.
+     * @param {ArticleLikeFindUniqueArgs} args - Arguments to find a ArticleLike
+     * @example
+     * // Get one ArticleLike
+     * const articleLike = await prisma.articleLike.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ArticleLikeFindUniqueArgs>(args: SelectSubset<T, ArticleLikeFindUniqueArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ArticleLike that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ArticleLikeFindUniqueOrThrowArgs} args - Arguments to find a ArticleLike
+     * @example
+     * // Get one ArticleLike
+     * const articleLike = await prisma.articleLike.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ArticleLikeFindUniqueOrThrowArgs>(args: SelectSubset<T, ArticleLikeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ArticleLike that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArticleLikeFindFirstArgs} args - Arguments to find a ArticleLike
+     * @example
+     * // Get one ArticleLike
+     * const articleLike = await prisma.articleLike.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ArticleLikeFindFirstArgs>(args?: SelectSubset<T, ArticleLikeFindFirstArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ArticleLike that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArticleLikeFindFirstOrThrowArgs} args - Arguments to find a ArticleLike
+     * @example
+     * // Get one ArticleLike
+     * const articleLike = await prisma.articleLike.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ArticleLikeFindFirstOrThrowArgs>(args?: SelectSubset<T, ArticleLikeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ArticleLikes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArticleLikeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ArticleLikes
+     * const articleLikes = await prisma.articleLike.findMany()
+     * 
+     * // Get first 10 ArticleLikes
+     * const articleLikes = await prisma.articleLike.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const articleLikeWithUserIdOnly = await prisma.articleLike.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends ArticleLikeFindManyArgs>(args?: SelectSubset<T, ArticleLikeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ArticleLike.
+     * @param {ArticleLikeCreateArgs} args - Arguments to create a ArticleLike.
+     * @example
+     * // Create one ArticleLike
+     * const ArticleLike = await prisma.articleLike.create({
+     *   data: {
+     *     // ... data to create a ArticleLike
+     *   }
+     * })
+     * 
+     */
+    create<T extends ArticleLikeCreateArgs>(args: SelectSubset<T, ArticleLikeCreateArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ArticleLikes.
+     * @param {ArticleLikeCreateManyArgs} args - Arguments to create many ArticleLikes.
+     * @example
+     * // Create many ArticleLikes
+     * const articleLike = await prisma.articleLike.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ArticleLikeCreateManyArgs>(args?: SelectSubset<T, ArticleLikeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ArticleLikes and returns the data saved in the database.
+     * @param {ArticleLikeCreateManyAndReturnArgs} args - Arguments to create many ArticleLikes.
+     * @example
+     * // Create many ArticleLikes
+     * const articleLike = await prisma.articleLike.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ArticleLikes and only return the `userId`
+     * const articleLikeWithUserIdOnly = await prisma.articleLike.createManyAndReturn({
+     *   select: { userId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ArticleLikeCreateManyAndReturnArgs>(args?: SelectSubset<T, ArticleLikeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ArticleLike.
+     * @param {ArticleLikeDeleteArgs} args - Arguments to delete one ArticleLike.
+     * @example
+     * // Delete one ArticleLike
+     * const ArticleLike = await prisma.articleLike.delete({
+     *   where: {
+     *     // ... filter to delete one ArticleLike
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ArticleLikeDeleteArgs>(args: SelectSubset<T, ArticleLikeDeleteArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ArticleLike.
+     * @param {ArticleLikeUpdateArgs} args - Arguments to update one ArticleLike.
+     * @example
+     * // Update one ArticleLike
+     * const articleLike = await prisma.articleLike.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ArticleLikeUpdateArgs>(args: SelectSubset<T, ArticleLikeUpdateArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ArticleLikes.
+     * @param {ArticleLikeDeleteManyArgs} args - Arguments to filter ArticleLikes to delete.
+     * @example
+     * // Delete a few ArticleLikes
+     * const { count } = await prisma.articleLike.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ArticleLikeDeleteManyArgs>(args?: SelectSubset<T, ArticleLikeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ArticleLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArticleLikeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ArticleLikes
+     * const articleLike = await prisma.articleLike.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ArticleLikeUpdateManyArgs>(args: SelectSubset<T, ArticleLikeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ArticleLikes and returns the data updated in the database.
+     * @param {ArticleLikeUpdateManyAndReturnArgs} args - Arguments to update many ArticleLikes.
+     * @example
+     * // Update many ArticleLikes
+     * const articleLike = await prisma.articleLike.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ArticleLikes and only return the `userId`
+     * const articleLikeWithUserIdOnly = await prisma.articleLike.updateManyAndReturn({
+     *   select: { userId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ArticleLikeUpdateManyAndReturnArgs>(args: SelectSubset<T, ArticleLikeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ArticleLike.
+     * @param {ArticleLikeUpsertArgs} args - Arguments to update or create a ArticleLike.
+     * @example
+     * // Update or create a ArticleLike
+     * const articleLike = await prisma.articleLike.upsert({
+     *   create: {
+     *     // ... data to create a ArticleLike
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ArticleLike we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ArticleLikeUpsertArgs>(args: SelectSubset<T, ArticleLikeUpsertArgs<ExtArgs>>): Prisma__ArticleLikeClient<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ArticleLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArticleLikeCountArgs} args - Arguments to filter ArticleLikes to count.
+     * @example
+     * // Count the number of ArticleLikes
+     * const count = await prisma.articleLike.count({
+     *   where: {
+     *     // ... the filter for the ArticleLikes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ArticleLikeCountArgs>(
+      args?: Subset<T, ArticleLikeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ArticleLikeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ArticleLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArticleLikeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ArticleLikeAggregateArgs>(args: Subset<T, ArticleLikeAggregateArgs>): Prisma.PrismaPromise<GetArticleLikeAggregateType<T>>
+
+    /**
+     * Group by ArticleLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ArticleLikeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ArticleLikeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ArticleLikeGroupByArgs['orderBy'] }
+        : { orderBy?: ArticleLikeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ArticleLikeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetArticleLikeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ArticleLike model
+   */
+  readonly fields: ArticleLikeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ArticleLike.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ArticleLikeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    article<T extends ArticleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ArticleDefaultArgs<ExtArgs>>): Prisma__ArticleClient<$Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ArticleLike model
+   */
+  interface ArticleLikeFieldRefs {
+    readonly userId: FieldRef<"ArticleLike", 'String'>
+    readonly articleId: FieldRef<"ArticleLike", 'String'>
+    readonly createdAt: FieldRef<"ArticleLike", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ArticleLike findUnique
+   */
+  export type ArticleLikeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which ArticleLike to fetch.
+     */
+    where: ArticleLikeWhereUniqueInput
+  }
+
+  /**
+   * ArticleLike findUniqueOrThrow
+   */
+  export type ArticleLikeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which ArticleLike to fetch.
+     */
+    where: ArticleLikeWhereUniqueInput
+  }
+
+  /**
+   * ArticleLike findFirst
+   */
+  export type ArticleLikeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which ArticleLike to fetch.
+     */
+    where?: ArticleLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ArticleLikes to fetch.
+     */
+    orderBy?: ArticleLikeOrderByWithRelationInput | ArticleLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ArticleLikes.
+     */
+    cursor?: ArticleLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ArticleLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ArticleLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ArticleLikes.
+     */
+    distinct?: ArticleLikeScalarFieldEnum | ArticleLikeScalarFieldEnum[]
+  }
+
+  /**
+   * ArticleLike findFirstOrThrow
+   */
+  export type ArticleLikeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which ArticleLike to fetch.
+     */
+    where?: ArticleLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ArticleLikes to fetch.
+     */
+    orderBy?: ArticleLikeOrderByWithRelationInput | ArticleLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ArticleLikes.
+     */
+    cursor?: ArticleLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ArticleLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ArticleLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ArticleLikes.
+     */
+    distinct?: ArticleLikeScalarFieldEnum | ArticleLikeScalarFieldEnum[]
+  }
+
+  /**
+   * ArticleLike findMany
+   */
+  export type ArticleLikeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which ArticleLikes to fetch.
+     */
+    where?: ArticleLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ArticleLikes to fetch.
+     */
+    orderBy?: ArticleLikeOrderByWithRelationInput | ArticleLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ArticleLikes.
+     */
+    cursor?: ArticleLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ArticleLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ArticleLikes.
+     */
+    skip?: number
+    distinct?: ArticleLikeScalarFieldEnum | ArticleLikeScalarFieldEnum[]
+  }
+
+  /**
+   * ArticleLike create
+   */
+  export type ArticleLikeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ArticleLike.
+     */
+    data: XOR<ArticleLikeCreateInput, ArticleLikeUncheckedCreateInput>
+  }
+
+  /**
+   * ArticleLike createMany
+   */
+  export type ArticleLikeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ArticleLikes.
+     */
+    data: ArticleLikeCreateManyInput | ArticleLikeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ArticleLike createManyAndReturn
+   */
+  export type ArticleLikeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * The data used to create many ArticleLikes.
+     */
+    data: ArticleLikeCreateManyInput | ArticleLikeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ArticleLike update
+   */
+  export type ArticleLikeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ArticleLike.
+     */
+    data: XOR<ArticleLikeUpdateInput, ArticleLikeUncheckedUpdateInput>
+    /**
+     * Choose, which ArticleLike to update.
+     */
+    where: ArticleLikeWhereUniqueInput
+  }
+
+  /**
+   * ArticleLike updateMany
+   */
+  export type ArticleLikeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ArticleLikes.
+     */
+    data: XOR<ArticleLikeUpdateManyMutationInput, ArticleLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which ArticleLikes to update
+     */
+    where?: ArticleLikeWhereInput
+    /**
+     * Limit how many ArticleLikes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ArticleLike updateManyAndReturn
+   */
+  export type ArticleLikeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * The data used to update ArticleLikes.
+     */
+    data: XOR<ArticleLikeUpdateManyMutationInput, ArticleLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which ArticleLikes to update
+     */
+    where?: ArticleLikeWhereInput
+    /**
+     * Limit how many ArticleLikes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ArticleLike upsert
+   */
+  export type ArticleLikeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ArticleLike to update in case it exists.
+     */
+    where: ArticleLikeWhereUniqueInput
+    /**
+     * In case the ArticleLike found by the `where` argument doesn't exist, create a new ArticleLike with this data.
+     */
+    create: XOR<ArticleLikeCreateInput, ArticleLikeUncheckedCreateInput>
+    /**
+     * In case the ArticleLike was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ArticleLikeUpdateInput, ArticleLikeUncheckedUpdateInput>
+  }
+
+  /**
+   * ArticleLike delete
+   */
+  export type ArticleLikeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
+    /**
+     * Filter which ArticleLike to delete.
+     */
+    where: ArticleLikeWhereUniqueInput
+  }
+
+  /**
+   * ArticleLike deleteMany
+   */
+  export type ArticleLikeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ArticleLikes to delete
+     */
+    where?: ArticleLikeWhereInput
+    /**
+     * Limit how many ArticleLikes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ArticleLike without action
+   */
+  export type ArticleLikeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArticleLike
+     */
+    select?: ArticleLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArticleLike
+     */
+    omit?: ArticleLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArticleLikeInclude<ExtArgs> | null
   }
 
 
@@ -10935,7 +12187,7 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     isVerified: 'isVerified',
-    job: 'job',
+    jobs: 'jobs',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10960,11 +12212,21 @@ export namespace Prisma {
     userId: 'userId',
     title: 'title',
     text: 'text',
+    type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
+
+
+  export const ArticleLikeScalarFieldEnum: {
+    userId: 'userId',
+    articleId: 'articleId',
+    createdAt: 'createdAt'
+  };
+
+  export type ArticleLikeScalarFieldEnum = (typeof ArticleLikeScalarFieldEnum)[keyof typeof ArticleLikeScalarFieldEnum]
 
 
   export const OrderScalarFieldEnum: {
@@ -11099,16 +12361,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Jobs'
+   * Reference to a field of type 'Jobs[]'
    */
-  export type EnumJobsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Jobs'>
+  export type ListEnumJobsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Jobs[]'>
     
 
 
   /**
-   * Reference to a field of type 'Jobs[]'
+   * Reference to a field of type 'Jobs'
    */
-  export type ListEnumJobsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Jobs[]'>
+  export type EnumJobsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Jobs'>
     
 
 
@@ -11137,6 +12399,20 @@ export namespace Prisma {
    * Reference to a field of type 'ApplicationStatus[]'
    */
   export type ListEnumApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApplicationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ArticleType'
+   */
+  export type EnumArticleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArticleType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ArticleType[]'
+   */
+  export type ListEnumArticleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ArticleType[]'>
     
 
 
@@ -11223,11 +12499,12 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     isVerified?: BoolFilter<"User"> | boolean
-    job?: EnumJobsNullableFilter<"User"> | $Enums.Jobs | null
+    jobs?: EnumJobsNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     applications?: ApplicationListRelationFilter
     articles?: ArticleListRelationFilter
+    articleLikes?: ArticleLikeListRelationFilter
     orders?: OrderListRelationFilter
     cards?: CardListRelationFilter
     vacancies?: VacancyListRelationFilter
@@ -11242,11 +12519,12 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     isVerified?: SortOrder
-    job?: SortOrderInput | SortOrder
+    jobs?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     applications?: ApplicationOrderByRelationAggregateInput
     articles?: ArticleOrderByRelationAggregateInput
+    articleLikes?: ArticleLikeOrderByRelationAggregateInput
     orders?: OrderOrderByRelationAggregateInput
     cards?: CardOrderByRelationAggregateInput
     vacancies?: VacancyOrderByRelationAggregateInput
@@ -11264,11 +12542,12 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     isVerified?: BoolFilter<"User"> | boolean
-    job?: EnumJobsNullableFilter<"User"> | $Enums.Jobs | null
+    jobs?: EnumJobsNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     applications?: ApplicationListRelationFilter
     articles?: ArticleListRelationFilter
+    articleLikes?: ArticleLikeListRelationFilter
     orders?: OrderListRelationFilter
     cards?: CardListRelationFilter
     vacancies?: VacancyListRelationFilter
@@ -11283,7 +12562,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     isVerified?: SortOrder
-    job?: SortOrderInput | SortOrder
+    jobs?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -11301,7 +12580,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
-    job?: EnumJobsNullableWithAggregatesFilter<"User"> | $Enums.Jobs | null
+    jobs?: EnumJobsNullableListFilter<"User">
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -11374,9 +12653,11 @@ export namespace Prisma {
     userId?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     text?: StringFilter<"Article"> | string
+    type?: EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    likes?: ArticleLikeListRelationFilter
   }
 
   export type ArticleOrderByWithRelationInput = {
@@ -11384,9 +12665,11 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    likes?: ArticleLikeOrderByRelationAggregateInput
   }
 
   export type ArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -11397,9 +12680,11 @@ export namespace Prisma {
     userId?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     text?: StringFilter<"Article"> | string
+    type?: EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    likes?: ArticleLikeListRelationFilter
   }, "id">
 
   export type ArticleOrderByWithAggregationInput = {
@@ -11407,6 +12692,7 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ArticleCountOrderByAggregateInput
@@ -11422,8 +12708,58 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Article"> | string
     title?: StringWithAggregatesFilter<"Article"> | string
     text?: StringWithAggregatesFilter<"Article"> | string
+    type?: EnumArticleTypeWithAggregatesFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
+  }
+
+  export type ArticleLikeWhereInput = {
+    AND?: ArticleLikeWhereInput | ArticleLikeWhereInput[]
+    OR?: ArticleLikeWhereInput[]
+    NOT?: ArticleLikeWhereInput | ArticleLikeWhereInput[]
+    userId?: StringFilter<"ArticleLike"> | string
+    articleId?: StringFilter<"ArticleLike"> | string
+    createdAt?: DateTimeFilter<"ArticleLike"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    article?: XOR<ArticleScalarRelationFilter, ArticleWhereInput>
+  }
+
+  export type ArticleLikeOrderByWithRelationInput = {
+    userId?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    article?: ArticleOrderByWithRelationInput
+  }
+
+  export type ArticleLikeWhereUniqueInput = Prisma.AtLeast<{
+    userId_articleId?: ArticleLikeUserIdArticleIdCompoundUniqueInput
+    AND?: ArticleLikeWhereInput | ArticleLikeWhereInput[]
+    OR?: ArticleLikeWhereInput[]
+    NOT?: ArticleLikeWhereInput | ArticleLikeWhereInput[]
+    userId?: StringFilter<"ArticleLike"> | string
+    articleId?: StringFilter<"ArticleLike"> | string
+    createdAt?: DateTimeFilter<"ArticleLike"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    article?: XOR<ArticleScalarRelationFilter, ArticleWhereInput>
+  }, "userId_articleId">
+
+  export type ArticleLikeOrderByWithAggregationInput = {
+    userId?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+    _count?: ArticleLikeCountOrderByAggregateInput
+    _max?: ArticleLikeMaxOrderByAggregateInput
+    _min?: ArticleLikeMinOrderByAggregateInput
+  }
+
+  export type ArticleLikeScalarWhereWithAggregatesInput = {
+    AND?: ArticleLikeScalarWhereWithAggregatesInput | ArticleLikeScalarWhereWithAggregatesInput[]
+    OR?: ArticleLikeScalarWhereWithAggregatesInput[]
+    NOT?: ArticleLikeScalarWhereWithAggregatesInput | ArticleLikeScalarWhereWithAggregatesInput[]
+    userId?: StringWithAggregatesFilter<"ArticleLike"> | string
+    articleId?: StringWithAggregatesFilter<"ArticleLike"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ArticleLike"> | Date | string
   }
 
   export type OrderWhereInput = {
@@ -11794,11 +13130,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
     vacancies?: VacancyCreateNestedManyWithoutUserInput
@@ -11813,11 +13150,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
     vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
@@ -11832,11 +13170,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUpdateManyWithoutUserNestedInput
@@ -11851,11 +13190,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
@@ -11870,7 +13210,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11882,7 +13222,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11894,7 +13234,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11965,9 +13305,11 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutArticlesInput
+    likes?: ArticleLikeCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUncheckedCreateInput = {
@@ -11975,17 +13317,21 @@ export namespace Prisma {
     userId: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
+    likes?: ArticleLikeUncheckedCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutArticlesNestedInput
+    likes?: ArticleLikeUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateInput = {
@@ -11993,8 +13339,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likes?: ArticleLikeUncheckedUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleCreateManyInput = {
@@ -12002,6 +13350,7 @@ export namespace Prisma {
     userId: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12010,6 +13359,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12019,8 +13369,49 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArticleLikeCreateInput = {
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutArticleLikesInput
+    article: ArticleCreateNestedOneWithoutLikesInput
+  }
+
+  export type ArticleLikeUncheckedCreateInput = {
+    userId: string
+    articleId: string
+    createdAt?: Date | string
+  }
+
+  export type ArticleLikeUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutArticleLikesNestedInput
+    article?: ArticleUpdateOneRequiredWithoutLikesNestedInput
+  }
+
+  export type ArticleLikeUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    articleId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArticleLikeCreateManyInput = {
+    userId: string
+    articleId: string
+    createdAt?: Date | string
+  }
+
+  export type ArticleLikeUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArticleLikeUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    articleId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderCreateInput = {
@@ -12418,11 +13809,12 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type EnumJobsNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumJobsNullableFilter<$PrismaModel> | $Enums.Jobs | null
+  export type EnumJobsNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
+    has?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -12446,6 +13838,12 @@ export namespace Prisma {
     every?: ArticleWhereInput
     some?: ArticleWhereInput
     none?: ArticleWhereInput
+  }
+
+  export type ArticleLikeListRelationFilter = {
+    every?: ArticleLikeWhereInput
+    some?: ArticleLikeWhereInput
+    none?: ArticleLikeWhereInput
   }
 
   export type OrderListRelationFilter = {
@@ -12472,16 +13870,15 @@ export namespace Prisma {
     none?: TransactionWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type ApplicationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type ArticleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ArticleLikeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12508,7 +13905,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     isVerified?: SortOrder
-    job?: SortOrder
+    jobs?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12520,7 +13917,6 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     isVerified?: SortOrder
-    job?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12532,7 +13928,6 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     isVerified?: SortOrder
-    job?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12571,16 +13966,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type EnumJobsNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumJobsNullableWithAggregatesFilter<$PrismaModel> | $Enums.Jobs | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumJobsNullableFilter<$PrismaModel>
-    _max?: NestedEnumJobsNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12646,11 +14031,19 @@ export namespace Prisma {
     _max?: NestedEnumApplicationStatusFilter<$PrismaModel>
   }
 
+  export type EnumArticleTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeFilter<$PrismaModel> | $Enums.ArticleType
+  }
+
   export type ArticleCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12660,6 +14053,7 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12669,8 +14063,47 @@ export namespace Prisma {
     userId?: SortOrder
     title?: SortOrder
     text?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumArticleTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeWithAggregatesFilter<$PrismaModel> | $Enums.ArticleType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArticleTypeFilter<$PrismaModel>
+    _max?: NestedEnumArticleTypeFilter<$PrismaModel>
+  }
+
+  export type ArticleScalarRelationFilter = {
+    is?: ArticleWhereInput
+    isNot?: ArticleWhereInput
+  }
+
+  export type ArticleLikeUserIdArticleIdCompoundUniqueInput = {
+    userId: string
+    articleId: string
+  }
+
+  export type ArticleLikeCountOrderByAggregateInput = {
+    userId?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ArticleLikeMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ArticleLikeMinOrderByAggregateInput = {
+    userId?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type EnumOrderStatusFilter<$PrismaModel = never> = {
@@ -12902,6 +14335,11 @@ export namespace Prisma {
     isNot?: CardWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type TransactionCountOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
@@ -13048,6 +14486,10 @@ export namespace Prisma {
     _max?: NestedEnumJobsFilter<$PrismaModel>
   }
 
+  export type UserCreatejobsInput = {
+    set: $Enums.Jobs[]
+  }
+
   export type ApplicationCreateNestedManyWithoutUserInput = {
     create?: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput> | ApplicationCreateWithoutUserInput[] | ApplicationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApplicationCreateOrConnectWithoutUserInput | ApplicationCreateOrConnectWithoutUserInput[]
@@ -13060,6 +14502,13 @@ export namespace Prisma {
     connectOrCreate?: ArticleCreateOrConnectWithoutUserInput | ArticleCreateOrConnectWithoutUserInput[]
     createMany?: ArticleCreateManyUserInputEnvelope
     connect?: ArticleWhereUniqueInput | ArticleWhereUniqueInput[]
+  }
+
+  export type ArticleLikeCreateNestedManyWithoutUserInput = {
+    create?: XOR<ArticleLikeCreateWithoutUserInput, ArticleLikeUncheckedCreateWithoutUserInput> | ArticleLikeCreateWithoutUserInput[] | ArticleLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutUserInput | ArticleLikeCreateOrConnectWithoutUserInput[]
+    createMany?: ArticleLikeCreateManyUserInputEnvelope
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
   }
 
   export type OrderCreateNestedManyWithoutUserInput = {
@@ -13111,6 +14560,13 @@ export namespace Prisma {
     connect?: ArticleWhereUniqueInput | ArticleWhereUniqueInput[]
   }
 
+  export type ArticleLikeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ArticleLikeCreateWithoutUserInput, ArticleLikeUncheckedCreateWithoutUserInput> | ArticleLikeCreateWithoutUserInput[] | ArticleLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutUserInput | ArticleLikeCreateOrConnectWithoutUserInput[]
+    createMany?: ArticleLikeCreateManyUserInputEnvelope
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+  }
+
   export type OrderUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput> | OrderCreateWithoutUserInput[] | OrderUncheckedCreateWithoutUserInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[]
@@ -13158,8 +14614,9 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type NullableEnumJobsFieldUpdateOperationsInput = {
-    set?: $Enums.Jobs | null
+  export type UserUpdatejobsInput = {
+    set?: $Enums.Jobs[]
+    push?: $Enums.Jobs | $Enums.Jobs[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -13192,6 +14649,20 @@ export namespace Prisma {
     update?: ArticleUpdateWithWhereUniqueWithoutUserInput | ArticleUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ArticleUpdateManyWithWhereWithoutUserInput | ArticleUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
+  }
+
+  export type ArticleLikeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ArticleLikeCreateWithoutUserInput, ArticleLikeUncheckedCreateWithoutUserInput> | ArticleLikeCreateWithoutUserInput[] | ArticleLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutUserInput | ArticleLikeCreateOrConnectWithoutUserInput[]
+    upsert?: ArticleLikeUpsertWithWhereUniqueWithoutUserInput | ArticleLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ArticleLikeCreateManyUserInputEnvelope
+    set?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    disconnect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    delete?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    update?: ArticleLikeUpdateWithWhereUniqueWithoutUserInput | ArticleLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ArticleLikeUpdateManyWithWhereWithoutUserInput | ArticleLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ArticleLikeScalarWhereInput | ArticleLikeScalarWhereInput[]
   }
 
   export type OrderUpdateManyWithoutUserNestedInput = {
@@ -13292,6 +14763,20 @@ export namespace Prisma {
     deleteMany?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
   }
 
+  export type ArticleLikeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ArticleLikeCreateWithoutUserInput, ArticleLikeUncheckedCreateWithoutUserInput> | ArticleLikeCreateWithoutUserInput[] | ArticleLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutUserInput | ArticleLikeCreateOrConnectWithoutUserInput[]
+    upsert?: ArticleLikeUpsertWithWhereUniqueWithoutUserInput | ArticleLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ArticleLikeCreateManyUserInputEnvelope
+    set?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    disconnect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    delete?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    update?: ArticleLikeUpdateWithWhereUniqueWithoutUserInput | ArticleLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ArticleLikeUpdateManyWithWhereWithoutUserInput | ArticleLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ArticleLikeScalarWhereInput | ArticleLikeScalarWhereInput[]
+  }
+
   export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput> | OrderCreateWithoutUserInput[] | OrderUncheckedCreateWithoutUserInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[]
@@ -13386,12 +14871,86 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type ArticleLikeCreateNestedManyWithoutArticleInput = {
+    create?: XOR<ArticleLikeCreateWithoutArticleInput, ArticleLikeUncheckedCreateWithoutArticleInput> | ArticleLikeCreateWithoutArticleInput[] | ArticleLikeUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutArticleInput | ArticleLikeCreateOrConnectWithoutArticleInput[]
+    createMany?: ArticleLikeCreateManyArticleInputEnvelope
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+  }
+
+  export type ArticleLikeUncheckedCreateNestedManyWithoutArticleInput = {
+    create?: XOR<ArticleLikeCreateWithoutArticleInput, ArticleLikeUncheckedCreateWithoutArticleInput> | ArticleLikeCreateWithoutArticleInput[] | ArticleLikeUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutArticleInput | ArticleLikeCreateOrConnectWithoutArticleInput[]
+    createMany?: ArticleLikeCreateManyArticleInputEnvelope
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+  }
+
+  export type EnumArticleTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ArticleType
+  }
+
   export type UserUpdateOneRequiredWithoutArticlesNestedInput = {
     create?: XOR<UserCreateWithoutArticlesInput, UserUncheckedCreateWithoutArticlesInput>
     connectOrCreate?: UserCreateOrConnectWithoutArticlesInput
     upsert?: UserUpsertWithoutArticlesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutArticlesInput, UserUpdateWithoutArticlesInput>, UserUncheckedUpdateWithoutArticlesInput>
+  }
+
+  export type ArticleLikeUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<ArticleLikeCreateWithoutArticleInput, ArticleLikeUncheckedCreateWithoutArticleInput> | ArticleLikeCreateWithoutArticleInput[] | ArticleLikeUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutArticleInput | ArticleLikeCreateOrConnectWithoutArticleInput[]
+    upsert?: ArticleLikeUpsertWithWhereUniqueWithoutArticleInput | ArticleLikeUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: ArticleLikeCreateManyArticleInputEnvelope
+    set?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    disconnect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    delete?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    update?: ArticleLikeUpdateWithWhereUniqueWithoutArticleInput | ArticleLikeUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: ArticleLikeUpdateManyWithWhereWithoutArticleInput | ArticleLikeUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: ArticleLikeScalarWhereInput | ArticleLikeScalarWhereInput[]
+  }
+
+  export type ArticleLikeUncheckedUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<ArticleLikeCreateWithoutArticleInput, ArticleLikeUncheckedCreateWithoutArticleInput> | ArticleLikeCreateWithoutArticleInput[] | ArticleLikeUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: ArticleLikeCreateOrConnectWithoutArticleInput | ArticleLikeCreateOrConnectWithoutArticleInput[]
+    upsert?: ArticleLikeUpsertWithWhereUniqueWithoutArticleInput | ArticleLikeUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: ArticleLikeCreateManyArticleInputEnvelope
+    set?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    disconnect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    delete?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    connect?: ArticleLikeWhereUniqueInput | ArticleLikeWhereUniqueInput[]
+    update?: ArticleLikeUpdateWithWhereUniqueWithoutArticleInput | ArticleLikeUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: ArticleLikeUpdateManyWithWhereWithoutArticleInput | ArticleLikeUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: ArticleLikeScalarWhereInput | ArticleLikeScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutArticleLikesInput = {
+    create?: XOR<UserCreateWithoutArticleLikesInput, UserUncheckedCreateWithoutArticleLikesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutArticleLikesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ArticleCreateNestedOneWithoutLikesInput = {
+    create?: XOR<ArticleCreateWithoutLikesInput, ArticleUncheckedCreateWithoutLikesInput>
+    connectOrCreate?: ArticleCreateOrConnectWithoutLikesInput
+    connect?: ArticleWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutArticleLikesNestedInput = {
+    create?: XOR<UserCreateWithoutArticleLikesInput, UserUncheckedCreateWithoutArticleLikesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutArticleLikesInput
+    upsert?: UserUpsertWithoutArticleLikesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutArticleLikesInput, UserUpdateWithoutArticleLikesInput>, UserUncheckedUpdateWithoutArticleLikesInput>
+  }
+
+  export type ArticleUpdateOneRequiredWithoutLikesNestedInput = {
+    create?: XOR<ArticleCreateWithoutLikesInput, ArticleUncheckedCreateWithoutLikesInput>
+    connectOrCreate?: ArticleCreateOrConnectWithoutLikesInput
+    upsert?: ArticleUpsertWithoutLikesInput
+    connect?: ArticleWhereUniqueInput
+    update?: XOR<XOR<ArticleUpdateToOneWithWhereWithoutLikesInput, ArticleUpdateWithoutLikesInput>, ArticleUncheckedUpdateWithoutLikesInput>
   }
 
   export type OrderItemCreateNestedManyWithoutOrderInput = {
@@ -13698,13 +15257,6 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedEnumJobsNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumJobsNullableFilter<$PrismaModel> | $Enums.Jobs | null
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -13762,27 +15314,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedEnumJobsNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumJobsNullableWithAggregatesFilter<$PrismaModel> | $Enums.Jobs | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumJobsNullableFilter<$PrismaModel>
-    _max?: NestedEnumJobsNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -13812,6 +15343,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumApplicationStatusFilter<$PrismaModel>
     _max?: NestedEnumApplicationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumArticleTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeFilter<$PrismaModel> | $Enums.ArticleType
+  }
+
+  export type NestedEnumArticleTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ArticleType | EnumArticleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ArticleType[] | ListEnumArticleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumArticleTypeWithAggregatesFilter<$PrismaModel> | $Enums.ArticleType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumArticleTypeFilter<$PrismaModel>
+    _max?: NestedEnumArticleTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
@@ -13939,6 +15487,17 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumJobsFilter<$PrismaModel = never> = {
     equals?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel>
     in?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel>
@@ -13986,16 +15545,20 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
+    likes?: ArticleLikeCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleUncheckedCreateWithoutUserInput = {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
+    likes?: ArticleLikeUncheckedCreateNestedManyWithoutArticleInput
   }
 
   export type ArticleCreateOrConnectWithoutUserInput = {
@@ -14005,6 +15568,26 @@ export namespace Prisma {
 
   export type ArticleCreateManyUserInputEnvelope = {
     data: ArticleCreateManyUserInput | ArticleCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ArticleLikeCreateWithoutUserInput = {
+    createdAt?: Date | string
+    article: ArticleCreateNestedOneWithoutLikesInput
+  }
+
+  export type ArticleLikeUncheckedCreateWithoutUserInput = {
+    articleId: string
+    createdAt?: Date | string
+  }
+
+  export type ArticleLikeCreateOrConnectWithoutUserInput = {
+    where: ArticleLikeWhereUniqueInput
+    create: XOR<ArticleLikeCreateWithoutUserInput, ArticleLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type ArticleLikeCreateManyUserInputEnvelope = {
+    data: ArticleLikeCreateManyUserInput | ArticleLikeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -14222,8 +15805,34 @@ export namespace Prisma {
     userId?: StringFilter<"Article"> | string
     title?: StringFilter<"Article"> | string
     text?: StringFilter<"Article"> | string
+    type?: EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
+  }
+
+  export type ArticleLikeUpsertWithWhereUniqueWithoutUserInput = {
+    where: ArticleLikeWhereUniqueInput
+    update: XOR<ArticleLikeUpdateWithoutUserInput, ArticleLikeUncheckedUpdateWithoutUserInput>
+    create: XOR<ArticleLikeCreateWithoutUserInput, ArticleLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type ArticleLikeUpdateWithWhereUniqueWithoutUserInput = {
+    where: ArticleLikeWhereUniqueInput
+    data: XOR<ArticleLikeUpdateWithoutUserInput, ArticleLikeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ArticleLikeUpdateManyWithWhereWithoutUserInput = {
+    where: ArticleLikeScalarWhereInput
+    data: XOR<ArticleLikeUpdateManyMutationInput, ArticleLikeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ArticleLikeScalarWhereInput = {
+    AND?: ArticleLikeScalarWhereInput | ArticleLikeScalarWhereInput[]
+    OR?: ArticleLikeScalarWhereInput[]
+    NOT?: ArticleLikeScalarWhereInput | ArticleLikeScalarWhereInput[]
+    userId?: StringFilter<"ArticleLike"> | string
+    articleId?: StringFilter<"ArticleLike"> | string
+    createdAt?: DateTimeFilter<"ArticleLike"> | Date | string
   }
 
   export type OrderUpsertWithWhereUniqueWithoutUserInput = {
@@ -14369,10 +15978,11 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
     vacancies?: VacancyCreateNestedManyWithoutUserInput
@@ -14387,10 +15997,11 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
     vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
@@ -14421,10 +16032,11 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUpdateManyWithoutUserNestedInput
@@ -14439,10 +16051,11 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
@@ -14457,10 +16070,11 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
     vacancies?: VacancyCreateNestedManyWithoutUserInput
@@ -14475,10 +16089,11 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
     vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
@@ -14489,6 +16104,26 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutArticlesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutArticlesInput, UserUncheckedCreateWithoutArticlesInput>
+  }
+
+  export type ArticleLikeCreateWithoutArticleInput = {
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutArticleLikesInput
+  }
+
+  export type ArticleLikeUncheckedCreateWithoutArticleInput = {
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type ArticleLikeCreateOrConnectWithoutArticleInput = {
+    where: ArticleLikeWhereUniqueInput
+    create: XOR<ArticleLikeCreateWithoutArticleInput, ArticleLikeUncheckedCreateWithoutArticleInput>
+  }
+
+  export type ArticleLikeCreateManyArticleInputEnvelope = {
+    data: ArticleLikeCreateManyArticleInput | ArticleLikeCreateManyArticleInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutArticlesInput = {
@@ -14509,10 +16144,11 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUpdateManyWithoutUserNestedInput
@@ -14527,15 +16163,180 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type ArticleLikeUpsertWithWhereUniqueWithoutArticleInput = {
+    where: ArticleLikeWhereUniqueInput
+    update: XOR<ArticleLikeUpdateWithoutArticleInput, ArticleLikeUncheckedUpdateWithoutArticleInput>
+    create: XOR<ArticleLikeCreateWithoutArticleInput, ArticleLikeUncheckedCreateWithoutArticleInput>
+  }
+
+  export type ArticleLikeUpdateWithWhereUniqueWithoutArticleInput = {
+    where: ArticleLikeWhereUniqueInput
+    data: XOR<ArticleLikeUpdateWithoutArticleInput, ArticleLikeUncheckedUpdateWithoutArticleInput>
+  }
+
+  export type ArticleLikeUpdateManyWithWhereWithoutArticleInput = {
+    where: ArticleLikeScalarWhereInput
+    data: XOR<ArticleLikeUpdateManyMutationInput, ArticleLikeUncheckedUpdateManyWithoutArticleInput>
+  }
+
+  export type UserCreateWithoutArticleLikesInput = {
+    id?: string
+    email: string
+    login: string
+    password: string
+    role?: $Enums.UserRole
+    isVerified?: boolean
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: ApplicationCreateNestedManyWithoutUserInput
+    articles?: ArticleCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    cards?: CardCreateNestedManyWithoutUserInput
+    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
+    confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
+  }
+
+  export type UserUncheckedCreateWithoutArticleLikesInput = {
+    id?: string
+    email: string
+    login: string
+    password: string
+    role?: $Enums.UserRole
+    isVerified?: boolean
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
+    articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    cards?: CardUncheckedCreateNestedManyWithoutUserInput
+    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
+    confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
+  }
+
+  export type UserCreateOrConnectWithoutArticleLikesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutArticleLikesInput, UserUncheckedCreateWithoutArticleLikesInput>
+  }
+
+  export type ArticleCreateWithoutLikesInput = {
+    id?: string
+    title: string
+    text: string
+    type: $Enums.ArticleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutArticlesInput
+  }
+
+  export type ArticleUncheckedCreateWithoutLikesInput = {
+    id?: string
+    userId: string
+    title: string
+    text: string
+    type: $Enums.ArticleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ArticleCreateOrConnectWithoutLikesInput = {
+    where: ArticleWhereUniqueInput
+    create: XOR<ArticleCreateWithoutLikesInput, ArticleUncheckedCreateWithoutLikesInput>
+  }
+
+  export type UserUpsertWithoutArticleLikesInput = {
+    update: XOR<UserUpdateWithoutArticleLikesInput, UserUncheckedUpdateWithoutArticleLikesInput>
+    create: XOR<UserCreateWithoutArticleLikesInput, UserUncheckedCreateWithoutArticleLikesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutArticleLikesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutArticleLikesInput, UserUncheckedUpdateWithoutArticleLikesInput>
+  }
+
+  export type UserUpdateWithoutArticleLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: ApplicationUpdateManyWithoutUserNestedInput
+    articles?: ArticleUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    cards?: CardUpdateManyWithoutUserNestedInput
+    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
+    confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutArticleLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
+    articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    cards?: CardUncheckedUpdateManyWithoutUserNestedInput
+    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
+    confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type ArticleUpsertWithoutLikesInput = {
+    update: XOR<ArticleUpdateWithoutLikesInput, ArticleUncheckedUpdateWithoutLikesInput>
+    create: XOR<ArticleCreateWithoutLikesInput, ArticleUncheckedCreateWithoutLikesInput>
+    where?: ArticleWhereInput
+  }
+
+  export type ArticleUpdateToOneWithWhereWithoutLikesInput = {
+    where?: ArticleWhereInput
+    data: XOR<ArticleUpdateWithoutLikesInput, ArticleUncheckedUpdateWithoutLikesInput>
+  }
+
+  export type ArticleUpdateWithoutLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutArticlesNestedInput
+  }
+
+  export type ArticleUncheckedUpdateWithoutLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemCreateWithoutOrderInput = {
@@ -14569,11 +16370,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
     vacancies?: VacancyCreateNestedManyWithoutUserInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
@@ -14587,11 +16389,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
     vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -14648,11 +16451,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUpdateManyWithoutUserNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
@@ -14666,11 +16470,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -14736,11 +16541,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     vacancies?: VacancyCreateNestedManyWithoutUserInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
@@ -14754,11 +16560,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -14860,11 +16667,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUpdateManyWithoutUserNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
@@ -14878,11 +16686,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -14928,11 +16737,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
     vacancies?: VacancyCreateNestedManyWithoutUserInput
@@ -14946,11 +16756,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
     vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
@@ -15023,11 +16834,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
     vacancies?: VacancyCreateNestedManyWithoutUserInput
@@ -15041,11 +16853,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
     vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
@@ -15075,11 +16888,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUpdateManyWithoutUserNestedInput
@@ -15093,11 +16907,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
@@ -15188,11 +17003,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUpdateManyWithoutUserNestedInput
@@ -15206,11 +17022,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
     vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
@@ -15224,11 +17041,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
@@ -15242,11 +17060,12 @@ export namespace Prisma {
     password: string
     role?: $Enums.UserRole
     isVerified?: boolean
-    job?: $Enums.Jobs | null
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15276,11 +17095,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
@@ -15294,11 +17114,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
-    job?: NullableEnumJobsFieldUpdateOperationsInput | $Enums.Jobs | null
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -15317,8 +17138,14 @@ export namespace Prisma {
     id?: string
     title: string
     text: string
+    type: $Enums.ArticleType
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ArticleLikeCreateManyUserInput = {
+    articleId: string
+    createdAt?: Date | string
   }
 
   export type OrderCreateManyUserInput = {
@@ -15402,24 +17229,44 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likes?: ArticleLikeUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likes?: ArticleLikeUncheckedUpdateManyWithoutArticleNestedInput
   }
 
   export type ArticleUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    type?: EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArticleLikeUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    article?: ArticleUpdateOneRequiredWithoutLikesNestedInput
+  }
+
+  export type ArticleLikeUncheckedUpdateWithoutUserInput = {
+    articleId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArticleLikeUncheckedUpdateManyWithoutUserInput = {
+    articleId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderUpdateWithoutUserInput = {
@@ -15585,6 +17432,26 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArticleLikeCreateManyArticleInput = {
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type ArticleLikeUpdateWithoutArticleInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutArticleLikesNestedInput
+  }
+
+  export type ArticleLikeUncheckedUpdateWithoutArticleInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ArticleLikeUncheckedUpdateManyWithoutArticleInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemCreateManyOrderInput = {
