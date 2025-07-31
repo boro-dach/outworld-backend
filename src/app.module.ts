@@ -7,11 +7,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { ApplicationModule } from './application/application.module';
 import { ArticlesModule } from './articles/articles.module';
 import { OrderModule } from './order/order.module';
-import { JobsModule } from './jobs/jobs.module';
 import { MinecraftModule } from './minecraft/minecraft.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { CardModule } from './card/card.module';
 import { VacancyModule } from './vacancy/vacancy.module';
+import { JobModule } from './job/job.module';
 
 @Module({
   imports: [
@@ -24,11 +24,11 @@ import { VacancyModule } from './vacancy/vacancy.module';
     ApplicationModule,
     ArticlesModule,
     OrderModule,
-    JobsModule,
     MinecraftModule,
     TransactionModule,
     CardModule,
     VacancyModule,
+    JobModule,
   ],
   controllers: [AppController],
   providers: [AppService],

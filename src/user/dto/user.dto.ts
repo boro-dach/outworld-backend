@@ -8,11 +8,3 @@ export class UpdateIsVerifiedDto {
   @IsBoolean()
   isVerified: boolean;
 }
-
-export class JobAssignDto {
-  @IsString()
-  userId: string;
-
-  @IsEnum(Jobs)
-  job: Jobs;
-}

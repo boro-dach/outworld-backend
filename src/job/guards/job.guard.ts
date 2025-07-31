@@ -1,10 +1,10 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { JOBS_KEY } from '../decorators/jobs.decorator';
+import { JOBS_KEY } from '../decorators/job.decorator';
 import type { Jobs } from 'generated/prisma';
 
 @Injectable()
-export class JobsGuard implements CanActivate {
+export class JobGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
