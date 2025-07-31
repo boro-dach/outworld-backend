@@ -8,7 +8,7 @@ import {
   WithdrawDto,
 } from './dto/transaction.dto';
 import { CurrentUser } from 'src/user/decorators/user.decorator';
-import { Job } from 'src/jobs/decorators/jobs.decorator';
+import { Job } from 'src/job/decorators/job.decorator';
 
 @Controller('transaction')
 export class TransactionController {

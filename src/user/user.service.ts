@@ -2,8 +2,8 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { hash } from 'argon2';
 import { RegisterDto } from 'src/auth/dto/auth.dto';
 import { PrismaService } from 'src/prisma.service';
-import { JobAssignDto, UpdateIsVerifiedDto } from './dto/user.dto';
-import { Jobs, UserRole } from 'generated/prisma';
+import { UpdateIsVerifiedDto } from './dto/user.dto';
+import { UserRole } from 'generated/prisma';
 import { firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 
@@ -143,44 +143,11 @@ export class UserService {
     return { role };
   }
 
-  async getJobs(userId: string) {
-    const jobs = await this.prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        jobs: true,
-      },
-    });
-
-    return jobs.jobs;
-  }
-
   async verify(id: string) {
     const user = await this.prisma.user.update({
       where: { id },
       data: { isVerified: true },
     });
     return user;
-  }
-
-  async assignJob(dto: JobAssignDto) {
-    const user = await this.prisma.user.update({
-      where: { id: dto.userId },
-      data: {
-        jobs: {
-          push: dto.job,
-        },
-      },
-      select: {
-        id: true,
-        login: true,
-        jobs: true,
-      },
-    });
-
-    return {
-      id: user.id,
-      login: user.login,
-      jobs: user.jobs,
-    };
   }
 }
