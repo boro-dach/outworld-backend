@@ -54,10 +54,20 @@ export type Card = $Result.DefaultSelection<Prisma.$CardPayload>
  */
 export type Transaction = $Result.DefaultSelection<Prisma.$TransactionPayload>
 /**
+ * Model Salary
+ * 
+ */
+export type Salary = $Result.DefaultSelection<Prisma.$SalaryPayload>
+/**
  * Model Vacancy
  * 
  */
 export type Vacancy = $Result.DefaultSelection<Prisma.$VacancyPayload>
+/**
+ * Model Company
+ * 
+ */
+export type Company = $Result.DefaultSelection<Prisma.$CompanyPayload>
 
 /**
  * Enums
@@ -128,6 +138,25 @@ export const TransactionStatus: {
 
 export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
 
+
+export const SalaryType: {
+  FIXED: 'FIXED',
+  RANGE: 'RANGE'
+};
+
+export type SalaryType = (typeof SalaryType)[keyof typeof SalaryType]
+
+
+export const PaymentPeriod: {
+  PER_TASK: 'PER_TASK',
+  PER_HOUR: 'PER_HOUR',
+  PER_DAY: 'PER_DAY',
+  PER_WEEK: 'PER_WEEK',
+  PER_MONTH: 'PER_MONTH'
+};
+
+export type PaymentPeriod = (typeof PaymentPeriod)[keyof typeof PaymentPeriod]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -157,6 +186,14 @@ export const TransactionType: typeof $Enums.TransactionType
 export type TransactionStatus = $Enums.TransactionStatus
 
 export const TransactionStatus: typeof $Enums.TransactionStatus
+
+export type SalaryType = $Enums.SalaryType
+
+export const SalaryType: typeof $Enums.SalaryType
+
+export type PaymentPeriod = $Enums.PaymentPeriod
+
+export const PaymentPeriod: typeof $Enums.PaymentPeriod
 
 /**
  * ##  Prisma Client ʲˢ
@@ -364,6 +401,16 @@ export class PrismaClient<
   get transaction(): Prisma.TransactionDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.salary`: Exposes CRUD operations for the **Salary** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Salaries
+    * const salaries = await prisma.salary.findMany()
+    * ```
+    */
+  get salary(): Prisma.SalaryDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.vacancy`: Exposes CRUD operations for the **Vacancy** model.
     * Example usage:
     * ```ts
@@ -372,6 +419,16 @@ export class PrismaClient<
     * ```
     */
   get vacancy(): Prisma.VacancyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.company`: Exposes CRUD operations for the **Company** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Companies
+    * const companies = await prisma.company.findMany()
+    * ```
+    */
+  get company(): Prisma.CompanyDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -820,7 +877,9 @@ export namespace Prisma {
     OrderItem: 'OrderItem',
     Card: 'Card',
     Transaction: 'Transaction',
-    Vacancy: 'Vacancy'
+    Salary: 'Salary',
+    Vacancy: 'Vacancy',
+    Company: 'Company'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -839,7 +898,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "application" | "article" | "articleLike" | "order" | "orderItem" | "card" | "transaction" | "vacancy"
+      modelProps: "user" | "application" | "article" | "articleLike" | "order" | "orderItem" | "card" | "transaction" | "salary" | "vacancy" | "company"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1435,6 +1494,80 @@ export namespace Prisma {
           }
         }
       }
+      Salary: {
+        payload: Prisma.$SalaryPayload<ExtArgs>
+        fields: Prisma.SalaryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SalaryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SalaryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>
+          }
+          findFirst: {
+            args: Prisma.SalaryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SalaryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>
+          }
+          findMany: {
+            args: Prisma.SalaryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>[]
+          }
+          create: {
+            args: Prisma.SalaryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>
+          }
+          createMany: {
+            args: Prisma.SalaryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SalaryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>[]
+          }
+          delete: {
+            args: Prisma.SalaryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>
+          }
+          update: {
+            args: Prisma.SalaryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>
+          }
+          deleteMany: {
+            args: Prisma.SalaryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SalaryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SalaryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>[]
+          }
+          upsert: {
+            args: Prisma.SalaryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalaryPayload>
+          }
+          aggregate: {
+            args: Prisma.SalaryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSalary>
+          }
+          groupBy: {
+            args: Prisma.SalaryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SalaryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SalaryCountArgs<ExtArgs>
+            result: $Utils.Optional<SalaryCountAggregateOutputType> | number
+          }
+        }
+      }
       Vacancy: {
         payload: Prisma.$VacancyPayload<ExtArgs>
         fields: Prisma.VacancyFieldRefs
@@ -1506,6 +1639,80 @@ export namespace Prisma {
           count: {
             args: Prisma.VacancyCountArgs<ExtArgs>
             result: $Utils.Optional<VacancyCountAggregateOutputType> | number
+          }
+        }
+      }
+      Company: {
+        payload: Prisma.$CompanyPayload<ExtArgs>
+        fields: Prisma.CompanyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CompanyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CompanyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          findFirst: {
+            args: Prisma.CompanyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CompanyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          findMany: {
+            args: Prisma.CompanyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>[]
+          }
+          create: {
+            args: Prisma.CompanyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          createMany: {
+            args: Prisma.CompanyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CompanyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>[]
+          }
+          delete: {
+            args: Prisma.CompanyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          update: {
+            args: Prisma.CompanyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          deleteMany: {
+            args: Prisma.CompanyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CompanyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CompanyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>[]
+          }
+          upsert: {
+            args: Prisma.CompanyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          aggregate: {
+            args: Prisma.CompanyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCompany>
+          }
+          groupBy: {
+            args: Prisma.CompanyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CompanyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CompanyCountArgs<ExtArgs>
+            result: $Utils.Optional<CompanyCountAggregateOutputType> | number
           }
         }
       }
@@ -1601,7 +1808,9 @@ export namespace Prisma {
     orderItem?: OrderItemOmit
     card?: CardOmit
     transaction?: TransactionOmit
+    salary?: SalaryOmit
     vacancy?: VacancyOmit
+    company?: CompanyOmit
   }
 
   /* Types for Logging */
@@ -1701,7 +1910,8 @@ export namespace Prisma {
     articleLikes: number
     orders: number
     cards: number
-    vacancies: number
+    companies: number
+    companyCeo: number
     initiatedTransactions: number
     confirmedTransactions: number
   }
@@ -1712,7 +1922,8 @@ export namespace Prisma {
     articleLikes?: boolean | UserCountOutputTypeCountArticleLikesArgs
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
     cards?: boolean | UserCountOutputTypeCountCardsArgs
-    vacancies?: boolean | UserCountOutputTypeCountVacanciesArgs
+    companies?: boolean | UserCountOutputTypeCountCompaniesArgs
+    companyCeo?: boolean | UserCountOutputTypeCountCompanyCeoArgs
     initiatedTransactions?: boolean | UserCountOutputTypeCountInitiatedTransactionsArgs
     confirmedTransactions?: boolean | UserCountOutputTypeCountConfirmedTransactionsArgs
   }
@@ -1766,8 +1977,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountVacanciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VacancyWhereInput
+  export type UserCountOutputTypeCountCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CompanyWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCompanyCeoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CompanyWhereInput
   }
 
   /**
@@ -1884,6 +2102,46 @@ export namespace Prisma {
    */
   export type CardCountOutputTypeCountRelatedTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TransactionWhereInput
+  }
+
+
+  /**
+   * Count Type CompanyCountOutputType
+   */
+
+  export type CompanyCountOutputType = {
+    employees: number
+    vacancies: number
+  }
+
+  export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employees?: boolean | CompanyCountOutputTypeCountEmployeesArgs
+    vacancies?: boolean | CompanyCountOutputTypeCountVacanciesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyCountOutputType
+     */
+    select?: CompanyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountVacanciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VacancyWhereInput
   }
 
 
@@ -2088,7 +2346,8 @@ export namespace Prisma {
     articleLikes?: boolean | User$articleLikesArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     cards?: boolean | User$cardsArgs<ExtArgs>
-    vacancies?: boolean | User$vacanciesArgs<ExtArgs>
+    companies?: boolean | User$companiesArgs<ExtArgs>
+    companyCeo?: boolean | User$companyCeoArgs<ExtArgs>
     initiatedTransactions?: boolean | User$initiatedTransactionsArgs<ExtArgs>
     confirmedTransactions?: boolean | User$confirmedTransactionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2137,7 +2396,8 @@ export namespace Prisma {
     articleLikes?: boolean | User$articleLikesArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     cards?: boolean | User$cardsArgs<ExtArgs>
-    vacancies?: boolean | User$vacanciesArgs<ExtArgs>
+    companies?: boolean | User$companiesArgs<ExtArgs>
+    companyCeo?: boolean | User$companyCeoArgs<ExtArgs>
     initiatedTransactions?: boolean | User$initiatedTransactionsArgs<ExtArgs>
     confirmedTransactions?: boolean | User$confirmedTransactionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2153,7 +2413,8 @@ export namespace Prisma {
       articleLikes: Prisma.$ArticleLikePayload<ExtArgs>[]
       orders: Prisma.$OrderPayload<ExtArgs>[]
       cards: Prisma.$CardPayload<ExtArgs>[]
-      vacancies: Prisma.$VacancyPayload<ExtArgs>[]
+      companies: Prisma.$CompanyPayload<ExtArgs>[]
+      companyCeo: Prisma.$CompanyPayload<ExtArgs>[]
       initiatedTransactions: Prisma.$TransactionPayload<ExtArgs>[]
       confirmedTransactions: Prisma.$TransactionPayload<ExtArgs>[]
     }
@@ -2566,7 +2827,8 @@ export namespace Prisma {
     articleLikes<T extends User$articleLikesArgs<ExtArgs> = {}>(args?: Subset<T, User$articleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cards<T extends User$cardsArgs<ExtArgs> = {}>(args?: Subset<T, User$cardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    vacancies<T extends User$vacanciesArgs<ExtArgs> = {}>(args?: Subset<T, User$vacanciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    companies<T extends User$companiesArgs<ExtArgs> = {}>(args?: Subset<T, User$companiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    companyCeo<T extends User$companyCeoArgs<ExtArgs> = {}>(args?: Subset<T, User$companyCeoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     initiatedTransactions<T extends User$initiatedTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$initiatedTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     confirmedTransactions<T extends User$confirmedTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$confirmedTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -3115,27 +3377,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.vacancies
+   * User.companies
    */
-  export type User$vacanciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$companiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Vacancy
+     * Select specific fields to fetch from the Company
      */
-    select?: VacancySelect<ExtArgs> | null
+    select?: CompanySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Vacancy
+     * Omit specific fields from the Company
      */
-    omit?: VacancyOmit<ExtArgs> | null
+    omit?: CompanyOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VacancyInclude<ExtArgs> | null
-    where?: VacancyWhereInput
-    orderBy?: VacancyOrderByWithRelationInput | VacancyOrderByWithRelationInput[]
-    cursor?: VacancyWhereUniqueInput
+    include?: CompanyInclude<ExtArgs> | null
+    where?: CompanyWhereInput
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    cursor?: CompanyWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: VacancyScalarFieldEnum | VacancyScalarFieldEnum[]
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * User.companyCeo
+   */
+  export type User$companyCeoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    where?: CompanyWhereInput
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    cursor?: CompanyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
   }
 
   /**
@@ -6603,7 +6889,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     items?: boolean | Order$itemsArgs<ExtArgs>
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
@@ -6614,7 +6900,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6624,7 +6910,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectScalar = {
@@ -6639,21 +6925,21 @@ export namespace Prisma {
   export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerUuid" | "status" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | Order$itemsArgs<ExtArgs>
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type OrderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
     objects: {
       items: Prisma.$OrderItemPayload<ExtArgs>[]
-      User: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7057,7 +7343,7 @@ export namespace Prisma {
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     items<T extends Order$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Order$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11036,32 +11322,1147 @@ export namespace Prisma {
 
 
   /**
+   * Model Salary
+   */
+
+  export type AggregateSalary = {
+    _count: SalaryCountAggregateOutputType | null
+    _avg: SalaryAvgAggregateOutputType | null
+    _sum: SalarySumAggregateOutputType | null
+    _min: SalaryMinAggregateOutputType | null
+    _max: SalaryMaxAggregateOutputType | null
+  }
+
+  export type SalaryAvgAggregateOutputType = {
+    fixedAmount: number | null
+    minAmount: number | null
+    maxAmount: number | null
+  }
+
+  export type SalarySumAggregateOutputType = {
+    fixedAmount: number | null
+    minAmount: number | null
+    maxAmount: number | null
+  }
+
+  export type SalaryMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.SalaryType | null
+    fixedAmount: number | null
+    minAmount: number | null
+    maxAmount: number | null
+    period: $Enums.PaymentPeriod | null
+    vacancyId: string | null
+  }
+
+  export type SalaryMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.SalaryType | null
+    fixedAmount: number | null
+    minAmount: number | null
+    maxAmount: number | null
+    period: $Enums.PaymentPeriod | null
+    vacancyId: string | null
+  }
+
+  export type SalaryCountAggregateOutputType = {
+    id: number
+    type: number
+    fixedAmount: number
+    minAmount: number
+    maxAmount: number
+    period: number
+    vacancyId: number
+    _all: number
+  }
+
+
+  export type SalaryAvgAggregateInputType = {
+    fixedAmount?: true
+    minAmount?: true
+    maxAmount?: true
+  }
+
+  export type SalarySumAggregateInputType = {
+    fixedAmount?: true
+    minAmount?: true
+    maxAmount?: true
+  }
+
+  export type SalaryMinAggregateInputType = {
+    id?: true
+    type?: true
+    fixedAmount?: true
+    minAmount?: true
+    maxAmount?: true
+    period?: true
+    vacancyId?: true
+  }
+
+  export type SalaryMaxAggregateInputType = {
+    id?: true
+    type?: true
+    fixedAmount?: true
+    minAmount?: true
+    maxAmount?: true
+    period?: true
+    vacancyId?: true
+  }
+
+  export type SalaryCountAggregateInputType = {
+    id?: true
+    type?: true
+    fixedAmount?: true
+    minAmount?: true
+    maxAmount?: true
+    period?: true
+    vacancyId?: true
+    _all?: true
+  }
+
+  export type SalaryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Salary to aggregate.
+     */
+    where?: SalaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Salaries to fetch.
+     */
+    orderBy?: SalaryOrderByWithRelationInput | SalaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SalaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Salaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Salaries
+    **/
+    _count?: true | SalaryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SalaryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SalarySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SalaryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SalaryMaxAggregateInputType
+  }
+
+  export type GetSalaryAggregateType<T extends SalaryAggregateArgs> = {
+        [P in keyof T & keyof AggregateSalary]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSalary[P]>
+      : GetScalarType<T[P], AggregateSalary[P]>
+  }
+
+
+
+
+  export type SalaryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SalaryWhereInput
+    orderBy?: SalaryOrderByWithAggregationInput | SalaryOrderByWithAggregationInput[]
+    by: SalaryScalarFieldEnum[] | SalaryScalarFieldEnum
+    having?: SalaryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SalaryCountAggregateInputType | true
+    _avg?: SalaryAvgAggregateInputType
+    _sum?: SalarySumAggregateInputType
+    _min?: SalaryMinAggregateInputType
+    _max?: SalaryMaxAggregateInputType
+  }
+
+  export type SalaryGroupByOutputType = {
+    id: string
+    type: $Enums.SalaryType
+    fixedAmount: number | null
+    minAmount: number | null
+    maxAmount: number | null
+    period: $Enums.PaymentPeriod
+    vacancyId: string
+    _count: SalaryCountAggregateOutputType | null
+    _avg: SalaryAvgAggregateOutputType | null
+    _sum: SalarySumAggregateOutputType | null
+    _min: SalaryMinAggregateOutputType | null
+    _max: SalaryMaxAggregateOutputType | null
+  }
+
+  type GetSalaryGroupByPayload<T extends SalaryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SalaryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SalaryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SalaryGroupByOutputType[P]>
+            : GetScalarType<T[P], SalaryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SalarySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    fixedAmount?: boolean
+    minAmount?: boolean
+    maxAmount?: boolean
+    period?: boolean
+    vacancyId?: boolean
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["salary"]>
+
+  export type SalarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    fixedAmount?: boolean
+    minAmount?: boolean
+    maxAmount?: boolean
+    period?: boolean
+    vacancyId?: boolean
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["salary"]>
+
+  export type SalarySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    fixedAmount?: boolean
+    minAmount?: boolean
+    maxAmount?: boolean
+    period?: boolean
+    vacancyId?: boolean
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["salary"]>
+
+  export type SalarySelectScalar = {
+    id?: boolean
+    type?: boolean
+    fixedAmount?: boolean
+    minAmount?: boolean
+    maxAmount?: boolean
+    period?: boolean
+    vacancyId?: boolean
+  }
+
+  export type SalaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "fixedAmount" | "minAmount" | "maxAmount" | "period" | "vacancyId", ExtArgs["result"]["salary"]>
+  export type SalaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }
+  export type SalaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }
+  export type SalaryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }
+
+  export type $SalaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Salary"
+    objects: {
+      vacancy: Prisma.$VacancyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.SalaryType
+      fixedAmount: number | null
+      minAmount: number | null
+      maxAmount: number | null
+      period: $Enums.PaymentPeriod
+      vacancyId: string
+    }, ExtArgs["result"]["salary"]>
+    composites: {}
+  }
+
+  type SalaryGetPayload<S extends boolean | null | undefined | SalaryDefaultArgs> = $Result.GetResult<Prisma.$SalaryPayload, S>
+
+  type SalaryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SalaryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SalaryCountAggregateInputType | true
+    }
+
+  export interface SalaryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Salary'], meta: { name: 'Salary' } }
+    /**
+     * Find zero or one Salary that matches the filter.
+     * @param {SalaryFindUniqueArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SalaryFindUniqueArgs>(args: SelectSubset<T, SalaryFindUniqueArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Salary that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SalaryFindUniqueOrThrowArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SalaryFindUniqueOrThrowArgs>(args: SelectSubset<T, SalaryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Salary that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryFindFirstArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SalaryFindFirstArgs>(args?: SelectSubset<T, SalaryFindFirstArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Salary that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryFindFirstOrThrowArgs} args - Arguments to find a Salary
+     * @example
+     * // Get one Salary
+     * const salary = await prisma.salary.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SalaryFindFirstOrThrowArgs>(args?: SelectSubset<T, SalaryFindFirstOrThrowArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Salaries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Salaries
+     * const salaries = await prisma.salary.findMany()
+     * 
+     * // Get first 10 Salaries
+     * const salaries = await prisma.salary.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const salaryWithIdOnly = await prisma.salary.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SalaryFindManyArgs>(args?: SelectSubset<T, SalaryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Salary.
+     * @param {SalaryCreateArgs} args - Arguments to create a Salary.
+     * @example
+     * // Create one Salary
+     * const Salary = await prisma.salary.create({
+     *   data: {
+     *     // ... data to create a Salary
+     *   }
+     * })
+     * 
+     */
+    create<T extends SalaryCreateArgs>(args: SelectSubset<T, SalaryCreateArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Salaries.
+     * @param {SalaryCreateManyArgs} args - Arguments to create many Salaries.
+     * @example
+     * // Create many Salaries
+     * const salary = await prisma.salary.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SalaryCreateManyArgs>(args?: SelectSubset<T, SalaryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Salaries and returns the data saved in the database.
+     * @param {SalaryCreateManyAndReturnArgs} args - Arguments to create many Salaries.
+     * @example
+     * // Create many Salaries
+     * const salary = await prisma.salary.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Salaries and only return the `id`
+     * const salaryWithIdOnly = await prisma.salary.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SalaryCreateManyAndReturnArgs>(args?: SelectSubset<T, SalaryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Salary.
+     * @param {SalaryDeleteArgs} args - Arguments to delete one Salary.
+     * @example
+     * // Delete one Salary
+     * const Salary = await prisma.salary.delete({
+     *   where: {
+     *     // ... filter to delete one Salary
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SalaryDeleteArgs>(args: SelectSubset<T, SalaryDeleteArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Salary.
+     * @param {SalaryUpdateArgs} args - Arguments to update one Salary.
+     * @example
+     * // Update one Salary
+     * const salary = await prisma.salary.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SalaryUpdateArgs>(args: SelectSubset<T, SalaryUpdateArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Salaries.
+     * @param {SalaryDeleteManyArgs} args - Arguments to filter Salaries to delete.
+     * @example
+     * // Delete a few Salaries
+     * const { count } = await prisma.salary.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SalaryDeleteManyArgs>(args?: SelectSubset<T, SalaryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Salaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Salaries
+     * const salary = await prisma.salary.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SalaryUpdateManyArgs>(args: SelectSubset<T, SalaryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Salaries and returns the data updated in the database.
+     * @param {SalaryUpdateManyAndReturnArgs} args - Arguments to update many Salaries.
+     * @example
+     * // Update many Salaries
+     * const salary = await prisma.salary.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Salaries and only return the `id`
+     * const salaryWithIdOnly = await prisma.salary.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SalaryUpdateManyAndReturnArgs>(args: SelectSubset<T, SalaryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Salary.
+     * @param {SalaryUpsertArgs} args - Arguments to update or create a Salary.
+     * @example
+     * // Update or create a Salary
+     * const salary = await prisma.salary.upsert({
+     *   create: {
+     *     // ... data to create a Salary
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Salary we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SalaryUpsertArgs>(args: SelectSubset<T, SalaryUpsertArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Salaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryCountArgs} args - Arguments to filter Salaries to count.
+     * @example
+     * // Count the number of Salaries
+     * const count = await prisma.salary.count({
+     *   where: {
+     *     // ... the filter for the Salaries we want to count
+     *   }
+     * })
+    **/
+    count<T extends SalaryCountArgs>(
+      args?: Subset<T, SalaryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SalaryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Salary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SalaryAggregateArgs>(args: Subset<T, SalaryAggregateArgs>): Prisma.PrismaPromise<GetSalaryAggregateType<T>>
+
+    /**
+     * Group by Salary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalaryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SalaryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SalaryGroupByArgs['orderBy'] }
+        : { orderBy?: SalaryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SalaryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSalaryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Salary model
+   */
+  readonly fields: SalaryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Salary.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SalaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    vacancy<T extends VacancyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VacancyDefaultArgs<ExtArgs>>): Prisma__VacancyClient<$Result.GetResult<Prisma.$VacancyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Salary model
+   */
+  interface SalaryFieldRefs {
+    readonly id: FieldRef<"Salary", 'String'>
+    readonly type: FieldRef<"Salary", 'SalaryType'>
+    readonly fixedAmount: FieldRef<"Salary", 'Int'>
+    readonly minAmount: FieldRef<"Salary", 'Int'>
+    readonly maxAmount: FieldRef<"Salary", 'Int'>
+    readonly period: FieldRef<"Salary", 'PaymentPeriod'>
+    readonly vacancyId: FieldRef<"Salary", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Salary findUnique
+   */
+  export type SalaryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * Filter, which Salary to fetch.
+     */
+    where: SalaryWhereUniqueInput
+  }
+
+  /**
+   * Salary findUniqueOrThrow
+   */
+  export type SalaryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * Filter, which Salary to fetch.
+     */
+    where: SalaryWhereUniqueInput
+  }
+
+  /**
+   * Salary findFirst
+   */
+  export type SalaryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * Filter, which Salary to fetch.
+     */
+    where?: SalaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Salaries to fetch.
+     */
+    orderBy?: SalaryOrderByWithRelationInput | SalaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Salaries.
+     */
+    cursor?: SalaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Salaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Salaries.
+     */
+    distinct?: SalaryScalarFieldEnum | SalaryScalarFieldEnum[]
+  }
+
+  /**
+   * Salary findFirstOrThrow
+   */
+  export type SalaryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * Filter, which Salary to fetch.
+     */
+    where?: SalaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Salaries to fetch.
+     */
+    orderBy?: SalaryOrderByWithRelationInput | SalaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Salaries.
+     */
+    cursor?: SalaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Salaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Salaries.
+     */
+    distinct?: SalaryScalarFieldEnum | SalaryScalarFieldEnum[]
+  }
+
+  /**
+   * Salary findMany
+   */
+  export type SalaryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * Filter, which Salaries to fetch.
+     */
+    where?: SalaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Salaries to fetch.
+     */
+    orderBy?: SalaryOrderByWithRelationInput | SalaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Salaries.
+     */
+    cursor?: SalaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Salaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Salaries.
+     */
+    skip?: number
+    distinct?: SalaryScalarFieldEnum | SalaryScalarFieldEnum[]
+  }
+
+  /**
+   * Salary create
+   */
+  export type SalaryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Salary.
+     */
+    data: XOR<SalaryCreateInput, SalaryUncheckedCreateInput>
+  }
+
+  /**
+   * Salary createMany
+   */
+  export type SalaryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Salaries.
+     */
+    data: SalaryCreateManyInput | SalaryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Salary createManyAndReturn
+   */
+  export type SalaryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * The data used to create many Salaries.
+     */
+    data: SalaryCreateManyInput | SalaryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Salary update
+   */
+  export type SalaryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Salary.
+     */
+    data: XOR<SalaryUpdateInput, SalaryUncheckedUpdateInput>
+    /**
+     * Choose, which Salary to update.
+     */
+    where: SalaryWhereUniqueInput
+  }
+
+  /**
+   * Salary updateMany
+   */
+  export type SalaryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Salaries.
+     */
+    data: XOR<SalaryUpdateManyMutationInput, SalaryUncheckedUpdateManyInput>
+    /**
+     * Filter which Salaries to update
+     */
+    where?: SalaryWhereInput
+    /**
+     * Limit how many Salaries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Salary updateManyAndReturn
+   */
+  export type SalaryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * The data used to update Salaries.
+     */
+    data: XOR<SalaryUpdateManyMutationInput, SalaryUncheckedUpdateManyInput>
+    /**
+     * Filter which Salaries to update
+     */
+    where?: SalaryWhereInput
+    /**
+     * Limit how many Salaries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Salary upsert
+   */
+  export type SalaryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Salary to update in case it exists.
+     */
+    where: SalaryWhereUniqueInput
+    /**
+     * In case the Salary found by the `where` argument doesn't exist, create a new Salary with this data.
+     */
+    create: XOR<SalaryCreateInput, SalaryUncheckedCreateInput>
+    /**
+     * In case the Salary was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SalaryUpdateInput, SalaryUncheckedUpdateInput>
+  }
+
+  /**
+   * Salary delete
+   */
+  export type SalaryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    /**
+     * Filter which Salary to delete.
+     */
+    where: SalaryWhereUniqueInput
+  }
+
+  /**
+   * Salary deleteMany
+   */
+  export type SalaryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Salaries to delete
+     */
+    where?: SalaryWhereInput
+    /**
+     * Limit how many Salaries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Salary without action
+   */
+  export type SalaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Vacancy
    */
 
   export type AggregateVacancy = {
     _count: VacancyCountAggregateOutputType | null
-    _avg: VacancyAvgAggregateOutputType | null
-    _sum: VacancySumAggregateOutputType | null
     _min: VacancyMinAggregateOutputType | null
     _max: VacancyMaxAggregateOutputType | null
-  }
-
-  export type VacancyAvgAggregateOutputType = {
-    salary: number | null
-  }
-
-  export type VacancySumAggregateOutputType = {
-    salary: number | null
   }
 
   export type VacancyMinAggregateOutputType = {
     id: string | null
     title: string | null
     description: string | null
-    salary: number | null
     occupation: $Enums.Jobs | null
-    userId: string | null
+    companyId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11070,9 +12471,8 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
-    salary: number | null
     occupation: $Enums.Jobs | null
-    userId: string | null
+    companyId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11081,30 +12481,20 @@ export namespace Prisma {
     id: number
     title: number
     description: number
-    salary: number
     occupation: number
-    userId: number
+    companyId: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
-  export type VacancyAvgAggregateInputType = {
-    salary?: true
-  }
-
-  export type VacancySumAggregateInputType = {
-    salary?: true
-  }
-
   export type VacancyMinAggregateInputType = {
     id?: true
     title?: true
     description?: true
-    salary?: true
     occupation?: true
-    userId?: true
+    companyId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11113,9 +12503,8 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    salary?: true
     occupation?: true
-    userId?: true
+    companyId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11124,9 +12513,8 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    salary?: true
     occupation?: true
-    userId?: true
+    companyId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -11170,18 +12558,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: VacancyAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VacancySumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: VacancyMinAggregateInputType
@@ -11212,8 +12588,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: VacancyCountAggregateInputType | true
-    _avg?: VacancyAvgAggregateInputType
-    _sum?: VacancySumAggregateInputType
     _min?: VacancyMinAggregateInputType
     _max?: VacancyMaxAggregateInputType
   }
@@ -11222,14 +12596,11 @@ export namespace Prisma {
     id: string
     title: string
     description: string
-    salary: number
     occupation: $Enums.Jobs
-    userId: string
+    companyId: string
     createdAt: Date
     updatedAt: Date
     _count: VacancyCountAggregateOutputType | null
-    _avg: VacancyAvgAggregateOutputType | null
-    _sum: VacancySumAggregateOutputType | null
     _min: VacancyMinAggregateOutputType | null
     _max: VacancyMaxAggregateOutputType | null
   }
@@ -11252,72 +12623,70 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    salary?: boolean
     occupation?: boolean
-    userId?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    salary?: boolean | Vacancy$salaryArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vacancy"]>
 
   export type VacancySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     description?: boolean
-    salary?: boolean
     occupation?: boolean
-    userId?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vacancy"]>
 
   export type VacancySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     description?: boolean
-    salary?: boolean
     occupation?: boolean
-    userId?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vacancy"]>
 
   export type VacancySelectScalar = {
     id?: boolean
     title?: boolean
     description?: boolean
-    salary?: boolean
     occupation?: boolean
-    userId?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type VacancyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "salary" | "occupation" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["vacancy"]>
+  export type VacancyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "occupation" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["vacancy"]>
   export type VacancyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    salary?: boolean | Vacancy$salaryArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }
   export type VacancyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }
   export type VacancyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }
 
   export type $VacancyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Vacancy"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      salary: Prisma.$SalaryPayload<ExtArgs> | null
+      company: Prisma.$CompanyPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       description: string
-      salary: number
       occupation: $Enums.Jobs
-      userId: string
+      companyId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["vacancy"]>
@@ -11714,7 +13083,8 @@ export namespace Prisma {
    */
   export interface Prisma__VacancyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    salary<T extends Vacancy$salaryArgs<ExtArgs> = {}>(args?: Subset<T, Vacancy$salaryArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11747,9 +13117,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Vacancy", 'String'>
     readonly title: FieldRef<"Vacancy", 'String'>
     readonly description: FieldRef<"Vacancy", 'String'>
-    readonly salary: FieldRef<"Vacancy", 'Int'>
     readonly occupation: FieldRef<"Vacancy", 'Jobs'>
-    readonly userId: FieldRef<"Vacancy", 'String'>
+    readonly companyId: FieldRef<"Vacancy", 'String'>
     readonly createdAt: FieldRef<"Vacancy", 'DateTime'>
     readonly updatedAt: FieldRef<"Vacancy", 'DateTime'>
   }
@@ -12148,6 +13517,25 @@ export namespace Prisma {
   }
 
   /**
+   * Vacancy.salary
+   */
+  export type Vacancy$salaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Salary
+     */
+    select?: SalarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Salary
+     */
+    omit?: SalaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaryInclude<ExtArgs> | null
+    where?: SalaryWhereInput
+  }
+
+  /**
    * Vacancy without action
    */
   export type VacancyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12163,6 +13551,1109 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: VacancyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Company
+   */
+
+  export type AggregateCompany = {
+    _count: CompanyCountAggregateOutputType | null
+    _min: CompanyMinAggregateOutputType | null
+    _max: CompanyMaxAggregateOutputType | null
+  }
+
+  export type CompanyMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    ceoId: string | null
+  }
+
+  export type CompanyMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    ceoId: string | null
+  }
+
+  export type CompanyCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    ceoId: number
+    _all: number
+  }
+
+
+  export type CompanyMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    ceoId?: true
+  }
+
+  export type CompanyMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    ceoId?: true
+  }
+
+  export type CompanyCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    ceoId?: true
+    _all?: true
+  }
+
+  export type CompanyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Company to aggregate.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Companies
+    **/
+    _count?: true | CompanyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CompanyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CompanyMaxAggregateInputType
+  }
+
+  export type GetCompanyAggregateType<T extends CompanyAggregateArgs> = {
+        [P in keyof T & keyof AggregateCompany]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCompany[P]>
+      : GetScalarType<T[P], AggregateCompany[P]>
+  }
+
+
+
+
+  export type CompanyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CompanyWhereInput
+    orderBy?: CompanyOrderByWithAggregationInput | CompanyOrderByWithAggregationInput[]
+    by: CompanyScalarFieldEnum[] | CompanyScalarFieldEnum
+    having?: CompanyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CompanyCountAggregateInputType | true
+    _min?: CompanyMinAggregateInputType
+    _max?: CompanyMaxAggregateInputType
+  }
+
+  export type CompanyGroupByOutputType = {
+    id: string
+    title: string
+    description: string
+    ceoId: string
+    _count: CompanyCountAggregateOutputType | null
+    _min: CompanyMinAggregateOutputType | null
+    _max: CompanyMaxAggregateOutputType | null
+  }
+
+  type GetCompanyGroupByPayload<T extends CompanyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CompanyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CompanyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CompanyGroupByOutputType[P]>
+            : GetScalarType<T[P], CompanyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CompanySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    ceoId?: boolean
+    employees?: boolean | Company$employeesArgs<ExtArgs>
+    ceo?: boolean | UserDefaultArgs<ExtArgs>
+    vacancies?: boolean | Company$vacanciesArgs<ExtArgs>
+    _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["company"]>
+
+  export type CompanySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    ceoId?: boolean
+    ceo?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["company"]>
+
+  export type CompanySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    ceoId?: boolean
+    ceo?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["company"]>
+
+  export type CompanySelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    ceoId?: boolean
+  }
+
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "ceoId", ExtArgs["result"]["company"]>
+  export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employees?: boolean | Company$employeesArgs<ExtArgs>
+    ceo?: boolean | UserDefaultArgs<ExtArgs>
+    vacancies?: boolean | Company$vacanciesArgs<ExtArgs>
+    _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ceo?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CompanyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ceo?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CompanyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Company"
+    objects: {
+      employees: Prisma.$UserPayload<ExtArgs>[]
+      ceo: Prisma.$UserPayload<ExtArgs>
+      vacancies: Prisma.$VacancyPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string
+      ceoId: string
+    }, ExtArgs["result"]["company"]>
+    composites: {}
+  }
+
+  type CompanyGetPayload<S extends boolean | null | undefined | CompanyDefaultArgs> = $Result.GetResult<Prisma.$CompanyPayload, S>
+
+  type CompanyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CompanyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CompanyCountAggregateInputType | true
+    }
+
+  export interface CompanyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Company'], meta: { name: 'Company' } }
+    /**
+     * Find zero or one Company that matches the filter.
+     * @param {CompanyFindUniqueArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CompanyFindUniqueArgs>(args: SelectSubset<T, CompanyFindUniqueArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Company that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CompanyFindUniqueOrThrowArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CompanyFindUniqueOrThrowArgs>(args: SelectSubset<T, CompanyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Company that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyFindFirstArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CompanyFindFirstArgs>(args?: SelectSubset<T, CompanyFindFirstArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Company that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyFindFirstOrThrowArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CompanyFindFirstOrThrowArgs>(args?: SelectSubset<T, CompanyFindFirstOrThrowArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Companies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Companies
+     * const companies = await prisma.company.findMany()
+     * 
+     * // Get first 10 Companies
+     * const companies = await prisma.company.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const companyWithIdOnly = await prisma.company.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CompanyFindManyArgs>(args?: SelectSubset<T, CompanyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Company.
+     * @param {CompanyCreateArgs} args - Arguments to create a Company.
+     * @example
+     * // Create one Company
+     * const Company = await prisma.company.create({
+     *   data: {
+     *     // ... data to create a Company
+     *   }
+     * })
+     * 
+     */
+    create<T extends CompanyCreateArgs>(args: SelectSubset<T, CompanyCreateArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Companies.
+     * @param {CompanyCreateManyArgs} args - Arguments to create many Companies.
+     * @example
+     * // Create many Companies
+     * const company = await prisma.company.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CompanyCreateManyArgs>(args?: SelectSubset<T, CompanyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Companies and returns the data saved in the database.
+     * @param {CompanyCreateManyAndReturnArgs} args - Arguments to create many Companies.
+     * @example
+     * // Create many Companies
+     * const company = await prisma.company.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Companies and only return the `id`
+     * const companyWithIdOnly = await prisma.company.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CompanyCreateManyAndReturnArgs>(args?: SelectSubset<T, CompanyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Company.
+     * @param {CompanyDeleteArgs} args - Arguments to delete one Company.
+     * @example
+     * // Delete one Company
+     * const Company = await prisma.company.delete({
+     *   where: {
+     *     // ... filter to delete one Company
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CompanyDeleteArgs>(args: SelectSubset<T, CompanyDeleteArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Company.
+     * @param {CompanyUpdateArgs} args - Arguments to update one Company.
+     * @example
+     * // Update one Company
+     * const company = await prisma.company.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CompanyUpdateArgs>(args: SelectSubset<T, CompanyUpdateArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Companies.
+     * @param {CompanyDeleteManyArgs} args - Arguments to filter Companies to delete.
+     * @example
+     * // Delete a few Companies
+     * const { count } = await prisma.company.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CompanyDeleteManyArgs>(args?: SelectSubset<T, CompanyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Companies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Companies
+     * const company = await prisma.company.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CompanyUpdateManyArgs>(args: SelectSubset<T, CompanyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Companies and returns the data updated in the database.
+     * @param {CompanyUpdateManyAndReturnArgs} args - Arguments to update many Companies.
+     * @example
+     * // Update many Companies
+     * const company = await prisma.company.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Companies and only return the `id`
+     * const companyWithIdOnly = await prisma.company.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CompanyUpdateManyAndReturnArgs>(args: SelectSubset<T, CompanyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Company.
+     * @param {CompanyUpsertArgs} args - Arguments to update or create a Company.
+     * @example
+     * // Update or create a Company
+     * const company = await prisma.company.upsert({
+     *   create: {
+     *     // ... data to create a Company
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Company we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CompanyUpsertArgs>(args: SelectSubset<T, CompanyUpsertArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Companies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyCountArgs} args - Arguments to filter Companies to count.
+     * @example
+     * // Count the number of Companies
+     * const count = await prisma.company.count({
+     *   where: {
+     *     // ... the filter for the Companies we want to count
+     *   }
+     * })
+    **/
+    count<T extends CompanyCountArgs>(
+      args?: Subset<T, CompanyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CompanyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Company.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CompanyAggregateArgs>(args: Subset<T, CompanyAggregateArgs>): Prisma.PrismaPromise<GetCompanyAggregateType<T>>
+
+    /**
+     * Group by Company.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CompanyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CompanyGroupByArgs['orderBy'] }
+        : { orderBy?: CompanyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CompanyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCompanyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Company model
+   */
+  readonly fields: CompanyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Company.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    employees<T extends Company$employeesArgs<ExtArgs> = {}>(args?: Subset<T, Company$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ceo<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    vacancies<T extends Company$vacanciesArgs<ExtArgs> = {}>(args?: Subset<T, Company$vacanciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Company model
+   */
+  interface CompanyFieldRefs {
+    readonly id: FieldRef<"Company", 'String'>
+    readonly title: FieldRef<"Company", 'String'>
+    readonly description: FieldRef<"Company", 'String'>
+    readonly ceoId: FieldRef<"Company", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Company findUnique
+   */
+  export type CompanyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company findUniqueOrThrow
+   */
+  export type CompanyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company findFirst
+   */
+  export type CompanyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Companies.
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Companies.
+     */
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * Company findFirstOrThrow
+   */
+  export type CompanyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Companies.
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Companies.
+     */
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * Company findMany
+   */
+  export type CompanyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Companies to fetch.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Companies.
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * Company create
+   */
+  export type CompanyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Company.
+     */
+    data: XOR<CompanyCreateInput, CompanyUncheckedCreateInput>
+  }
+
+  /**
+   * Company createMany
+   */
+  export type CompanyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Companies.
+     */
+    data: CompanyCreateManyInput | CompanyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Company createManyAndReturn
+   */
+  export type CompanyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * The data used to create many Companies.
+     */
+    data: CompanyCreateManyInput | CompanyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Company update
+   */
+  export type CompanyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Company.
+     */
+    data: XOR<CompanyUpdateInput, CompanyUncheckedUpdateInput>
+    /**
+     * Choose, which Company to update.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company updateMany
+   */
+  export type CompanyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Companies.
+     */
+    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyInput>
+    /**
+     * Filter which Companies to update
+     */
+    where?: CompanyWhereInput
+    /**
+     * Limit how many Companies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Company updateManyAndReturn
+   */
+  export type CompanyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * The data used to update Companies.
+     */
+    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyInput>
+    /**
+     * Filter which Companies to update
+     */
+    where?: CompanyWhereInput
+    /**
+     * Limit how many Companies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Company upsert
+   */
+  export type CompanyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Company to update in case it exists.
+     */
+    where: CompanyWhereUniqueInput
+    /**
+     * In case the Company found by the `where` argument doesn't exist, create a new Company with this data.
+     */
+    create: XOR<CompanyCreateInput, CompanyUncheckedCreateInput>
+    /**
+     * In case the Company was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CompanyUpdateInput, CompanyUncheckedUpdateInput>
+  }
+
+  /**
+   * Company delete
+   */
+  export type CompanyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter which Company to delete.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company deleteMany
+   */
+  export type CompanyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Companies to delete
+     */
+    where?: CompanyWhereInput
+    /**
+     * Limit how many Companies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Company.employees
+   */
+  export type Company$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Company.vacancies
+   */
+  export type Company$vacanciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vacancy
+     */
+    select?: VacancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vacancy
+     */
+    omit?: VacancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyInclude<ExtArgs> | null
+    where?: VacancyWhereInput
+    orderBy?: VacancyOrderByWithRelationInput | VacancyOrderByWithRelationInput[]
+    cursor?: VacancyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VacancyScalarFieldEnum | VacancyScalarFieldEnum[]
+  }
+
+  /**
+   * Company without action
+   */
+  export type CompanyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
   }
 
 
@@ -12282,18 +14773,40 @@ export namespace Prisma {
   export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
 
 
+  export const SalaryScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    fixedAmount: 'fixedAmount',
+    minAmount: 'minAmount',
+    maxAmount: 'maxAmount',
+    period: 'period',
+    vacancyId: 'vacancyId'
+  };
+
+  export type SalaryScalarFieldEnum = (typeof SalaryScalarFieldEnum)[keyof typeof SalaryScalarFieldEnum]
+
+
   export const VacancyScalarFieldEnum: {
     id: 'id',
     title: 'title',
     description: 'description',
-    salary: 'salary',
     occupation: 'occupation',
-    userId: 'userId',
+    companyId: 'companyId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type VacancyScalarFieldEnum = (typeof VacancyScalarFieldEnum)[keyof typeof VacancyScalarFieldEnum]
+
+
+  export const CompanyScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    ceoId: 'ceoId'
+  };
+
+  export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12484,6 +14997,34 @@ export namespace Prisma {
    */
   export type ListEnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus[]'>
     
+
+
+  /**
+   * Reference to a field of type 'SalaryType'
+   */
+  export type EnumSalaryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SalaryType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SalaryType[]'
+   */
+  export type ListEnumSalaryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SalaryType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentPeriod'
+   */
+  export type EnumPaymentPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentPeriod'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentPeriod[]'
+   */
+  export type ListEnumPaymentPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentPeriod[]'>
+    
   /**
    * Deep Input Types
    */
@@ -12507,7 +15048,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeListRelationFilter
     orders?: OrderListRelationFilter
     cards?: CardListRelationFilter
-    vacancies?: VacancyListRelationFilter
+    companies?: CompanyListRelationFilter
+    companyCeo?: CompanyListRelationFilter
     initiatedTransactions?: TransactionListRelationFilter
     confirmedTransactions?: TransactionListRelationFilter
   }
@@ -12527,7 +15069,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeOrderByRelationAggregateInput
     orders?: OrderOrderByRelationAggregateInput
     cards?: CardOrderByRelationAggregateInput
-    vacancies?: VacancyOrderByRelationAggregateInput
+    companies?: CompanyOrderByRelationAggregateInput
+    companyCeo?: CompanyOrderByRelationAggregateInput
     initiatedTransactions?: TransactionOrderByRelationAggregateInput
     confirmedTransactions?: TransactionOrderByRelationAggregateInput
   }
@@ -12550,7 +15093,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeListRelationFilter
     orders?: OrderListRelationFilter
     cards?: CardListRelationFilter
-    vacancies?: VacancyListRelationFilter
+    companies?: CompanyListRelationFilter
+    companyCeo?: CompanyListRelationFilter
     initiatedTransactions?: TransactionListRelationFilter
     confirmedTransactions?: TransactionListRelationFilter
   }, "id" | "email">
@@ -12773,7 +15317,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     items?: OrderItemListRelationFilter
-    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -12784,7 +15328,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     items?: OrderItemOrderByRelationAggregateInput
-    User?: UserOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -12798,7 +15342,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     items?: OrderItemListRelationFilter
-    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
@@ -13051,6 +15595,73 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Transaction"> | Date | string
   }
 
+  export type SalaryWhereInput = {
+    AND?: SalaryWhereInput | SalaryWhereInput[]
+    OR?: SalaryWhereInput[]
+    NOT?: SalaryWhereInput | SalaryWhereInput[]
+    id?: StringFilter<"Salary"> | string
+    type?: EnumSalaryTypeFilter<"Salary"> | $Enums.SalaryType
+    fixedAmount?: IntNullableFilter<"Salary"> | number | null
+    minAmount?: IntNullableFilter<"Salary"> | number | null
+    maxAmount?: IntNullableFilter<"Salary"> | number | null
+    period?: EnumPaymentPeriodFilter<"Salary"> | $Enums.PaymentPeriod
+    vacancyId?: StringFilter<"Salary"> | string
+    vacancy?: XOR<VacancyScalarRelationFilter, VacancyWhereInput>
+  }
+
+  export type SalaryOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    fixedAmount?: SortOrderInput | SortOrder
+    minAmount?: SortOrderInput | SortOrder
+    maxAmount?: SortOrderInput | SortOrder
+    period?: SortOrder
+    vacancyId?: SortOrder
+    vacancy?: VacancyOrderByWithRelationInput
+  }
+
+  export type SalaryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    vacancyId?: string
+    AND?: SalaryWhereInput | SalaryWhereInput[]
+    OR?: SalaryWhereInput[]
+    NOT?: SalaryWhereInput | SalaryWhereInput[]
+    type?: EnumSalaryTypeFilter<"Salary"> | $Enums.SalaryType
+    fixedAmount?: IntNullableFilter<"Salary"> | number | null
+    minAmount?: IntNullableFilter<"Salary"> | number | null
+    maxAmount?: IntNullableFilter<"Salary"> | number | null
+    period?: EnumPaymentPeriodFilter<"Salary"> | $Enums.PaymentPeriod
+    vacancy?: XOR<VacancyScalarRelationFilter, VacancyWhereInput>
+  }, "id" | "vacancyId">
+
+  export type SalaryOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    fixedAmount?: SortOrderInput | SortOrder
+    minAmount?: SortOrderInput | SortOrder
+    maxAmount?: SortOrderInput | SortOrder
+    period?: SortOrder
+    vacancyId?: SortOrder
+    _count?: SalaryCountOrderByAggregateInput
+    _avg?: SalaryAvgOrderByAggregateInput
+    _max?: SalaryMaxOrderByAggregateInput
+    _min?: SalaryMinOrderByAggregateInput
+    _sum?: SalarySumOrderByAggregateInput
+  }
+
+  export type SalaryScalarWhereWithAggregatesInput = {
+    AND?: SalaryScalarWhereWithAggregatesInput | SalaryScalarWhereWithAggregatesInput[]
+    OR?: SalaryScalarWhereWithAggregatesInput[]
+    NOT?: SalaryScalarWhereWithAggregatesInput | SalaryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Salary"> | string
+    type?: EnumSalaryTypeWithAggregatesFilter<"Salary"> | $Enums.SalaryType
+    fixedAmount?: IntNullableWithAggregatesFilter<"Salary"> | number | null
+    minAmount?: IntNullableWithAggregatesFilter<"Salary"> | number | null
+    maxAmount?: IntNullableWithAggregatesFilter<"Salary"> | number | null
+    period?: EnumPaymentPeriodWithAggregatesFilter<"Salary"> | $Enums.PaymentPeriod
+    vacancyId?: StringWithAggregatesFilter<"Salary"> | string
+  }
+
   export type VacancyWhereInput = {
     AND?: VacancyWhereInput | VacancyWhereInput[]
     OR?: VacancyWhereInput[]
@@ -13058,24 +15669,24 @@ export namespace Prisma {
     id?: StringFilter<"Vacancy"> | string
     title?: StringFilter<"Vacancy"> | string
     description?: StringFilter<"Vacancy"> | string
-    salary?: IntFilter<"Vacancy"> | number
     occupation?: EnumJobsFilter<"Vacancy"> | $Enums.Jobs
-    userId?: StringFilter<"Vacancy"> | string
+    companyId?: StringFilter<"Vacancy"> | string
     createdAt?: DateTimeFilter<"Vacancy"> | Date | string
     updatedAt?: DateTimeFilter<"Vacancy"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    salary?: XOR<SalaryNullableScalarRelationFilter, SalaryWhereInput> | null
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
   }
 
   export type VacancyOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    salary?: SortOrder
     occupation?: SortOrder
-    userId?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    salary?: SalaryOrderByWithRelationInput
+    company?: CompanyOrderByWithRelationInput
   }
 
   export type VacancyWhereUniqueInput = Prisma.AtLeast<{
@@ -13085,28 +15696,25 @@ export namespace Prisma {
     NOT?: VacancyWhereInput | VacancyWhereInput[]
     title?: StringFilter<"Vacancy"> | string
     description?: StringFilter<"Vacancy"> | string
-    salary?: IntFilter<"Vacancy"> | number
     occupation?: EnumJobsFilter<"Vacancy"> | $Enums.Jobs
-    userId?: StringFilter<"Vacancy"> | string
+    companyId?: StringFilter<"Vacancy"> | string
     createdAt?: DateTimeFilter<"Vacancy"> | Date | string
     updatedAt?: DateTimeFilter<"Vacancy"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    salary?: XOR<SalaryNullableScalarRelationFilter, SalaryWhereInput> | null
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
   }, "id">
 
   export type VacancyOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    salary?: SortOrder
     occupation?: SortOrder
-    userId?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: VacancyCountOrderByAggregateInput
-    _avg?: VacancyAvgOrderByAggregateInput
     _max?: VacancyMaxOrderByAggregateInput
     _min?: VacancyMinOrderByAggregateInput
-    _sum?: VacancySumOrderByAggregateInput
   }
 
   export type VacancyScalarWhereWithAggregatesInput = {
@@ -13116,11 +15724,66 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Vacancy"> | string
     title?: StringWithAggregatesFilter<"Vacancy"> | string
     description?: StringWithAggregatesFilter<"Vacancy"> | string
-    salary?: IntWithAggregatesFilter<"Vacancy"> | number
     occupation?: EnumJobsWithAggregatesFilter<"Vacancy"> | $Enums.Jobs
-    userId?: StringWithAggregatesFilter<"Vacancy"> | string
+    companyId?: StringWithAggregatesFilter<"Vacancy"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Vacancy"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Vacancy"> | Date | string
+  }
+
+  export type CompanyWhereInput = {
+    AND?: CompanyWhereInput | CompanyWhereInput[]
+    OR?: CompanyWhereInput[]
+    NOT?: CompanyWhereInput | CompanyWhereInput[]
+    id?: StringFilter<"Company"> | string
+    title?: StringFilter<"Company"> | string
+    description?: StringFilter<"Company"> | string
+    ceoId?: StringFilter<"Company"> | string
+    employees?: UserListRelationFilter
+    ceo?: XOR<UserScalarRelationFilter, UserWhereInput>
+    vacancies?: VacancyListRelationFilter
+  }
+
+  export type CompanyOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    ceoId?: SortOrder
+    employees?: UserOrderByRelationAggregateInput
+    ceo?: UserOrderByWithRelationInput
+    vacancies?: VacancyOrderByRelationAggregateInput
+  }
+
+  export type CompanyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CompanyWhereInput | CompanyWhereInput[]
+    OR?: CompanyWhereInput[]
+    NOT?: CompanyWhereInput | CompanyWhereInput[]
+    title?: StringFilter<"Company"> | string
+    description?: StringFilter<"Company"> | string
+    ceoId?: StringFilter<"Company"> | string
+    employees?: UserListRelationFilter
+    ceo?: XOR<UserScalarRelationFilter, UserWhereInput>
+    vacancies?: VacancyListRelationFilter
+  }, "id">
+
+  export type CompanyOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    ceoId?: SortOrder
+    _count?: CompanyCountOrderByAggregateInput
+    _max?: CompanyMaxOrderByAggregateInput
+    _min?: CompanyMinOrderByAggregateInput
+  }
+
+  export type CompanyScalarWhereWithAggregatesInput = {
+    AND?: CompanyScalarWhereWithAggregatesInput | CompanyScalarWhereWithAggregatesInput[]
+    OR?: CompanyScalarWhereWithAggregatesInput[]
+    NOT?: CompanyScalarWhereWithAggregatesInput | CompanyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Company"> | string
+    title?: StringWithAggregatesFilter<"Company"> | string
+    description?: StringWithAggregatesFilter<"Company"> | string
+    ceoId?: StringWithAggregatesFilter<"Company"> | string
   }
 
   export type UserCreateInput = {
@@ -13138,7 +15801,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -13158,7 +15822,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -13178,7 +15843,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -13198,7 +15864,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -13421,7 +16088,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemCreateNestedManyWithoutOrderInput
-    User: UserCreateNestedOneWithoutOrdersInput
+    user: UserCreateNestedOneWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -13441,7 +16108,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUpdateManyWithoutOrderNestedInput
-    User?: UserUpdateOneRequiredWithoutOrdersNestedInput
+    user?: UserUpdateOneRequiredWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -13706,57 +16373,125 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SalaryCreateInput = {
+    id?: string
+    type: $Enums.SalaryType
+    fixedAmount?: number | null
+    minAmount?: number | null
+    maxAmount?: number | null
+    period: $Enums.PaymentPeriod
+    vacancy: VacancyCreateNestedOneWithoutSalaryInput
+  }
+
+  export type SalaryUncheckedCreateInput = {
+    id?: string
+    type: $Enums.SalaryType
+    fixedAmount?: number | null
+    minAmount?: number | null
+    maxAmount?: number | null
+    period: $Enums.PaymentPeriod
+    vacancyId: string
+  }
+
+  export type SalaryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
+    fixedAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    minAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    maxAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    period?: EnumPaymentPeriodFieldUpdateOperationsInput | $Enums.PaymentPeriod
+    vacancy?: VacancyUpdateOneRequiredWithoutSalaryNestedInput
+  }
+
+  export type SalaryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
+    fixedAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    minAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    maxAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    period?: EnumPaymentPeriodFieldUpdateOperationsInput | $Enums.PaymentPeriod
+    vacancyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SalaryCreateManyInput = {
+    id?: string
+    type: $Enums.SalaryType
+    fixedAmount?: number | null
+    minAmount?: number | null
+    maxAmount?: number | null
+    period: $Enums.PaymentPeriod
+    vacancyId: string
+  }
+
+  export type SalaryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
+    fixedAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    minAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    maxAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    period?: EnumPaymentPeriodFieldUpdateOperationsInput | $Enums.PaymentPeriod
+  }
+
+  export type SalaryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
+    fixedAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    minAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    maxAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    period?: EnumPaymentPeriodFieldUpdateOperationsInput | $Enums.PaymentPeriod
+    vacancyId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type VacancyCreateInput = {
     id?: string
     title: string
     description: string
-    salary: number
     occupation: $Enums.Jobs
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutVacanciesInput
+    salary?: SalaryCreateNestedOneWithoutVacancyInput
+    company: CompanyCreateNestedOneWithoutVacanciesInput
   }
 
   export type VacancyUncheckedCreateInput = {
     id?: string
     title: string
     description: string
-    salary: number
     occupation: $Enums.Jobs
-    userId: string
+    companyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    salary?: SalaryUncheckedCreateNestedOneWithoutVacancyInput
   }
 
   export type VacancyUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    salary?: IntFieldUpdateOperationsInput | number
     occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutVacanciesNestedInput
+    salary?: SalaryUpdateOneWithoutVacancyNestedInput
+    company?: CompanyUpdateOneRequiredWithoutVacanciesNestedInput
   }
 
   export type VacancyUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    salary?: IntFieldUpdateOperationsInput | number
     occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
-    userId?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    salary?: SalaryUncheckedUpdateOneWithoutVacancyNestedInput
   }
 
   export type VacancyCreateManyInput = {
     id?: string
     title: string
     description: string
-    salary: number
     occupation: $Enums.Jobs
-    userId: string
+    companyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13765,7 +16500,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    salary?: IntFieldUpdateOperationsInput | number
     occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13775,11 +16509,66 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    salary?: IntFieldUpdateOperationsInput | number
     occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
-    userId?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CompanyCreateInput = {
+    id?: string
+    title: string
+    description: string
+    employees?: UserCreateNestedManyWithoutCompaniesInput
+    ceo: UserCreateNestedOneWithoutCompanyCeoInput
+    vacancies?: VacancyCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateInput = {
+    id?: string
+    title: string
+    description: string
+    ceoId: string
+    employees?: UserUncheckedCreateNestedManyWithoutCompaniesInput
+    vacancies?: VacancyUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    employees?: UserUpdateManyWithoutCompaniesNestedInput
+    ceo?: UserUpdateOneRequiredWithoutCompanyCeoNestedInput
+    vacancies?: VacancyUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    ceoId?: StringFieldUpdateOperationsInput | string
+    employees?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
+    vacancies?: VacancyUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyCreateManyInput = {
+    id?: string
+    title: string
+    description: string
+    ceoId: string
+  }
+
+  export type CompanyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CompanyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    ceoId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -13858,10 +16647,10 @@ export namespace Prisma {
     none?: CardWhereInput
   }
 
-  export type VacancyListRelationFilter = {
-    every?: VacancyWhereInput
-    some?: VacancyWhereInput
-    none?: VacancyWhereInput
+  export type CompanyListRelationFilter = {
+    every?: CompanyWhereInput
+    some?: CompanyWhereInput
+    none?: CompanyWhereInput
   }
 
   export type TransactionListRelationFilter = {
@@ -13890,7 +16679,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type VacancyOrderByRelationAggregateInput = {
+  export type CompanyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14428,6 +17217,114 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type EnumSalaryTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SalaryType | EnumSalaryTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSalaryTypeFilter<$PrismaModel> | $Enums.SalaryType
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type EnumPaymentPeriodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPeriod | EnumPaymentPeriodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPeriodFilter<$PrismaModel> | $Enums.PaymentPeriod
+  }
+
+  export type VacancyScalarRelationFilter = {
+    is?: VacancyWhereInput
+    isNot?: VacancyWhereInput
+  }
+
+  export type SalaryCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    fixedAmount?: SortOrder
+    minAmount?: SortOrder
+    maxAmount?: SortOrder
+    period?: SortOrder
+    vacancyId?: SortOrder
+  }
+
+  export type SalaryAvgOrderByAggregateInput = {
+    fixedAmount?: SortOrder
+    minAmount?: SortOrder
+    maxAmount?: SortOrder
+  }
+
+  export type SalaryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    fixedAmount?: SortOrder
+    minAmount?: SortOrder
+    maxAmount?: SortOrder
+    period?: SortOrder
+    vacancyId?: SortOrder
+  }
+
+  export type SalaryMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    fixedAmount?: SortOrder
+    minAmount?: SortOrder
+    maxAmount?: SortOrder
+    period?: SortOrder
+    vacancyId?: SortOrder
+  }
+
+  export type SalarySumOrderByAggregateInput = {
+    fixedAmount?: SortOrder
+    minAmount?: SortOrder
+    maxAmount?: SortOrder
+  }
+
+  export type EnumSalaryTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SalaryType | EnumSalaryTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSalaryTypeWithAggregatesFilter<$PrismaModel> | $Enums.SalaryType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSalaryTypeFilter<$PrismaModel>
+    _max?: NestedEnumSalaryTypeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumPaymentPeriodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPeriod | EnumPaymentPeriodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPeriodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentPeriod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentPeriodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentPeriodFilter<$PrismaModel>
+  }
+
   export type EnumJobsFilter<$PrismaModel = never> = {
     equals?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel>
     in?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel>
@@ -14435,28 +17332,32 @@ export namespace Prisma {
     not?: NestedEnumJobsFilter<$PrismaModel> | $Enums.Jobs
   }
 
+  export type SalaryNullableScalarRelationFilter = {
+    is?: SalaryWhereInput | null
+    isNot?: SalaryWhereInput | null
+  }
+
+  export type CompanyScalarRelationFilter = {
+    is?: CompanyWhereInput
+    isNot?: CompanyWhereInput
+  }
+
   export type VacancyCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    salary?: SortOrder
     occupation?: SortOrder
-    userId?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type VacancyAvgOrderByAggregateInput = {
-    salary?: SortOrder
   }
 
   export type VacancyMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    salary?: SortOrder
     occupation?: SortOrder
-    userId?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14465,15 +17366,10 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    salary?: SortOrder
     occupation?: SortOrder
-    userId?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type VacancySumOrderByAggregateInput = {
-    salary?: SortOrder
   }
 
   export type EnumJobsWithAggregatesFilter<$PrismaModel = never> = {
@@ -14484,6 +17380,47 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumJobsFilter<$PrismaModel>
     _max?: NestedEnumJobsFilter<$PrismaModel>
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type VacancyListRelationFilter = {
+    every?: VacancyWhereInput
+    some?: VacancyWhereInput
+    none?: VacancyWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VacancyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CompanyCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    ceoId?: SortOrder
+  }
+
+  export type CompanyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    ceoId?: SortOrder
+  }
+
+  export type CompanyMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    ceoId?: SortOrder
   }
 
   export type UserCreatejobsInput = {
@@ -14525,11 +17462,17 @@ export namespace Prisma {
     connect?: CardWhereUniqueInput | CardWhereUniqueInput[]
   }
 
-  export type VacancyCreateNestedManyWithoutUserInput = {
-    create?: XOR<VacancyCreateWithoutUserInput, VacancyUncheckedCreateWithoutUserInput> | VacancyCreateWithoutUserInput[] | VacancyUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VacancyCreateOrConnectWithoutUserInput | VacancyCreateOrConnectWithoutUserInput[]
-    createMany?: VacancyCreateManyUserInputEnvelope
-    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+  export type CompanyCreateNestedManyWithoutEmployeesInput = {
+    create?: XOR<CompanyCreateWithoutEmployeesInput, CompanyUncheckedCreateWithoutEmployeesInput> | CompanyCreateWithoutEmployeesInput[] | CompanyUncheckedCreateWithoutEmployeesInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutEmployeesInput | CompanyCreateOrConnectWithoutEmployeesInput[]
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+  }
+
+  export type CompanyCreateNestedManyWithoutCeoInput = {
+    create?: XOR<CompanyCreateWithoutCeoInput, CompanyUncheckedCreateWithoutCeoInput> | CompanyCreateWithoutCeoInput[] | CompanyUncheckedCreateWithoutCeoInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutCeoInput | CompanyCreateOrConnectWithoutCeoInput[]
+    createMany?: CompanyCreateManyCeoInputEnvelope
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
   }
 
   export type TransactionCreateNestedManyWithoutUserInput = {
@@ -14581,11 +17524,17 @@ export namespace Prisma {
     connect?: CardWhereUniqueInput | CardWhereUniqueInput[]
   }
 
-  export type VacancyUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<VacancyCreateWithoutUserInput, VacancyUncheckedCreateWithoutUserInput> | VacancyCreateWithoutUserInput[] | VacancyUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VacancyCreateOrConnectWithoutUserInput | VacancyCreateOrConnectWithoutUserInput[]
-    createMany?: VacancyCreateManyUserInputEnvelope
-    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+  export type CompanyUncheckedCreateNestedManyWithoutEmployeesInput = {
+    create?: XOR<CompanyCreateWithoutEmployeesInput, CompanyUncheckedCreateWithoutEmployeesInput> | CompanyCreateWithoutEmployeesInput[] | CompanyUncheckedCreateWithoutEmployeesInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutEmployeesInput | CompanyCreateOrConnectWithoutEmployeesInput[]
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+  }
+
+  export type CompanyUncheckedCreateNestedManyWithoutCeoInput = {
+    create?: XOR<CompanyCreateWithoutCeoInput, CompanyUncheckedCreateWithoutCeoInput> | CompanyCreateWithoutCeoInput[] | CompanyUncheckedCreateWithoutCeoInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutCeoInput | CompanyCreateOrConnectWithoutCeoInput[]
+    createMany?: CompanyCreateManyCeoInputEnvelope
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
   }
 
   export type TransactionUncheckedCreateNestedManyWithoutUserInput = {
@@ -14693,18 +17642,31 @@ export namespace Prisma {
     deleteMany?: CardScalarWhereInput | CardScalarWhereInput[]
   }
 
-  export type VacancyUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VacancyCreateWithoutUserInput, VacancyUncheckedCreateWithoutUserInput> | VacancyCreateWithoutUserInput[] | VacancyUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VacancyCreateOrConnectWithoutUserInput | VacancyCreateOrConnectWithoutUserInput[]
-    upsert?: VacancyUpsertWithWhereUniqueWithoutUserInput | VacancyUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VacancyCreateManyUserInputEnvelope
-    set?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    disconnect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    delete?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    update?: VacancyUpdateWithWhereUniqueWithoutUserInput | VacancyUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VacancyUpdateManyWithWhereWithoutUserInput | VacancyUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
+  export type CompanyUpdateManyWithoutEmployeesNestedInput = {
+    create?: XOR<CompanyCreateWithoutEmployeesInput, CompanyUncheckedCreateWithoutEmployeesInput> | CompanyCreateWithoutEmployeesInput[] | CompanyUncheckedCreateWithoutEmployeesInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutEmployeesInput | CompanyCreateOrConnectWithoutEmployeesInput[]
+    upsert?: CompanyUpsertWithWhereUniqueWithoutEmployeesInput | CompanyUpsertWithWhereUniqueWithoutEmployeesInput[]
+    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    update?: CompanyUpdateWithWhereUniqueWithoutEmployeesInput | CompanyUpdateWithWhereUniqueWithoutEmployeesInput[]
+    updateMany?: CompanyUpdateManyWithWhereWithoutEmployeesInput | CompanyUpdateManyWithWhereWithoutEmployeesInput[]
+    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  }
+
+  export type CompanyUpdateManyWithoutCeoNestedInput = {
+    create?: XOR<CompanyCreateWithoutCeoInput, CompanyUncheckedCreateWithoutCeoInput> | CompanyCreateWithoutCeoInput[] | CompanyUncheckedCreateWithoutCeoInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutCeoInput | CompanyCreateOrConnectWithoutCeoInput[]
+    upsert?: CompanyUpsertWithWhereUniqueWithoutCeoInput | CompanyUpsertWithWhereUniqueWithoutCeoInput[]
+    createMany?: CompanyCreateManyCeoInputEnvelope
+    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    update?: CompanyUpdateWithWhereUniqueWithoutCeoInput | CompanyUpdateWithWhereUniqueWithoutCeoInput[]
+    updateMany?: CompanyUpdateManyWithWhereWithoutCeoInput | CompanyUpdateManyWithWhereWithoutCeoInput[]
+    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
   }
 
   export type TransactionUpdateManyWithoutUserNestedInput = {
@@ -14805,18 +17767,31 @@ export namespace Prisma {
     deleteMany?: CardScalarWhereInput | CardScalarWhereInput[]
   }
 
-  export type VacancyUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VacancyCreateWithoutUserInput, VacancyUncheckedCreateWithoutUserInput> | VacancyCreateWithoutUserInput[] | VacancyUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VacancyCreateOrConnectWithoutUserInput | VacancyCreateOrConnectWithoutUserInput[]
-    upsert?: VacancyUpsertWithWhereUniqueWithoutUserInput | VacancyUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VacancyCreateManyUserInputEnvelope
-    set?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    disconnect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    delete?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
-    update?: VacancyUpdateWithWhereUniqueWithoutUserInput | VacancyUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VacancyUpdateManyWithWhereWithoutUserInput | VacancyUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
+  export type CompanyUncheckedUpdateManyWithoutEmployeesNestedInput = {
+    create?: XOR<CompanyCreateWithoutEmployeesInput, CompanyUncheckedCreateWithoutEmployeesInput> | CompanyCreateWithoutEmployeesInput[] | CompanyUncheckedCreateWithoutEmployeesInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutEmployeesInput | CompanyCreateOrConnectWithoutEmployeesInput[]
+    upsert?: CompanyUpsertWithWhereUniqueWithoutEmployeesInput | CompanyUpsertWithWhereUniqueWithoutEmployeesInput[]
+    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    update?: CompanyUpdateWithWhereUniqueWithoutEmployeesInput | CompanyUpdateWithWhereUniqueWithoutEmployeesInput[]
+    updateMany?: CompanyUpdateManyWithWhereWithoutEmployeesInput | CompanyUpdateManyWithWhereWithoutEmployeesInput[]
+    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  }
+
+  export type CompanyUncheckedUpdateManyWithoutCeoNestedInput = {
+    create?: XOR<CompanyCreateWithoutCeoInput, CompanyUncheckedCreateWithoutCeoInput> | CompanyCreateWithoutCeoInput[] | CompanyUncheckedCreateWithoutCeoInput[]
+    connectOrCreate?: CompanyCreateOrConnectWithoutCeoInput | CompanyCreateOrConnectWithoutCeoInput[]
+    upsert?: CompanyUpsertWithWhereUniqueWithoutCeoInput | CompanyUpsertWithWhereUniqueWithoutCeoInput[]
+    createMany?: CompanyCreateManyCeoInputEnvelope
+    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+    update?: CompanyUpdateWithWhereUniqueWithoutCeoInput | CompanyUpdateWithWhereUniqueWithoutCeoInput[]
+    updateMany?: CompanyUpdateManyWithWhereWithoutCeoInput | CompanyUpdateManyWithWhereWithoutCeoInput[]
+    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
   }
 
   export type TransactionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -15213,22 +18188,178 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInitiatedTransactionsInput, UserUpdateWithoutInitiatedTransactionsInput>, UserUncheckedUpdateWithoutInitiatedTransactionsInput>
   }
 
-  export type UserCreateNestedOneWithoutVacanciesInput = {
-    create?: XOR<UserCreateWithoutVacanciesInput, UserUncheckedCreateWithoutVacanciesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVacanciesInput
-    connect?: UserWhereUniqueInput
+  export type VacancyCreateNestedOneWithoutSalaryInput = {
+    create?: XOR<VacancyCreateWithoutSalaryInput, VacancyUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: VacancyCreateOrConnectWithoutSalaryInput
+    connect?: VacancyWhereUniqueInput
+  }
+
+  export type EnumSalaryTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SalaryType
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumPaymentPeriodFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentPeriod
+  }
+
+  export type VacancyUpdateOneRequiredWithoutSalaryNestedInput = {
+    create?: XOR<VacancyCreateWithoutSalaryInput, VacancyUncheckedCreateWithoutSalaryInput>
+    connectOrCreate?: VacancyCreateOrConnectWithoutSalaryInput
+    upsert?: VacancyUpsertWithoutSalaryInput
+    connect?: VacancyWhereUniqueInput
+    update?: XOR<XOR<VacancyUpdateToOneWithWhereWithoutSalaryInput, VacancyUpdateWithoutSalaryInput>, VacancyUncheckedUpdateWithoutSalaryInput>
+  }
+
+  export type SalaryCreateNestedOneWithoutVacancyInput = {
+    create?: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
+    connectOrCreate?: SalaryCreateOrConnectWithoutVacancyInput
+    connect?: SalaryWhereUniqueInput
+  }
+
+  export type CompanyCreateNestedOneWithoutVacanciesInput = {
+    create?: XOR<CompanyCreateWithoutVacanciesInput, CompanyUncheckedCreateWithoutVacanciesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutVacanciesInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type SalaryUncheckedCreateNestedOneWithoutVacancyInput = {
+    create?: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
+    connectOrCreate?: SalaryCreateOrConnectWithoutVacancyInput
+    connect?: SalaryWhereUniqueInput
   }
 
   export type EnumJobsFieldUpdateOperationsInput = {
     set?: $Enums.Jobs
   }
 
-  export type UserUpdateOneRequiredWithoutVacanciesNestedInput = {
-    create?: XOR<UserCreateWithoutVacanciesInput, UserUncheckedCreateWithoutVacanciesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVacanciesInput
-    upsert?: UserUpsertWithoutVacanciesInput
+  export type SalaryUpdateOneWithoutVacancyNestedInput = {
+    create?: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
+    connectOrCreate?: SalaryCreateOrConnectWithoutVacancyInput
+    upsert?: SalaryUpsertWithoutVacancyInput
+    disconnect?: SalaryWhereInput | boolean
+    delete?: SalaryWhereInput | boolean
+    connect?: SalaryWhereUniqueInput
+    update?: XOR<XOR<SalaryUpdateToOneWithWhereWithoutVacancyInput, SalaryUpdateWithoutVacancyInput>, SalaryUncheckedUpdateWithoutVacancyInput>
+  }
+
+  export type CompanyUpdateOneRequiredWithoutVacanciesNestedInput = {
+    create?: XOR<CompanyCreateWithoutVacanciesInput, CompanyUncheckedCreateWithoutVacanciesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutVacanciesInput
+    upsert?: CompanyUpsertWithoutVacanciesInput
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutVacanciesInput, CompanyUpdateWithoutVacanciesInput>, CompanyUncheckedUpdateWithoutVacanciesInput>
+  }
+
+  export type SalaryUncheckedUpdateOneWithoutVacancyNestedInput = {
+    create?: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
+    connectOrCreate?: SalaryCreateOrConnectWithoutVacancyInput
+    upsert?: SalaryUpsertWithoutVacancyInput
+    disconnect?: SalaryWhereInput | boolean
+    delete?: SalaryWhereInput | boolean
+    connect?: SalaryWhereUniqueInput
+    update?: XOR<XOR<SalaryUpdateToOneWithWhereWithoutVacancyInput, SalaryUpdateWithoutVacancyInput>, SalaryUncheckedUpdateWithoutVacancyInput>
+  }
+
+  export type UserCreateNestedManyWithoutCompaniesInput = {
+    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCompanyCeoInput = {
+    create?: XOR<UserCreateWithoutCompanyCeoInput, UserUncheckedCreateWithoutCompanyCeoInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyCeoInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVacanciesInput, UserUpdateWithoutVacanciesInput>, UserUncheckedUpdateWithoutVacanciesInput>
+  }
+
+  export type VacancyCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<VacancyCreateWithoutCompanyInput, VacancyUncheckedCreateWithoutCompanyInput> | VacancyCreateWithoutCompanyInput[] | VacancyUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: VacancyCreateOrConnectWithoutCompanyInput | VacancyCreateOrConnectWithoutCompanyInput[]
+    createMany?: VacancyCreateManyCompanyInputEnvelope
+    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutCompaniesInput = {
+    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type VacancyUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<VacancyCreateWithoutCompanyInput, VacancyUncheckedCreateWithoutCompanyInput> | VacancyCreateWithoutCompanyInput[] | VacancyUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: VacancyCreateOrConnectWithoutCompanyInput | VacancyCreateOrConnectWithoutCompanyInput[]
+    createMany?: VacancyCreateManyCompanyInputEnvelope
+    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+  }
+
+  export type UserUpdateManyWithoutCompaniesNestedInput = {
+    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCompaniesInput | UserUpsertWithWhereUniqueWithoutCompaniesInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCompaniesInput | UserUpdateWithWhereUniqueWithoutCompaniesInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCompaniesInput | UserUpdateManyWithWhereWithoutCompaniesInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutCompanyCeoNestedInput = {
+    create?: XOR<UserCreateWithoutCompanyCeoInput, UserUncheckedCreateWithoutCompanyCeoInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyCeoInput
+    upsert?: UserUpsertWithoutCompanyCeoInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCompanyCeoInput, UserUpdateWithoutCompanyCeoInput>, UserUncheckedUpdateWithoutCompanyCeoInput>
+  }
+
+  export type VacancyUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<VacancyCreateWithoutCompanyInput, VacancyUncheckedCreateWithoutCompanyInput> | VacancyCreateWithoutCompanyInput[] | VacancyUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: VacancyCreateOrConnectWithoutCompanyInput | VacancyCreateOrConnectWithoutCompanyInput[]
+    upsert?: VacancyUpsertWithWhereUniqueWithoutCompanyInput | VacancyUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: VacancyCreateManyCompanyInputEnvelope
+    set?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    disconnect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    delete?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    update?: VacancyUpdateWithWhereUniqueWithoutCompanyInput | VacancyUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: VacancyUpdateManyWithWhereWithoutCompanyInput | VacancyUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutCompaniesNestedInput = {
+    create?: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput> | UserCreateWithoutCompaniesInput[] | UserUncheckedCreateWithoutCompaniesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompaniesInput | UserCreateOrConnectWithoutCompaniesInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCompaniesInput | UserUpsertWithWhereUniqueWithoutCompaniesInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCompaniesInput | UserUpdateWithWhereUniqueWithoutCompaniesInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCompaniesInput | UserUpdateManyWithWhereWithoutCompaniesInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type VacancyUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<VacancyCreateWithoutCompanyInput, VacancyUncheckedCreateWithoutCompanyInput> | VacancyCreateWithoutCompanyInput[] | VacancyUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: VacancyCreateOrConnectWithoutCompanyInput | VacancyCreateOrConnectWithoutCompanyInput[]
+    upsert?: VacancyUpsertWithWhereUniqueWithoutCompanyInput | VacancyUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: VacancyCreateManyCompanyInputEnvelope
+    set?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    disconnect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    delete?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    connect?: VacancyWhereUniqueInput | VacancyWhereUniqueInput[]
+    update?: VacancyUpdateWithWhereUniqueWithoutCompanyInput | VacancyUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: VacancyUpdateManyWithWhereWithoutCompanyInput | VacancyUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15498,6 +18629,67 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumSalaryTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SalaryType | EnumSalaryTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSalaryTypeFilter<$PrismaModel> | $Enums.SalaryType
+  }
+
+  export type NestedEnumPaymentPeriodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPeriod | EnumPaymentPeriodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPeriodFilter<$PrismaModel> | $Enums.PaymentPeriod
+  }
+
+  export type NestedEnumSalaryTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SalaryType | EnumSalaryTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSalaryTypeWithAggregatesFilter<$PrismaModel> | $Enums.SalaryType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSalaryTypeFilter<$PrismaModel>
+    _max?: NestedEnumSalaryTypeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumPaymentPeriodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPeriod | EnumPaymentPeriodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPeriodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentPeriod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentPeriodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentPeriodFilter<$PrismaModel>
+  }
+
   export type NestedEnumJobsFilter<$PrismaModel = never> = {
     equals?: $Enums.Jobs | EnumJobsFieldRefInput<$PrismaModel>
     in?: $Enums.Jobs[] | ListEnumJobsFieldRefInput<$PrismaModel>
@@ -15651,33 +18843,50 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type VacancyCreateWithoutUserInput = {
+  export type CompanyCreateWithoutEmployeesInput = {
     id?: string
     title: string
     description: string
-    salary: number
-    occupation: $Enums.Jobs
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    ceo: UserCreateNestedOneWithoutCompanyCeoInput
+    vacancies?: VacancyCreateNestedManyWithoutCompanyInput
   }
 
-  export type VacancyUncheckedCreateWithoutUserInput = {
+  export type CompanyUncheckedCreateWithoutEmployeesInput = {
     id?: string
     title: string
     description: string
-    salary: number
-    occupation: $Enums.Jobs
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    ceoId: string
+    vacancies?: VacancyUncheckedCreateNestedManyWithoutCompanyInput
   }
 
-  export type VacancyCreateOrConnectWithoutUserInput = {
-    where: VacancyWhereUniqueInput
-    create: XOR<VacancyCreateWithoutUserInput, VacancyUncheckedCreateWithoutUserInput>
+  export type CompanyCreateOrConnectWithoutEmployeesInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutEmployeesInput, CompanyUncheckedCreateWithoutEmployeesInput>
   }
 
-  export type VacancyCreateManyUserInputEnvelope = {
-    data: VacancyCreateManyUserInput | VacancyCreateManyUserInput[]
+  export type CompanyCreateWithoutCeoInput = {
+    id?: string
+    title: string
+    description: string
+    employees?: UserCreateNestedManyWithoutCompaniesInput
+    vacancies?: VacancyCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutCeoInput = {
+    id?: string
+    title: string
+    description: string
+    employees?: UserUncheckedCreateNestedManyWithoutCompaniesInput
+    vacancies?: VacancyUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutCeoInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutCeoInput, CompanyUncheckedCreateWithoutCeoInput>
+  }
+
+  export type CompanyCreateManyCeoInputEnvelope = {
+    data: CompanyCreateManyCeoInput | CompanyCreateManyCeoInput[]
     skipDuplicates?: boolean
   }
 
@@ -15892,34 +19101,46 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Card"> | Date | string
   }
 
-  export type VacancyUpsertWithWhereUniqueWithoutUserInput = {
-    where: VacancyWhereUniqueInput
-    update: XOR<VacancyUpdateWithoutUserInput, VacancyUncheckedUpdateWithoutUserInput>
-    create: XOR<VacancyCreateWithoutUserInput, VacancyUncheckedCreateWithoutUserInput>
+  export type CompanyUpsertWithWhereUniqueWithoutEmployeesInput = {
+    where: CompanyWhereUniqueInput
+    update: XOR<CompanyUpdateWithoutEmployeesInput, CompanyUncheckedUpdateWithoutEmployeesInput>
+    create: XOR<CompanyCreateWithoutEmployeesInput, CompanyUncheckedCreateWithoutEmployeesInput>
   }
 
-  export type VacancyUpdateWithWhereUniqueWithoutUserInput = {
-    where: VacancyWhereUniqueInput
-    data: XOR<VacancyUpdateWithoutUserInput, VacancyUncheckedUpdateWithoutUserInput>
+  export type CompanyUpdateWithWhereUniqueWithoutEmployeesInput = {
+    where: CompanyWhereUniqueInput
+    data: XOR<CompanyUpdateWithoutEmployeesInput, CompanyUncheckedUpdateWithoutEmployeesInput>
   }
 
-  export type VacancyUpdateManyWithWhereWithoutUserInput = {
-    where: VacancyScalarWhereInput
-    data: XOR<VacancyUpdateManyMutationInput, VacancyUncheckedUpdateManyWithoutUserInput>
+  export type CompanyUpdateManyWithWhereWithoutEmployeesInput = {
+    where: CompanyScalarWhereInput
+    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyWithoutEmployeesInput>
   }
 
-  export type VacancyScalarWhereInput = {
-    AND?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
-    OR?: VacancyScalarWhereInput[]
-    NOT?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
-    id?: StringFilter<"Vacancy"> | string
-    title?: StringFilter<"Vacancy"> | string
-    description?: StringFilter<"Vacancy"> | string
-    salary?: IntFilter<"Vacancy"> | number
-    occupation?: EnumJobsFilter<"Vacancy"> | $Enums.Jobs
-    userId?: StringFilter<"Vacancy"> | string
-    createdAt?: DateTimeFilter<"Vacancy"> | Date | string
-    updatedAt?: DateTimeFilter<"Vacancy"> | Date | string
+  export type CompanyScalarWhereInput = {
+    AND?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+    OR?: CompanyScalarWhereInput[]
+    NOT?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+    id?: StringFilter<"Company"> | string
+    title?: StringFilter<"Company"> | string
+    description?: StringFilter<"Company"> | string
+    ceoId?: StringFilter<"Company"> | string
+  }
+
+  export type CompanyUpsertWithWhereUniqueWithoutCeoInput = {
+    where: CompanyWhereUniqueInput
+    update: XOR<CompanyUpdateWithoutCeoInput, CompanyUncheckedUpdateWithoutCeoInput>
+    create: XOR<CompanyCreateWithoutCeoInput, CompanyUncheckedCreateWithoutCeoInput>
+  }
+
+  export type CompanyUpdateWithWhereUniqueWithoutCeoInput = {
+    where: CompanyWhereUniqueInput
+    data: XOR<CompanyUpdateWithoutCeoInput, CompanyUncheckedUpdateWithoutCeoInput>
+  }
+
+  export type CompanyUpdateManyWithWhereWithoutCeoInput = {
+    where: CompanyScalarWhereInput
+    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyWithoutCeoInput>
   }
 
   export type TransactionUpsertWithWhereUniqueWithoutUserInput = {
@@ -15985,7 +19206,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16004,7 +19226,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16039,7 +19262,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16058,7 +19282,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16077,7 +19302,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16096,7 +19322,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16151,7 +19378,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16170,7 +19398,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16205,7 +19434,8 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16224,7 +19454,8 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16284,7 +19515,8 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16303,7 +19535,8 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16377,7 +19610,8 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16396,7 +19630,8 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16458,7 +19693,8 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16477,7 +19713,8 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16488,7 +19725,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    User: UserCreateNestedOneWithoutOrdersInput
+    user: UserCreateNestedOneWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateWithoutItemsInput = {
@@ -16522,7 +19759,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    User?: UserUpdateOneRequiredWithoutOrdersNestedInput
+    user?: UserUpdateOneRequiredWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutItemsInput = {
@@ -16548,7 +19785,8 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16567,7 +19805,8 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
@@ -16674,7 +19913,8 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16693,7 +19933,8 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
   }
@@ -16745,7 +19986,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
   }
 
@@ -16764,7 +20006,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -16842,7 +20085,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
-    vacancies?: VacancyCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
 
@@ -16861,7 +20105,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
-    vacancies?: VacancyUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
 
@@ -16896,7 +20141,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
   }
 
@@ -16915,7 +20161,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -17011,7 +20258,8 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
 
@@ -17030,11 +20278,168 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
-    vacancies?: VacancyUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
   }
 
-  export type UserCreateWithoutVacanciesInput = {
+  export type VacancyCreateWithoutSalaryInput = {
+    id?: string
+    title: string
+    description: string
+    occupation: $Enums.Jobs
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutVacanciesInput
+  }
+
+  export type VacancyUncheckedCreateWithoutSalaryInput = {
+    id?: string
+    title: string
+    description: string
+    occupation: $Enums.Jobs
+    companyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VacancyCreateOrConnectWithoutSalaryInput = {
+    where: VacancyWhereUniqueInput
+    create: XOR<VacancyCreateWithoutSalaryInput, VacancyUncheckedCreateWithoutSalaryInput>
+  }
+
+  export type VacancyUpsertWithoutSalaryInput = {
+    update: XOR<VacancyUpdateWithoutSalaryInput, VacancyUncheckedUpdateWithoutSalaryInput>
+    create: XOR<VacancyCreateWithoutSalaryInput, VacancyUncheckedCreateWithoutSalaryInput>
+    where?: VacancyWhereInput
+  }
+
+  export type VacancyUpdateToOneWithWhereWithoutSalaryInput = {
+    where?: VacancyWhereInput
+    data: XOR<VacancyUpdateWithoutSalaryInput, VacancyUncheckedUpdateWithoutSalaryInput>
+  }
+
+  export type VacancyUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutVacanciesNestedInput
+  }
+
+  export type VacancyUncheckedUpdateWithoutSalaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
+    companyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SalaryCreateWithoutVacancyInput = {
+    id?: string
+    type: $Enums.SalaryType
+    fixedAmount?: number | null
+    minAmount?: number | null
+    maxAmount?: number | null
+    period: $Enums.PaymentPeriod
+  }
+
+  export type SalaryUncheckedCreateWithoutVacancyInput = {
+    id?: string
+    type: $Enums.SalaryType
+    fixedAmount?: number | null
+    minAmount?: number | null
+    maxAmount?: number | null
+    period: $Enums.PaymentPeriod
+  }
+
+  export type SalaryCreateOrConnectWithoutVacancyInput = {
+    where: SalaryWhereUniqueInput
+    create: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
+  }
+
+  export type CompanyCreateWithoutVacanciesInput = {
+    id?: string
+    title: string
+    description: string
+    employees?: UserCreateNestedManyWithoutCompaniesInput
+    ceo: UserCreateNestedOneWithoutCompanyCeoInput
+  }
+
+  export type CompanyUncheckedCreateWithoutVacanciesInput = {
+    id?: string
+    title: string
+    description: string
+    ceoId: string
+    employees?: UserUncheckedCreateNestedManyWithoutCompaniesInput
+  }
+
+  export type CompanyCreateOrConnectWithoutVacanciesInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutVacanciesInput, CompanyUncheckedCreateWithoutVacanciesInput>
+  }
+
+  export type SalaryUpsertWithoutVacancyInput = {
+    update: XOR<SalaryUpdateWithoutVacancyInput, SalaryUncheckedUpdateWithoutVacancyInput>
+    create: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
+    where?: SalaryWhereInput
+  }
+
+  export type SalaryUpdateToOneWithWhereWithoutVacancyInput = {
+    where?: SalaryWhereInput
+    data: XOR<SalaryUpdateWithoutVacancyInput, SalaryUncheckedUpdateWithoutVacancyInput>
+  }
+
+  export type SalaryUpdateWithoutVacancyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
+    fixedAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    minAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    maxAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    period?: EnumPaymentPeriodFieldUpdateOperationsInput | $Enums.PaymentPeriod
+  }
+
+  export type SalaryUncheckedUpdateWithoutVacancyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
+    fixedAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    minAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    maxAmount?: NullableIntFieldUpdateOperationsInput | number | null
+    period?: EnumPaymentPeriodFieldUpdateOperationsInput | $Enums.PaymentPeriod
+  }
+
+  export type CompanyUpsertWithoutVacanciesInput = {
+    update: XOR<CompanyUpdateWithoutVacanciesInput, CompanyUncheckedUpdateWithoutVacanciesInput>
+    create: XOR<CompanyCreateWithoutVacanciesInput, CompanyUncheckedCreateWithoutVacanciesInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutVacanciesInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutVacanciesInput, CompanyUncheckedUpdateWithoutVacanciesInput>
+  }
+
+  export type CompanyUpdateWithoutVacanciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    employees?: UserUpdateManyWithoutCompaniesNestedInput
+    ceo?: UserUpdateOneRequiredWithoutCompanyCeoNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutVacanciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    ceoId?: StringFieldUpdateOperationsInput | string
+    employees?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
+  }
+
+  export type UserCreateWithoutCompaniesInput = {
     id?: string
     email: string
     login: string
@@ -17049,11 +20454,12 @@ export namespace Prisma {
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     cards?: CardCreateNestedManyWithoutUserInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
   }
 
-  export type UserUncheckedCreateWithoutVacanciesInput = {
+  export type UserUncheckedCreateWithoutCompaniesInput = {
     id?: string
     email: string
     login: string
@@ -17068,27 +20474,134 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     cards?: CardUncheckedCreateNestedManyWithoutUserInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
     initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
   }
 
-  export type UserCreateOrConnectWithoutVacanciesInput = {
+  export type UserCreateOrConnectWithoutCompaniesInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutVacanciesInput, UserUncheckedCreateWithoutVacanciesInput>
+    create: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput>
   }
 
-  export type UserUpsertWithoutVacanciesInput = {
-    update: XOR<UserUpdateWithoutVacanciesInput, UserUncheckedUpdateWithoutVacanciesInput>
-    create: XOR<UserCreateWithoutVacanciesInput, UserUncheckedCreateWithoutVacanciesInput>
+  export type UserCreateWithoutCompanyCeoInput = {
+    id?: string
+    email: string
+    login: string
+    password: string
+    role?: $Enums.UserRole
+    isVerified?: boolean
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: ApplicationCreateNestedManyWithoutUserInput
+    articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    cards?: CardCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
+    confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
+  }
+
+  export type UserUncheckedCreateWithoutCompanyCeoInput = {
+    id?: string
+    email: string
+    login: string
+    password: string
+    role?: $Enums.UserRole
+    isVerified?: boolean
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
+    articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    cards?: CardUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
+    confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
+  }
+
+  export type UserCreateOrConnectWithoutCompanyCeoInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCompanyCeoInput, UserUncheckedCreateWithoutCompanyCeoInput>
+  }
+
+  export type VacancyCreateWithoutCompanyInput = {
+    id?: string
+    title: string
+    description: string
+    occupation: $Enums.Jobs
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    salary?: SalaryCreateNestedOneWithoutVacancyInput
+  }
+
+  export type VacancyUncheckedCreateWithoutCompanyInput = {
+    id?: string
+    title: string
+    description: string
+    occupation: $Enums.Jobs
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    salary?: SalaryUncheckedCreateNestedOneWithoutVacancyInput
+  }
+
+  export type VacancyCreateOrConnectWithoutCompanyInput = {
+    where: VacancyWhereUniqueInput
+    create: XOR<VacancyCreateWithoutCompanyInput, VacancyUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type VacancyCreateManyCompanyInputEnvelope = {
+    data: VacancyCreateManyCompanyInput | VacancyCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutCompaniesInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutCompaniesInput, UserUncheckedUpdateWithoutCompaniesInput>
+    create: XOR<UserCreateWithoutCompaniesInput, UserUncheckedCreateWithoutCompaniesInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutCompaniesInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutCompaniesInput, UserUncheckedUpdateWithoutCompaniesInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutCompaniesInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutCompaniesInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    login?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    isVerified?: BoolFilter<"User"> | boolean
+    jobs?: EnumJobsNullableListFilter<"User">
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+  }
+
+  export type UserUpsertWithoutCompanyCeoInput = {
+    update: XOR<UserUpdateWithoutCompanyCeoInput, UserUncheckedUpdateWithoutCompanyCeoInput>
+    create: XOR<UserCreateWithoutCompanyCeoInput, UserUncheckedCreateWithoutCompanyCeoInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutVacanciesInput = {
+  export type UserUpdateToOneWithWhereWithoutCompanyCeoInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutVacanciesInput, UserUncheckedUpdateWithoutVacanciesInput>
+    data: XOR<UserUpdateWithoutCompanyCeoInput, UserUncheckedUpdateWithoutCompanyCeoInput>
   }
 
-  export type UserUpdateWithoutVacanciesInput = {
+  export type UserUpdateWithoutCompanyCeoInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     login?: StringFieldUpdateOperationsInput | string
@@ -17103,11 +20616,12 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     cards?: CardUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
     initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutVacanciesInput = {
+  export type UserUncheckedUpdateWithoutCompanyCeoInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     login?: StringFieldUpdateOperationsInput | string
@@ -17122,8 +20636,38 @@ export namespace Prisma {
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     cards?: CardUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
     initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type VacancyUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: VacancyWhereUniqueInput
+    update: XOR<VacancyUpdateWithoutCompanyInput, VacancyUncheckedUpdateWithoutCompanyInput>
+    create: XOR<VacancyCreateWithoutCompanyInput, VacancyUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type VacancyUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: VacancyWhereUniqueInput
+    data: XOR<VacancyUpdateWithoutCompanyInput, VacancyUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type VacancyUpdateManyWithWhereWithoutCompanyInput = {
+    where: VacancyScalarWhereInput
+    data: XOR<VacancyUpdateManyMutationInput, VacancyUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type VacancyScalarWhereInput = {
+    AND?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
+    OR?: VacancyScalarWhereInput[]
+    NOT?: VacancyScalarWhereInput | VacancyScalarWhereInput[]
+    id?: StringFilter<"Vacancy"> | string
+    title?: StringFilter<"Vacancy"> | string
+    description?: StringFilter<"Vacancy"> | string
+    occupation?: EnumJobsFilter<"Vacancy"> | $Enums.Jobs
+    companyId?: StringFilter<"Vacancy"> | string
+    createdAt?: DateTimeFilter<"Vacancy"> | Date | string
+    updatedAt?: DateTimeFilter<"Vacancy"> | Date | string
   }
 
   export type ApplicationCreateManyUserInput = {
@@ -17165,14 +20709,10 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type VacancyCreateManyUserInput = {
+  export type CompanyCreateManyCeoInput = {
     id?: string
     title: string
     description: string
-    salary: number
-    occupation: $Enums.Jobs
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type TransactionCreateManyUserInput = {
@@ -17326,34 +20866,49 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VacancyUpdateWithoutUserInput = {
+  export type CompanyUpdateWithoutEmployeesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    salary?: IntFieldUpdateOperationsInput | number
-    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ceo?: UserUpdateOneRequiredWithoutCompanyCeoNestedInput
+    vacancies?: VacancyUpdateManyWithoutCompanyNestedInput
   }
 
-  export type VacancyUncheckedUpdateWithoutUserInput = {
+  export type CompanyUncheckedUpdateWithoutEmployeesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    salary?: IntFieldUpdateOperationsInput | number
-    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ceoId?: StringFieldUpdateOperationsInput | string
+    vacancies?: VacancyUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
-  export type VacancyUncheckedUpdateManyWithoutUserInput = {
+  export type CompanyUncheckedUpdateManyWithoutEmployeesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    salary?: IntFieldUpdateOperationsInput | number
-    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ceoId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CompanyUpdateWithoutCeoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    employees?: UserUpdateManyWithoutCompaniesNestedInput
+    vacancies?: VacancyUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutCeoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    employees?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
+    vacancies?: VacancyUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateManyWithoutCeoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type TransactionUpdateWithoutUserInput = {
@@ -17582,6 +21137,96 @@ export namespace Prisma {
     confirmedByBankerId?: NullableStringFieldUpdateOperationsInput | string | null
     cardId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VacancyCreateManyCompanyInput = {
+    id?: string
+    title: string
+    description: string
+    occupation: $Enums.Jobs
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUpdateWithoutCompaniesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: ApplicationUpdateManyWithoutUserNestedInput
+    articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    cards?: CardUpdateManyWithoutUserNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
+    initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
+    confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCompaniesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
+    articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    cards?: CardUncheckedUpdateManyWithoutUserNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
+    initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
+    confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutCompaniesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VacancyUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    salary?: SalaryUpdateOneWithoutVacancyNestedInput
+  }
+
+  export type VacancyUncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    salary?: SalaryUncheckedUpdateOneWithoutVacancyNestedInput
+  }
+
+  export type VacancyUncheckedUpdateManyWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { UserRole } from 'generated/prisma';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CurrentUser } from 'src/user/decorators/user.decorator';
@@ -11,7 +11,7 @@ export class JobController {
 
   @Auth(UserRole.USER, UserRole.ADMIN)
   @HttpCode(200)
-  @Post('get')
+  @Get('get')
   async getJobs(@CurrentUser('id') userId: string) {
     return await this.jobService.get(userId);
   }

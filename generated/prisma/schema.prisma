@@ -33,14 +33,15 @@ model User {
   password   String
   role       UserRole @default(USER)
   isVerified Boolean  @default(false)
+  jobs       Jobs[]
 
   applications Application[]
   articles     Article[]
   articleLikes ArticleLike[]
   orders       Order[]
   cards        Card[]
-  vacancies    Vacancy[]
-  jobs         Jobs[]
+  companies    Company[]     @relation("employees")
+  companyCeo   Company[]     @relation("CEO")
 
   initiatedTransactions Transaction[] @relation("InitiatedByUser")
   confirmedTransactions Transaction[] @relation("ConfirmedByBanker")
@@ -115,7 +116,7 @@ model Order {
   status     OrderStatus @default(CREATED)
   items      OrderItem[]
 
-  User   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
   userId String
 
   createdAt DateTime @default(now())
@@ -185,18 +186,60 @@ model Transaction {
   updatedAt DateTime @updatedAt
 }
 
+enum SalaryType {
+  FIXED
+  RANGE
+}
+
+enum PaymentPeriod {
+  PER_TASK
+  PER_HOUR
+  PER_DAY
+  PER_WEEK
+  PER_MONTH
+}
+
+model Salary {
+  id String @id @default(cuid())
+
+  type        SalaryType
+  fixedAmount Int?
+  minAmount   Int?
+  maxAmount   Int?
+
+  period PaymentPeriod
+
+  vacancy   Vacancy @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
+  vacancyId String  @unique
+}
+
 model Vacancy {
   id String @id @default(cuid())
 
   title       String
   description String
-  salary      Int
+
+  salary Salary?
 
   occupation Jobs
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Company {
+  id String @id @default(cuid())
+
+  title       String
+  description String
+
+  employees User[] @relation("employees")
+
+  ceo   User   @relation("CEO", fields: [ceoId], references: [id])
+  ceoId String
+
+  vacancies Vacancy[]
 }

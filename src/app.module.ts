@@ -12,6 +12,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { CardModule } from './card/card.module';
 import { VacancyModule } from './vacancy/vacancy.module';
 import { JobModule } from './job/job.module';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { JobModule } from './job/job.module';
     CardModule,
     VacancyModule,
     JobModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

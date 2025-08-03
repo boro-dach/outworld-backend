@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateCardDto, SendToCardDto } from './dto/card.dto';
-import { TransactionStatus, TransactionType } from 'generated/prisma';
+import { Prisma, TransactionStatus, TransactionType } from 'generated/prisma';
 
 @Injectable()
 export class CardService {
@@ -29,67 +29,66 @@ export class CardService {
 
   async send(dto: SendToCardDto, userId: string) {
     return this.prisma.$transaction(async (tx) => {
-      const fromCard = await tx.card.findUnique({
-        where: { cardNumber: dto.fromCard, userId: userId },
-      });
-      if (!fromCard) {
-        throw new NotFoundException(
-          'Карта отправителя не найдена или не принадлежит вам.',
-        );
-      }
-
-      const toCard = await tx.card.findUnique({
-        where: { cardNumber: dto.toCard },
-      });
-      if (!toCard) {
-        throw new NotFoundException('Карта получателя не найдена.');
-      }
-
-      if (fromCard.id === toCard.id) {
-        throw new BadRequestException(
-          'Нельзя перевести средства на ту же самую карту.',
-        );
-      }
-      if (fromCard.credits < dto.amount) {
-        throw new BadRequestException('Недостаточно средств на счету');
-      }
-
-      await tx.card.update({
-        where: { id: fromCard.id },
-        data: { credits: { decrement: dto.amount } },
-      });
-
-      await tx.card.update({
-        where: { id: toCard.id },
-        data: { credits: { increment: dto.amount } },
-      });
-
-      await tx.transaction.create({
-        data: {
-          amount: dto.amount,
-          type: TransactionType.TRANSFER_OUT,
-          status: TransactionStatus.COMPLETED,
-          card: { connect: { id: fromCard.id } },
-          relatedCard: { connect: { id: toCard.id } },
-          user: { connect: { id: userId } },
-        },
-      });
-
-      await tx.transaction.create({
-        data: {
-          amount: dto.amount,
-          type: TransactionType.TRANSFER_IN,
-          status: TransactionStatus.COMPLETED,
-          card: { connect: { id: toCard.id } },
-          relatedCard: { connect: { id: fromCard.id } },
-          user: { connect: { id: toCard.userId } },
-        },
-      });
-
-      return tx.card.findUnique({
-        where: { id: fromCard.id },
-      });
+      return this._performSend(dto, userId, tx);
     });
+  }
+
+  async _performSend(
+    dto: SendToCardDto,
+    userId: string,
+    tx: Prisma.TransactionClient,
+  ) {
+    const fromCard = await tx.card.findUnique({
+      where: { cardNumber: dto.fromCard, userId: userId },
+    });
+    if (!fromCard)
+      throw new NotFoundException(
+        'Карта отправителя не найдена или не принадлежит вам.',
+      );
+
+    const toCard = await tx.card.findUnique({
+      where: { cardNumber: dto.toCard },
+    });
+    if (!toCard) throw new NotFoundException('Карта получателя не найдена.');
+
+    if (fromCard.id === toCard.id)
+      throw new BadRequestException(
+        'Нельзя перевести средства на ту же самую карту.',
+      );
+    if (fromCard.credits < dto.amount)
+      throw new BadRequestException('Недостаточно средств на счету');
+
+    await tx.card.update({
+      where: { id: fromCard.id },
+      data: { credits: { decrement: dto.amount } },
+    });
+    await tx.card.update({
+      where: { id: toCard.id },
+      data: { credits: { increment: dto.amount } },
+    });
+
+    await tx.transaction.create({
+      data: {
+        amount: dto.amount,
+        type: TransactionType.TRANSFER_OUT,
+        status: TransactionStatus.COMPLETED,
+        card: { connect: { id: fromCard.id } },
+        relatedCard: { connect: { id: toCard.id } },
+        user: { connect: { id: userId } },
+      },
+    });
+    await tx.transaction.create({
+      data: {
+        amount: dto.amount,
+        type: TransactionType.TRANSFER_IN,
+        status: TransactionStatus.COMPLETED,
+        card: { connect: { id: toCard.id } },
+        relatedCard: { connect: { id: fromCard.id } },
+        user: { connect: { id: toCard.userId } },
+      },
+    });
+
+    return tx.card.findUnique({ where: { id: fromCard.id } });
   }
 
   async getAll(userId: string) {

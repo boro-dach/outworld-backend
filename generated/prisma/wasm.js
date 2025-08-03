@@ -198,15 +198,31 @@ exports.Prisma.TransactionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SalaryScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  fixedAmount: 'fixedAmount',
+  minAmount: 'minAmount',
+  maxAmount: 'maxAmount',
+  period: 'period',
+  vacancyId: 'vacancyId'
+};
+
 exports.Prisma.VacancyScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  salary: 'salary',
   occupation: 'occupation',
-  userId: 'userId',
+  companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CompanyScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  ceoId: 'ceoId'
 };
 
 exports.Prisma.SortOrder = {
@@ -268,6 +284,19 @@ exports.TransactionStatus = exports.$Enums.TransactionStatus = {
   FAILED: 'FAILED'
 };
 
+exports.SalaryType = exports.$Enums.SalaryType = {
+  FIXED: 'FIXED',
+  RANGE: 'RANGE'
+};
+
+exports.PaymentPeriod = exports.$Enums.PaymentPeriod = {
+  PER_TASK: 'PER_TASK',
+  PER_HOUR: 'PER_HOUR',
+  PER_DAY: 'PER_DAY',
+  PER_WEEK: 'PER_WEEK',
+  PER_MONTH: 'PER_MONTH'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Application: 'Application',
@@ -277,7 +306,9 @@ exports.Prisma.ModelName = {
   OrderItem: 'OrderItem',
   Card: 'Card',
   Transaction: 'Transaction',
-  Vacancy: 'Vacancy'
+  Salary: 'Salary',
+  Vacancy: 'Vacancy',
+  Company: 'Company'
 };
 
 /**

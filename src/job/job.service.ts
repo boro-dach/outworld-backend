@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { JobAssignDto } from './dto/job.dto';
 
@@ -18,7 +18,20 @@ export class JobService {
   }
 
   async assign(dto: JobAssignDto) {
-    const user = await this.prisma.user.update({
+    const user = await this.prisma.user.findUnique({
+      where: { id: dto.userId },
+      select: { jobs: true, id: true, login: true },
+    });
+
+    if (user?.jobs?.includes(dto.job)) {
+      return {
+        id: user.id,
+        login: user.login,
+        jobs: user.jobs,
+      };
+    }
+
+    const updatedUser = await this.prisma.user.update({
       where: { id: dto.userId },
       data: {
         jobs: {
@@ -33,9 +46,9 @@ export class JobService {
     });
 
     return {
-      id: user.id,
-      login: user.login,
-      jobs: user.jobs,
+      id: updatedUser.id,
+      login: updatedUser.login,
+      jobs: updatedUser.jobs,
     };
   }
 }
