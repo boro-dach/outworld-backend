@@ -132,6 +132,16 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.VacancyResponseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  vacancyId: 'vacancyId',
+  status: 'status',
+  coverLetter: 'coverLetter',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ApplicationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -251,6 +261,12 @@ exports.Jobs = exports.$Enums.Jobs = {
   OTHER: 'OTHER'
 };
 
+exports.VacancyResponseStatus = exports.$Enums.VacancyResponseStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+};
+
 exports.ApplicationStatus = exports.$Enums.ApplicationStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
@@ -299,6 +315,7 @@ exports.PaymentPeriod = exports.$Enums.PaymentPeriod = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  VacancyResponse: 'VacancyResponse',
   Application: 'Application',
   Article: 'Article',
   ArticleLike: 'ArticleLike',

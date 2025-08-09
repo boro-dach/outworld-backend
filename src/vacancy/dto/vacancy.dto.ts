@@ -14,6 +14,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
   ValidationArguments,
+  Min,
 } from 'class-validator';
 import { Jobs, PaymentPeriod, SalaryType } from 'generated/prisma';
 
@@ -109,4 +110,40 @@ export class CreateVacancyDto {
   @ValidateNested()
   @Type(() => CreateSalaryDto)
   salary?: CreateSalaryDto;
+}
+
+export class getByCompanyDto {
+  @IsString()
+  @IsNotEmpty()
+  companyId: string;
+}
+
+export class ApplyToVacancyDto {
+  @IsString()
+  @IsNotEmpty()
+  @Min(20)
+  @IsOptional()
+  coverLetter?: string;
+
+  @IsString()
+  @IsNotEmpty()
+  vacancyId: string;
+}
+
+export class AcceptApplyDto {
+  @IsString()
+  @IsNotEmpty()
+  applyId: string;
+}
+
+export class RejectApplyDto {
+  @IsString()
+  @IsNotEmpty()
+  applyId: string;
+}
+
+export class GetAppliesByVacancyDto {
+  @IsString()
+  @IsNotEmpty()
+  vacancyId: string;
 }

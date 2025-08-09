@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model VacancyResponse
+ * 
+ */
+export type VacancyResponse = $Result.DefaultSelection<Prisma.$VacancyResponsePayload>
+/**
  * Model Application
  * 
  */
@@ -89,6 +94,15 @@ export const Jobs: {
 };
 
 export type Jobs = (typeof Jobs)[keyof typeof Jobs]
+
+
+export const VacancyResponseStatus: {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+};
+
+export type VacancyResponseStatus = (typeof VacancyResponseStatus)[keyof typeof VacancyResponseStatus]
 
 
 export const ApplicationStatus: {
@@ -166,6 +180,10 @@ export const UserRole: typeof $Enums.UserRole
 export type Jobs = $Enums.Jobs
 
 export const Jobs: typeof $Enums.Jobs
+
+export type VacancyResponseStatus = $Enums.VacancyResponseStatus
+
+export const VacancyResponseStatus: typeof $Enums.VacancyResponseStatus
 
 export type ApplicationStatus = $Enums.ApplicationStatus
 
@@ -329,6 +347,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.vacancyResponse`: Exposes CRUD operations for the **VacancyResponse** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VacancyResponses
+    * const vacancyResponses = await prisma.vacancyResponse.findMany()
+    * ```
+    */
+  get vacancyResponse(): Prisma.VacancyResponseDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.application`: Exposes CRUD operations for the **Application** model.
@@ -870,6 +898,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    VacancyResponse: 'VacancyResponse',
     Application: 'Application',
     Article: 'Article',
     ArticleLike: 'ArticleLike',
@@ -898,7 +927,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "application" | "article" | "articleLike" | "order" | "orderItem" | "card" | "transaction" | "salary" | "vacancy" | "company"
+      modelProps: "user" | "vacancyResponse" | "application" | "article" | "articleLike" | "order" | "orderItem" | "card" | "transaction" | "salary" | "vacancy" | "company"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -973,6 +1002,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      VacancyResponse: {
+        payload: Prisma.$VacancyResponsePayload<ExtArgs>
+        fields: Prisma.VacancyResponseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VacancyResponseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VacancyResponseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>
+          }
+          findFirst: {
+            args: Prisma.VacancyResponseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VacancyResponseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>
+          }
+          findMany: {
+            args: Prisma.VacancyResponseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>[]
+          }
+          create: {
+            args: Prisma.VacancyResponseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>
+          }
+          createMany: {
+            args: Prisma.VacancyResponseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VacancyResponseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>[]
+          }
+          delete: {
+            args: Prisma.VacancyResponseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>
+          }
+          update: {
+            args: Prisma.VacancyResponseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>
+          }
+          deleteMany: {
+            args: Prisma.VacancyResponseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VacancyResponseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VacancyResponseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>[]
+          }
+          upsert: {
+            args: Prisma.VacancyResponseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VacancyResponsePayload>
+          }
+          aggregate: {
+            args: Prisma.VacancyResponseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVacancyResponse>
+          }
+          groupBy: {
+            args: Prisma.VacancyResponseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VacancyResponseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VacancyResponseCountArgs<ExtArgs>
+            result: $Utils.Optional<VacancyResponseCountAggregateOutputType> | number
           }
         }
       }
@@ -1801,6 +1904,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    vacancyResponse?: VacancyResponseOmit
     application?: ApplicationOmit
     article?: ArticleOmit
     articleLike?: ArticleLikeOmit
@@ -1905,6 +2009,7 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    vacancyResponses: number
     applications: number
     articles: number
     articleLikes: number
@@ -1917,6 +2022,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    vacancyResponses?: boolean | UserCountOutputTypeCountVacancyResponsesArgs
     applications?: boolean | UserCountOutputTypeCountApplicationsArgs
     articles?: boolean | UserCountOutputTypeCountArticlesArgs
     articleLikes?: boolean | UserCountOutputTypeCountArticleLikesArgs
@@ -1937,6 +2043,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVacancyResponsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VacancyResponseWhereInput
   }
 
   /**
@@ -2102,6 +2215,37 @@ export namespace Prisma {
    */
   export type CardCountOutputTypeCountRelatedTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TransactionWhereInput
+  }
+
+
+  /**
+   * Count Type VacancyCountOutputType
+   */
+
+  export type VacancyCountOutputType = {
+    responses: number
+  }
+
+  export type VacancyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    responses?: boolean | VacancyCountOutputTypeCountResponsesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VacancyCountOutputType without action
+   */
+  export type VacancyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyCountOutputType
+     */
+    select?: VacancyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VacancyCountOutputType without action
+   */
+  export type VacancyCountOutputTypeCountResponsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VacancyResponseWhereInput
   }
 
 
@@ -2341,6 +2485,7 @@ export namespace Prisma {
     jobs?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    vacancyResponses?: boolean | User$vacancyResponsesArgs<ExtArgs>
     applications?: boolean | User$applicationsArgs<ExtArgs>
     articles?: boolean | User$articlesArgs<ExtArgs>
     articleLikes?: boolean | User$articleLikesArgs<ExtArgs>
@@ -2391,6 +2536,7 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "login" | "password" | "role" | "isVerified" | "jobs" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    vacancyResponses?: boolean | User$vacancyResponsesArgs<ExtArgs>
     applications?: boolean | User$applicationsArgs<ExtArgs>
     articles?: boolean | User$articlesArgs<ExtArgs>
     articleLikes?: boolean | User$articleLikesArgs<ExtArgs>
@@ -2408,6 +2554,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      vacancyResponses: Prisma.$VacancyResponsePayload<ExtArgs>[]
       applications: Prisma.$ApplicationPayload<ExtArgs>[]
       articles: Prisma.$ArticlePayload<ExtArgs>[]
       articleLikes: Prisma.$ArticleLikePayload<ExtArgs>[]
@@ -2822,6 +2969,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    vacancyResponses<T extends User$vacancyResponsesArgs<ExtArgs> = {}>(args?: Subset<T, User$vacancyResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     applications<T extends User$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, User$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     articles<T extends User$articlesArgs<ExtArgs> = {}>(args?: Subset<T, User$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     articleLikes<T extends User$articleLikesArgs<ExtArgs> = {}>(args?: Subset<T, User$articleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3257,6 +3405,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.vacancyResponses
+   */
+  export type User$vacancyResponsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    where?: VacancyResponseWhereInput
+    orderBy?: VacancyResponseOrderByWithRelationInput | VacancyResponseOrderByWithRelationInput[]
+    cursor?: VacancyResponseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VacancyResponseScalarFieldEnum | VacancyResponseScalarFieldEnum[]
+  }
+
+  /**
    * User.applications
    */
   export type User$applicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3488,6 +3660,1098 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model VacancyResponse
+   */
+
+  export type AggregateVacancyResponse = {
+    _count: VacancyResponseCountAggregateOutputType | null
+    _min: VacancyResponseMinAggregateOutputType | null
+    _max: VacancyResponseMaxAggregateOutputType | null
+  }
+
+  export type VacancyResponseMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    vacancyId: string | null
+    status: $Enums.VacancyResponseStatus | null
+    coverLetter: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VacancyResponseMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    vacancyId: string | null
+    status: $Enums.VacancyResponseStatus | null
+    coverLetter: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VacancyResponseCountAggregateOutputType = {
+    id: number
+    userId: number
+    vacancyId: number
+    status: number
+    coverLetter: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VacancyResponseMinAggregateInputType = {
+    id?: true
+    userId?: true
+    vacancyId?: true
+    status?: true
+    coverLetter?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VacancyResponseMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    vacancyId?: true
+    status?: true
+    coverLetter?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VacancyResponseCountAggregateInputType = {
+    id?: true
+    userId?: true
+    vacancyId?: true
+    status?: true
+    coverLetter?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VacancyResponseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VacancyResponse to aggregate.
+     */
+    where?: VacancyResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VacancyResponses to fetch.
+     */
+    orderBy?: VacancyResponseOrderByWithRelationInput | VacancyResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VacancyResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VacancyResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VacancyResponses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VacancyResponses
+    **/
+    _count?: true | VacancyResponseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VacancyResponseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VacancyResponseMaxAggregateInputType
+  }
+
+  export type GetVacancyResponseAggregateType<T extends VacancyResponseAggregateArgs> = {
+        [P in keyof T & keyof AggregateVacancyResponse]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVacancyResponse[P]>
+      : GetScalarType<T[P], AggregateVacancyResponse[P]>
+  }
+
+
+
+
+  export type VacancyResponseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VacancyResponseWhereInput
+    orderBy?: VacancyResponseOrderByWithAggregationInput | VacancyResponseOrderByWithAggregationInput[]
+    by: VacancyResponseScalarFieldEnum[] | VacancyResponseScalarFieldEnum
+    having?: VacancyResponseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VacancyResponseCountAggregateInputType | true
+    _min?: VacancyResponseMinAggregateInputType
+    _max?: VacancyResponseMaxAggregateInputType
+  }
+
+  export type VacancyResponseGroupByOutputType = {
+    id: string
+    userId: string
+    vacancyId: string
+    status: $Enums.VacancyResponseStatus
+    coverLetter: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: VacancyResponseCountAggregateOutputType | null
+    _min: VacancyResponseMinAggregateOutputType | null
+    _max: VacancyResponseMaxAggregateOutputType | null
+  }
+
+  type GetVacancyResponseGroupByPayload<T extends VacancyResponseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VacancyResponseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VacancyResponseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VacancyResponseGroupByOutputType[P]>
+            : GetScalarType<T[P], VacancyResponseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VacancyResponseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    vacancyId?: boolean
+    status?: boolean
+    coverLetter?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["vacancyResponse"]>
+
+  export type VacancyResponseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    vacancyId?: boolean
+    status?: boolean
+    coverLetter?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["vacancyResponse"]>
+
+  export type VacancyResponseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    vacancyId?: boolean
+    status?: boolean
+    coverLetter?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["vacancyResponse"]>
+
+  export type VacancyResponseSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    vacancyId?: boolean
+    status?: boolean
+    coverLetter?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type VacancyResponseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "vacancyId" | "status" | "coverLetter" | "createdAt" | "updatedAt", ExtArgs["result"]["vacancyResponse"]>
+  export type VacancyResponseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }
+  export type VacancyResponseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }
+  export type VacancyResponseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
+  }
+
+  export type $VacancyResponsePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VacancyResponse"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      vacancy: Prisma.$VacancyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      vacancyId: string
+      status: $Enums.VacancyResponseStatus
+      coverLetter: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["vacancyResponse"]>
+    composites: {}
+  }
+
+  type VacancyResponseGetPayload<S extends boolean | null | undefined | VacancyResponseDefaultArgs> = $Result.GetResult<Prisma.$VacancyResponsePayload, S>
+
+  type VacancyResponseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VacancyResponseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VacancyResponseCountAggregateInputType | true
+    }
+
+  export interface VacancyResponseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VacancyResponse'], meta: { name: 'VacancyResponse' } }
+    /**
+     * Find zero or one VacancyResponse that matches the filter.
+     * @param {VacancyResponseFindUniqueArgs} args - Arguments to find a VacancyResponse
+     * @example
+     * // Get one VacancyResponse
+     * const vacancyResponse = await prisma.vacancyResponse.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VacancyResponseFindUniqueArgs>(args: SelectSubset<T, VacancyResponseFindUniqueArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VacancyResponse that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VacancyResponseFindUniqueOrThrowArgs} args - Arguments to find a VacancyResponse
+     * @example
+     * // Get one VacancyResponse
+     * const vacancyResponse = await prisma.vacancyResponse.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VacancyResponseFindUniqueOrThrowArgs>(args: SelectSubset<T, VacancyResponseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VacancyResponse that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VacancyResponseFindFirstArgs} args - Arguments to find a VacancyResponse
+     * @example
+     * // Get one VacancyResponse
+     * const vacancyResponse = await prisma.vacancyResponse.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VacancyResponseFindFirstArgs>(args?: SelectSubset<T, VacancyResponseFindFirstArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VacancyResponse that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VacancyResponseFindFirstOrThrowArgs} args - Arguments to find a VacancyResponse
+     * @example
+     * // Get one VacancyResponse
+     * const vacancyResponse = await prisma.vacancyResponse.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VacancyResponseFindFirstOrThrowArgs>(args?: SelectSubset<T, VacancyResponseFindFirstOrThrowArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VacancyResponses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VacancyResponseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VacancyResponses
+     * const vacancyResponses = await prisma.vacancyResponse.findMany()
+     * 
+     * // Get first 10 VacancyResponses
+     * const vacancyResponses = await prisma.vacancyResponse.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const vacancyResponseWithIdOnly = await prisma.vacancyResponse.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VacancyResponseFindManyArgs>(args?: SelectSubset<T, VacancyResponseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VacancyResponse.
+     * @param {VacancyResponseCreateArgs} args - Arguments to create a VacancyResponse.
+     * @example
+     * // Create one VacancyResponse
+     * const VacancyResponse = await prisma.vacancyResponse.create({
+     *   data: {
+     *     // ... data to create a VacancyResponse
+     *   }
+     * })
+     * 
+     */
+    create<T extends VacancyResponseCreateArgs>(args: SelectSubset<T, VacancyResponseCreateArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VacancyResponses.
+     * @param {VacancyResponseCreateManyArgs} args - Arguments to create many VacancyResponses.
+     * @example
+     * // Create many VacancyResponses
+     * const vacancyResponse = await prisma.vacancyResponse.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VacancyResponseCreateManyArgs>(args?: SelectSubset<T, VacancyResponseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VacancyResponses and returns the data saved in the database.
+     * @param {VacancyResponseCreateManyAndReturnArgs} args - Arguments to create many VacancyResponses.
+     * @example
+     * // Create many VacancyResponses
+     * const vacancyResponse = await prisma.vacancyResponse.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VacancyResponses and only return the `id`
+     * const vacancyResponseWithIdOnly = await prisma.vacancyResponse.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VacancyResponseCreateManyAndReturnArgs>(args?: SelectSubset<T, VacancyResponseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VacancyResponse.
+     * @param {VacancyResponseDeleteArgs} args - Arguments to delete one VacancyResponse.
+     * @example
+     * // Delete one VacancyResponse
+     * const VacancyResponse = await prisma.vacancyResponse.delete({
+     *   where: {
+     *     // ... filter to delete one VacancyResponse
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VacancyResponseDeleteArgs>(args: SelectSubset<T, VacancyResponseDeleteArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VacancyResponse.
+     * @param {VacancyResponseUpdateArgs} args - Arguments to update one VacancyResponse.
+     * @example
+     * // Update one VacancyResponse
+     * const vacancyResponse = await prisma.vacancyResponse.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VacancyResponseUpdateArgs>(args: SelectSubset<T, VacancyResponseUpdateArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VacancyResponses.
+     * @param {VacancyResponseDeleteManyArgs} args - Arguments to filter VacancyResponses to delete.
+     * @example
+     * // Delete a few VacancyResponses
+     * const { count } = await prisma.vacancyResponse.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VacancyResponseDeleteManyArgs>(args?: SelectSubset<T, VacancyResponseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VacancyResponses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VacancyResponseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VacancyResponses
+     * const vacancyResponse = await prisma.vacancyResponse.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VacancyResponseUpdateManyArgs>(args: SelectSubset<T, VacancyResponseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VacancyResponses and returns the data updated in the database.
+     * @param {VacancyResponseUpdateManyAndReturnArgs} args - Arguments to update many VacancyResponses.
+     * @example
+     * // Update many VacancyResponses
+     * const vacancyResponse = await prisma.vacancyResponse.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VacancyResponses and only return the `id`
+     * const vacancyResponseWithIdOnly = await prisma.vacancyResponse.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VacancyResponseUpdateManyAndReturnArgs>(args: SelectSubset<T, VacancyResponseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VacancyResponse.
+     * @param {VacancyResponseUpsertArgs} args - Arguments to update or create a VacancyResponse.
+     * @example
+     * // Update or create a VacancyResponse
+     * const vacancyResponse = await prisma.vacancyResponse.upsert({
+     *   create: {
+     *     // ... data to create a VacancyResponse
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VacancyResponse we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VacancyResponseUpsertArgs>(args: SelectSubset<T, VacancyResponseUpsertArgs<ExtArgs>>): Prisma__VacancyResponseClient<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VacancyResponses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VacancyResponseCountArgs} args - Arguments to filter VacancyResponses to count.
+     * @example
+     * // Count the number of VacancyResponses
+     * const count = await prisma.vacancyResponse.count({
+     *   where: {
+     *     // ... the filter for the VacancyResponses we want to count
+     *   }
+     * })
+    **/
+    count<T extends VacancyResponseCountArgs>(
+      args?: Subset<T, VacancyResponseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VacancyResponseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VacancyResponse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VacancyResponseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VacancyResponseAggregateArgs>(args: Subset<T, VacancyResponseAggregateArgs>): Prisma.PrismaPromise<GetVacancyResponseAggregateType<T>>
+
+    /**
+     * Group by VacancyResponse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VacancyResponseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VacancyResponseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VacancyResponseGroupByArgs['orderBy'] }
+        : { orderBy?: VacancyResponseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VacancyResponseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVacancyResponseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VacancyResponse model
+   */
+  readonly fields: VacancyResponseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VacancyResponse.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VacancyResponseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    vacancy<T extends VacancyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VacancyDefaultArgs<ExtArgs>>): Prisma__VacancyClient<$Result.GetResult<Prisma.$VacancyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VacancyResponse model
+   */
+  interface VacancyResponseFieldRefs {
+    readonly id: FieldRef<"VacancyResponse", 'String'>
+    readonly userId: FieldRef<"VacancyResponse", 'String'>
+    readonly vacancyId: FieldRef<"VacancyResponse", 'String'>
+    readonly status: FieldRef<"VacancyResponse", 'VacancyResponseStatus'>
+    readonly coverLetter: FieldRef<"VacancyResponse", 'String'>
+    readonly createdAt: FieldRef<"VacancyResponse", 'DateTime'>
+    readonly updatedAt: FieldRef<"VacancyResponse", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VacancyResponse findUnique
+   */
+  export type VacancyResponseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which VacancyResponse to fetch.
+     */
+    where: VacancyResponseWhereUniqueInput
+  }
+
+  /**
+   * VacancyResponse findUniqueOrThrow
+   */
+  export type VacancyResponseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which VacancyResponse to fetch.
+     */
+    where: VacancyResponseWhereUniqueInput
+  }
+
+  /**
+   * VacancyResponse findFirst
+   */
+  export type VacancyResponseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which VacancyResponse to fetch.
+     */
+    where?: VacancyResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VacancyResponses to fetch.
+     */
+    orderBy?: VacancyResponseOrderByWithRelationInput | VacancyResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VacancyResponses.
+     */
+    cursor?: VacancyResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VacancyResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VacancyResponses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VacancyResponses.
+     */
+    distinct?: VacancyResponseScalarFieldEnum | VacancyResponseScalarFieldEnum[]
+  }
+
+  /**
+   * VacancyResponse findFirstOrThrow
+   */
+  export type VacancyResponseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which VacancyResponse to fetch.
+     */
+    where?: VacancyResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VacancyResponses to fetch.
+     */
+    orderBy?: VacancyResponseOrderByWithRelationInput | VacancyResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VacancyResponses.
+     */
+    cursor?: VacancyResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VacancyResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VacancyResponses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VacancyResponses.
+     */
+    distinct?: VacancyResponseScalarFieldEnum | VacancyResponseScalarFieldEnum[]
+  }
+
+  /**
+   * VacancyResponse findMany
+   */
+  export type VacancyResponseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which VacancyResponses to fetch.
+     */
+    where?: VacancyResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VacancyResponses to fetch.
+     */
+    orderBy?: VacancyResponseOrderByWithRelationInput | VacancyResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VacancyResponses.
+     */
+    cursor?: VacancyResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VacancyResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VacancyResponses.
+     */
+    skip?: number
+    distinct?: VacancyResponseScalarFieldEnum | VacancyResponseScalarFieldEnum[]
+  }
+
+  /**
+   * VacancyResponse create
+   */
+  export type VacancyResponseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VacancyResponse.
+     */
+    data: XOR<VacancyResponseCreateInput, VacancyResponseUncheckedCreateInput>
+  }
+
+  /**
+   * VacancyResponse createMany
+   */
+  export type VacancyResponseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VacancyResponses.
+     */
+    data: VacancyResponseCreateManyInput | VacancyResponseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VacancyResponse createManyAndReturn
+   */
+  export type VacancyResponseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * The data used to create many VacancyResponses.
+     */
+    data: VacancyResponseCreateManyInput | VacancyResponseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VacancyResponse update
+   */
+  export type VacancyResponseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VacancyResponse.
+     */
+    data: XOR<VacancyResponseUpdateInput, VacancyResponseUncheckedUpdateInput>
+    /**
+     * Choose, which VacancyResponse to update.
+     */
+    where: VacancyResponseWhereUniqueInput
+  }
+
+  /**
+   * VacancyResponse updateMany
+   */
+  export type VacancyResponseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VacancyResponses.
+     */
+    data: XOR<VacancyResponseUpdateManyMutationInput, VacancyResponseUncheckedUpdateManyInput>
+    /**
+     * Filter which VacancyResponses to update
+     */
+    where?: VacancyResponseWhereInput
+    /**
+     * Limit how many VacancyResponses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VacancyResponse updateManyAndReturn
+   */
+  export type VacancyResponseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * The data used to update VacancyResponses.
+     */
+    data: XOR<VacancyResponseUpdateManyMutationInput, VacancyResponseUncheckedUpdateManyInput>
+    /**
+     * Filter which VacancyResponses to update
+     */
+    where?: VacancyResponseWhereInput
+    /**
+     * Limit how many VacancyResponses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VacancyResponse upsert
+   */
+  export type VacancyResponseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VacancyResponse to update in case it exists.
+     */
+    where: VacancyResponseWhereUniqueInput
+    /**
+     * In case the VacancyResponse found by the `where` argument doesn't exist, create a new VacancyResponse with this data.
+     */
+    create: XOR<VacancyResponseCreateInput, VacancyResponseUncheckedCreateInput>
+    /**
+     * In case the VacancyResponse was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VacancyResponseUpdateInput, VacancyResponseUncheckedUpdateInput>
+  }
+
+  /**
+   * VacancyResponse delete
+   */
+  export type VacancyResponseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    /**
+     * Filter which VacancyResponse to delete.
+     */
+    where: VacancyResponseWhereUniqueInput
+  }
+
+  /**
+   * VacancyResponse deleteMany
+   */
+  export type VacancyResponseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VacancyResponses to delete
+     */
+    where?: VacancyResponseWhereInput
+    /**
+     * Limit how many VacancyResponses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VacancyResponse without action
+   */
+  export type VacancyResponseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
   }
 
 
@@ -12629,6 +13893,8 @@ export namespace Prisma {
     updatedAt?: boolean
     salary?: boolean | Vacancy$salaryArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
+    responses?: boolean | Vacancy$responsesArgs<ExtArgs>
+    _count?: boolean | VacancyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vacancy"]>
 
   export type VacancySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12667,6 +13933,8 @@ export namespace Prisma {
   export type VacancyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     salary?: boolean | Vacancy$salaryArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
+    responses?: boolean | Vacancy$responsesArgs<ExtArgs>
+    _count?: boolean | VacancyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VacancyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -12680,6 +13948,7 @@ export namespace Prisma {
     objects: {
       salary: Prisma.$SalaryPayload<ExtArgs> | null
       company: Prisma.$CompanyPayload<ExtArgs>
+      responses: Prisma.$VacancyResponsePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -13085,6 +14354,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     salary<T extends Vacancy$salaryArgs<ExtArgs> = {}>(args?: Subset<T, Vacancy$salaryArgs<ExtArgs>>): Prisma__SalaryClient<$Result.GetResult<Prisma.$SalaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    responses<T extends Vacancy$responsesArgs<ExtArgs> = {}>(args?: Subset<T, Vacancy$responsesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VacancyResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13533,6 +14803,30 @@ export namespace Prisma {
      */
     include?: SalaryInclude<ExtArgs> | null
     where?: SalaryWhereInput
+  }
+
+  /**
+   * Vacancy.responses
+   */
+  export type Vacancy$responsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VacancyResponse
+     */
+    select?: VacancyResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VacancyResponse
+     */
+    omit?: VacancyResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VacancyResponseInclude<ExtArgs> | null
+    where?: VacancyResponseWhereInput
+    orderBy?: VacancyResponseOrderByWithRelationInput | VacancyResponseOrderByWithRelationInput[]
+    cursor?: VacancyResponseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VacancyResponseScalarFieldEnum | VacancyResponseScalarFieldEnum[]
   }
 
   /**
@@ -14686,6 +15980,19 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const VacancyResponseScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    vacancyId: 'vacancyId',
+    status: 'status',
+    coverLetter: 'coverLetter',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VacancyResponseScalarFieldEnum = (typeof VacancyResponseScalarFieldEnum)[keyof typeof VacancyResponseScalarFieldEnum]
+
+
   export const ApplicationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -14902,6 +16209,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'VacancyResponseStatus'
+   */
+  export type EnumVacancyResponseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VacancyResponseStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'VacancyResponseStatus[]'
+   */
+  export type ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VacancyResponseStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ApplicationStatus'
    */
   export type EnumApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApplicationStatus'>
@@ -15043,6 +16364,7 @@ export namespace Prisma {
     jobs?: EnumJobsNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    vacancyResponses?: VacancyResponseListRelationFilter
     applications?: ApplicationListRelationFilter
     articles?: ArticleListRelationFilter
     articleLikes?: ArticleLikeListRelationFilter
@@ -15064,6 +16386,7 @@ export namespace Prisma {
     jobs?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    vacancyResponses?: VacancyResponseOrderByRelationAggregateInput
     applications?: ApplicationOrderByRelationAggregateInput
     articles?: ArticleOrderByRelationAggregateInput
     articleLikes?: ArticleLikeOrderByRelationAggregateInput
@@ -15088,6 +16411,7 @@ export namespace Prisma {
     jobs?: EnumJobsNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    vacancyResponses?: VacancyResponseListRelationFilter
     applications?: ApplicationListRelationFilter
     articles?: ArticleListRelationFilter
     articleLikes?: ArticleLikeListRelationFilter
@@ -15127,6 +16451,75 @@ export namespace Prisma {
     jobs?: EnumJobsNullableListFilter<"User">
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type VacancyResponseWhereInput = {
+    AND?: VacancyResponseWhereInput | VacancyResponseWhereInput[]
+    OR?: VacancyResponseWhereInput[]
+    NOT?: VacancyResponseWhereInput | VacancyResponseWhereInput[]
+    id?: StringFilter<"VacancyResponse"> | string
+    userId?: StringFilter<"VacancyResponse"> | string
+    vacancyId?: StringFilter<"VacancyResponse"> | string
+    status?: EnumVacancyResponseStatusFilter<"VacancyResponse"> | $Enums.VacancyResponseStatus
+    coverLetter?: StringNullableFilter<"VacancyResponse"> | string | null
+    createdAt?: DateTimeFilter<"VacancyResponse"> | Date | string
+    updatedAt?: DateTimeFilter<"VacancyResponse"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    vacancy?: XOR<VacancyScalarRelationFilter, VacancyWhereInput>
+  }
+
+  export type VacancyResponseOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    vacancyId?: SortOrder
+    status?: SortOrder
+    coverLetter?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    vacancy?: VacancyOrderByWithRelationInput
+  }
+
+  export type VacancyResponseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_vacancyId?: VacancyResponseUserIdVacancyIdCompoundUniqueInput
+    AND?: VacancyResponseWhereInput | VacancyResponseWhereInput[]
+    OR?: VacancyResponseWhereInput[]
+    NOT?: VacancyResponseWhereInput | VacancyResponseWhereInput[]
+    userId?: StringFilter<"VacancyResponse"> | string
+    vacancyId?: StringFilter<"VacancyResponse"> | string
+    status?: EnumVacancyResponseStatusFilter<"VacancyResponse"> | $Enums.VacancyResponseStatus
+    coverLetter?: StringNullableFilter<"VacancyResponse"> | string | null
+    createdAt?: DateTimeFilter<"VacancyResponse"> | Date | string
+    updatedAt?: DateTimeFilter<"VacancyResponse"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    vacancy?: XOR<VacancyScalarRelationFilter, VacancyWhereInput>
+  }, "id" | "userId_vacancyId">
+
+  export type VacancyResponseOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    vacancyId?: SortOrder
+    status?: SortOrder
+    coverLetter?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VacancyResponseCountOrderByAggregateInput
+    _max?: VacancyResponseMaxOrderByAggregateInput
+    _min?: VacancyResponseMinOrderByAggregateInput
+  }
+
+  export type VacancyResponseScalarWhereWithAggregatesInput = {
+    AND?: VacancyResponseScalarWhereWithAggregatesInput | VacancyResponseScalarWhereWithAggregatesInput[]
+    OR?: VacancyResponseScalarWhereWithAggregatesInput[]
+    NOT?: VacancyResponseScalarWhereWithAggregatesInput | VacancyResponseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"VacancyResponse"> | string
+    userId?: StringWithAggregatesFilter<"VacancyResponse"> | string
+    vacancyId?: StringWithAggregatesFilter<"VacancyResponse"> | string
+    status?: EnumVacancyResponseStatusWithAggregatesFilter<"VacancyResponse"> | $Enums.VacancyResponseStatus
+    coverLetter?: StringNullableWithAggregatesFilter<"VacancyResponse"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"VacancyResponse"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"VacancyResponse"> | Date | string
   }
 
   export type ApplicationWhereInput = {
@@ -15675,6 +17068,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Vacancy"> | Date | string
     salary?: XOR<SalaryNullableScalarRelationFilter, SalaryWhereInput> | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    responses?: VacancyResponseListRelationFilter
   }
 
   export type VacancyOrderByWithRelationInput = {
@@ -15687,6 +17081,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     salary?: SalaryOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
+    responses?: VacancyResponseOrderByRelationAggregateInput
   }
 
   export type VacancyWhereUniqueInput = Prisma.AtLeast<{
@@ -15702,6 +17097,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Vacancy"> | Date | string
     salary?: XOR<SalaryNullableScalarRelationFilter, SalaryWhereInput> | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    responses?: VacancyResponseListRelationFilter
   }, "id">
 
   export type VacancyOrderByWithAggregationInput = {
@@ -15796,6 +17192,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
@@ -15817,6 +17214,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
@@ -15838,6 +17236,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
@@ -15859,6 +17258,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -15902,6 +17302,74 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VacancyResponseCreateInput = {
+    id?: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutVacancyResponsesInput
+    vacancy: VacancyCreateNestedOneWithoutResponsesInput
+  }
+
+  export type VacancyResponseUncheckedCreateInput = {
+    id?: string
+    userId: string
+    vacancyId: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VacancyResponseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutVacancyResponsesNestedInput
+    vacancy?: VacancyUpdateOneRequiredWithoutResponsesNestedInput
+  }
+
+  export type VacancyResponseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    vacancyId?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VacancyResponseCreateManyInput = {
+    id?: string
+    userId: string
+    vacancyId: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VacancyResponseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VacancyResponseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    vacancyId?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16451,6 +17919,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     salary?: SalaryCreateNestedOneWithoutVacancyInput
     company: CompanyCreateNestedOneWithoutVacanciesInput
+    responses?: VacancyResponseCreateNestedManyWithoutVacancyInput
   }
 
   export type VacancyUncheckedCreateInput = {
@@ -16462,6 +17931,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     salary?: SalaryUncheckedCreateNestedOneWithoutVacancyInput
+    responses?: VacancyResponseUncheckedCreateNestedManyWithoutVacancyInput
   }
 
   export type VacancyUpdateInput = {
@@ -16473,6 +17943,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     salary?: SalaryUpdateOneWithoutVacancyNestedInput
     company?: CompanyUpdateOneRequiredWithoutVacanciesNestedInput
+    responses?: VacancyResponseUpdateManyWithoutVacancyNestedInput
   }
 
   export type VacancyUncheckedUpdateInput = {
@@ -16484,6 +17955,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     salary?: SalaryUncheckedUpdateOneWithoutVacancyNestedInput
+    responses?: VacancyResponseUncheckedUpdateManyWithoutVacancyNestedInput
   }
 
   export type VacancyCreateManyInput = {
@@ -16617,6 +18089,12 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type VacancyResponseListRelationFilter = {
+    every?: VacancyResponseWhereInput
+    some?: VacancyResponseWhereInput
+    none?: VacancyResponseWhereInput
+  }
+
   export type ApplicationListRelationFilter = {
     every?: ApplicationWhereInput
     some?: ApplicationWhereInput
@@ -16657,6 +18135,10 @@ export namespace Prisma {
     every?: TransactionWhereInput
     some?: TransactionWhereInput
     none?: TransactionWhereInput
+  }
+
+  export type VacancyResponseOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ApplicationOrderByRelationAggregateInput = {
@@ -16771,16 +18253,111 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type EnumApplicationStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ApplicationStatus | EnumApplicationStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ApplicationStatus[] | ListEnumApplicationStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ApplicationStatus[] | ListEnumApplicationStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumApplicationStatusFilter<$PrismaModel> | $Enums.ApplicationStatus
+  export type EnumVacancyResponseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.VacancyResponseStatus | EnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVacancyResponseStatusFilter<$PrismaModel> | $Enums.VacancyResponseStatus
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type VacancyScalarRelationFilter = {
+    is?: VacancyWhereInput
+    isNot?: VacancyWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type VacancyResponseUserIdVacancyIdCompoundUniqueInput = {
+    userId: string
+    vacancyId: string
+  }
+
+  export type VacancyResponseCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    vacancyId?: SortOrder
+    status?: SortOrder
+    coverLetter?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VacancyResponseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    vacancyId?: SortOrder
+    status?: SortOrder
+    coverLetter?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VacancyResponseMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    vacancyId?: SortOrder
+    status?: SortOrder
+    coverLetter?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumVacancyResponseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VacancyResponseStatus | EnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVacancyResponseStatusWithAggregatesFilter<$PrismaModel> | $Enums.VacancyResponseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVacancyResponseStatusFilter<$PrismaModel>
+    _max?: NestedEnumVacancyResponseStatusFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumApplicationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApplicationStatus | EnumApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ApplicationStatus[] | ListEnumApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ApplicationStatus[] | ListEnumApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumApplicationStatusFilter<$PrismaModel> | $Enums.ApplicationStatus
   }
 
   export type ApplicationCountOrderByAggregateInput = {
@@ -17094,21 +18671,6 @@ export namespace Prisma {
     not?: NestedEnumTransactionStatusFilter<$PrismaModel> | $Enums.TransactionStatus
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -17122,11 +18684,6 @@ export namespace Prisma {
   export type CardScalarRelationFilter = {
     is?: CardWhereInput
     isNot?: CardWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type TransactionCountOrderByAggregateInput = {
@@ -17199,24 +18756,6 @@ export namespace Prisma {
     _max?: NestedEnumTransactionStatusFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type EnumSalaryTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.SalaryType | EnumSalaryTypeFieldRefInput<$PrismaModel>
     in?: $Enums.SalaryType[] | ListEnumSalaryTypeFieldRefInput<$PrismaModel>
@@ -17240,11 +18779,6 @@ export namespace Prisma {
     in?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
     notIn?: $Enums.PaymentPeriod[] | ListEnumPaymentPeriodFieldRefInput<$PrismaModel>
     not?: NestedEnumPaymentPeriodFilter<$PrismaModel> | $Enums.PaymentPeriod
-  }
-
-  export type VacancyScalarRelationFilter = {
-    is?: VacancyWhereInput
-    isNot?: VacancyWhereInput
   }
 
   export type SalaryCountOrderByAggregateInput = {
@@ -17427,6 +18961,13 @@ export namespace Prisma {
     set: $Enums.Jobs[]
   }
 
+  export type VacancyResponseCreateNestedManyWithoutUserInput = {
+    create?: XOR<VacancyResponseCreateWithoutUserInput, VacancyResponseUncheckedCreateWithoutUserInput> | VacancyResponseCreateWithoutUserInput[] | VacancyResponseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutUserInput | VacancyResponseCreateOrConnectWithoutUserInput[]
+    createMany?: VacancyResponseCreateManyUserInputEnvelope
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+  }
+
   export type ApplicationCreateNestedManyWithoutUserInput = {
     create?: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput> | ApplicationCreateWithoutUserInput[] | ApplicationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApplicationCreateOrConnectWithoutUserInput | ApplicationCreateOrConnectWithoutUserInput[]
@@ -17487,6 +19028,13 @@ export namespace Prisma {
     connectOrCreate?: TransactionCreateOrConnectWithoutConfirmedByBankerInput | TransactionCreateOrConnectWithoutConfirmedByBankerInput[]
     createMany?: TransactionCreateManyConfirmedByBankerInputEnvelope
     connect?: TransactionWhereUniqueInput | TransactionWhereUniqueInput[]
+  }
+
+  export type VacancyResponseUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<VacancyResponseCreateWithoutUserInput, VacancyResponseUncheckedCreateWithoutUserInput> | VacancyResponseCreateWithoutUserInput[] | VacancyResponseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutUserInput | VacancyResponseCreateOrConnectWithoutUserInput[]
+    createMany?: VacancyResponseCreateManyUserInputEnvelope
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
   }
 
   export type ApplicationUncheckedCreateNestedManyWithoutUserInput = {
@@ -17570,6 +19118,20 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type VacancyResponseUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VacancyResponseCreateWithoutUserInput, VacancyResponseUncheckedCreateWithoutUserInput> | VacancyResponseCreateWithoutUserInput[] | VacancyResponseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutUserInput | VacancyResponseCreateOrConnectWithoutUserInput[]
+    upsert?: VacancyResponseUpsertWithWhereUniqueWithoutUserInput | VacancyResponseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VacancyResponseCreateManyUserInputEnvelope
+    set?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    disconnect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    delete?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    update?: VacancyResponseUpdateWithWhereUniqueWithoutUserInput | VacancyResponseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VacancyResponseUpdateManyWithWhereWithoutUserInput | VacancyResponseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VacancyResponseScalarWhereInput | VacancyResponseScalarWhereInput[]
   }
 
   export type ApplicationUpdateManyWithoutUserNestedInput = {
@@ -17697,6 +19259,20 @@ export namespace Prisma {
     deleteMany?: TransactionScalarWhereInput | TransactionScalarWhereInput[]
   }
 
+  export type VacancyResponseUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VacancyResponseCreateWithoutUserInput, VacancyResponseUncheckedCreateWithoutUserInput> | VacancyResponseCreateWithoutUserInput[] | VacancyResponseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutUserInput | VacancyResponseCreateOrConnectWithoutUserInput[]
+    upsert?: VacancyResponseUpsertWithWhereUniqueWithoutUserInput | VacancyResponseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VacancyResponseCreateManyUserInputEnvelope
+    set?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    disconnect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    delete?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    update?: VacancyResponseUpdateWithWhereUniqueWithoutUserInput | VacancyResponseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VacancyResponseUpdateManyWithWhereWithoutUserInput | VacancyResponseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VacancyResponseScalarWhereInput | VacancyResponseScalarWhereInput[]
+  }
+
   export type ApplicationUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput> | ApplicationCreateWithoutUserInput[] | ApplicationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApplicationCreateOrConnectWithoutUserInput | ApplicationCreateOrConnectWithoutUserInput[]
@@ -17820,6 +19396,42 @@ export namespace Prisma {
     update?: TransactionUpdateWithWhereUniqueWithoutConfirmedByBankerInput | TransactionUpdateWithWhereUniqueWithoutConfirmedByBankerInput[]
     updateMany?: TransactionUpdateManyWithWhereWithoutConfirmedByBankerInput | TransactionUpdateManyWithWhereWithoutConfirmedByBankerInput[]
     deleteMany?: TransactionScalarWhereInput | TransactionScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutVacancyResponsesInput = {
+    create?: XOR<UserCreateWithoutVacancyResponsesInput, UserUncheckedCreateWithoutVacancyResponsesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVacancyResponsesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type VacancyCreateNestedOneWithoutResponsesInput = {
+    create?: XOR<VacancyCreateWithoutResponsesInput, VacancyUncheckedCreateWithoutResponsesInput>
+    connectOrCreate?: VacancyCreateOrConnectWithoutResponsesInput
+    connect?: VacancyWhereUniqueInput
+  }
+
+  export type EnumVacancyResponseStatusFieldUpdateOperationsInput = {
+    set?: $Enums.VacancyResponseStatus
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type UserUpdateOneRequiredWithoutVacancyResponsesNestedInput = {
+    create?: XOR<UserCreateWithoutVacancyResponsesInput, UserUncheckedCreateWithoutVacancyResponsesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVacancyResponsesInput
+    upsert?: UserUpsertWithoutVacancyResponsesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVacancyResponsesInput, UserUpdateWithoutVacancyResponsesInput>, UserUncheckedUpdateWithoutVacancyResponsesInput>
+  }
+
+  export type VacancyUpdateOneRequiredWithoutResponsesNestedInput = {
+    create?: XOR<VacancyCreateWithoutResponsesInput, VacancyUncheckedCreateWithoutResponsesInput>
+    connectOrCreate?: VacancyCreateOrConnectWithoutResponsesInput
+    upsert?: VacancyUpsertWithoutResponsesInput
+    connect?: VacancyWhereUniqueInput
+    update?: XOR<XOR<VacancyUpdateToOneWithWhereWithoutResponsesInput, VacancyUpdateWithoutResponsesInput>, VacancyUncheckedUpdateWithoutResponsesInput>
   }
 
   export type UserCreateNestedOneWithoutApplicationsInput = {
@@ -18148,10 +19760,6 @@ export namespace Prisma {
     set?: $Enums.TransactionStatus
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type UserUpdateOneWithoutConfirmedTransactionsNestedInput = {
     create?: XOR<UserCreateWithoutConfirmedTransactionsInput, UserUncheckedCreateWithoutConfirmedTransactionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutConfirmedTransactionsInput
@@ -18230,10 +19838,24 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
+  export type VacancyResponseCreateNestedManyWithoutVacancyInput = {
+    create?: XOR<VacancyResponseCreateWithoutVacancyInput, VacancyResponseUncheckedCreateWithoutVacancyInput> | VacancyResponseCreateWithoutVacancyInput[] | VacancyResponseUncheckedCreateWithoutVacancyInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutVacancyInput | VacancyResponseCreateOrConnectWithoutVacancyInput[]
+    createMany?: VacancyResponseCreateManyVacancyInputEnvelope
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+  }
+
   export type SalaryUncheckedCreateNestedOneWithoutVacancyInput = {
     create?: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
     connectOrCreate?: SalaryCreateOrConnectWithoutVacancyInput
     connect?: SalaryWhereUniqueInput
+  }
+
+  export type VacancyResponseUncheckedCreateNestedManyWithoutVacancyInput = {
+    create?: XOR<VacancyResponseCreateWithoutVacancyInput, VacancyResponseUncheckedCreateWithoutVacancyInput> | VacancyResponseCreateWithoutVacancyInput[] | VacancyResponseUncheckedCreateWithoutVacancyInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutVacancyInput | VacancyResponseCreateOrConnectWithoutVacancyInput[]
+    createMany?: VacancyResponseCreateManyVacancyInputEnvelope
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
   }
 
   export type EnumJobsFieldUpdateOperationsInput = {
@@ -18258,6 +19880,20 @@ export namespace Prisma {
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutVacanciesInput, CompanyUpdateWithoutVacanciesInput>, CompanyUncheckedUpdateWithoutVacanciesInput>
   }
 
+  export type VacancyResponseUpdateManyWithoutVacancyNestedInput = {
+    create?: XOR<VacancyResponseCreateWithoutVacancyInput, VacancyResponseUncheckedCreateWithoutVacancyInput> | VacancyResponseCreateWithoutVacancyInput[] | VacancyResponseUncheckedCreateWithoutVacancyInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutVacancyInput | VacancyResponseCreateOrConnectWithoutVacancyInput[]
+    upsert?: VacancyResponseUpsertWithWhereUniqueWithoutVacancyInput | VacancyResponseUpsertWithWhereUniqueWithoutVacancyInput[]
+    createMany?: VacancyResponseCreateManyVacancyInputEnvelope
+    set?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    disconnect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    delete?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    update?: VacancyResponseUpdateWithWhereUniqueWithoutVacancyInput | VacancyResponseUpdateWithWhereUniqueWithoutVacancyInput[]
+    updateMany?: VacancyResponseUpdateManyWithWhereWithoutVacancyInput | VacancyResponseUpdateManyWithWhereWithoutVacancyInput[]
+    deleteMany?: VacancyResponseScalarWhereInput | VacancyResponseScalarWhereInput[]
+  }
+
   export type SalaryUncheckedUpdateOneWithoutVacancyNestedInput = {
     create?: XOR<SalaryCreateWithoutVacancyInput, SalaryUncheckedCreateWithoutVacancyInput>
     connectOrCreate?: SalaryCreateOrConnectWithoutVacancyInput
@@ -18266,6 +19902,20 @@ export namespace Prisma {
     delete?: SalaryWhereInput | boolean
     connect?: SalaryWhereUniqueInput
     update?: XOR<XOR<SalaryUpdateToOneWithWhereWithoutVacancyInput, SalaryUpdateWithoutVacancyInput>, SalaryUncheckedUpdateWithoutVacancyInput>
+  }
+
+  export type VacancyResponseUncheckedUpdateManyWithoutVacancyNestedInput = {
+    create?: XOR<VacancyResponseCreateWithoutVacancyInput, VacancyResponseUncheckedCreateWithoutVacancyInput> | VacancyResponseCreateWithoutVacancyInput[] | VacancyResponseUncheckedCreateWithoutVacancyInput[]
+    connectOrCreate?: VacancyResponseCreateOrConnectWithoutVacancyInput | VacancyResponseCreateOrConnectWithoutVacancyInput[]
+    upsert?: VacancyResponseUpsertWithWhereUniqueWithoutVacancyInput | VacancyResponseUpsertWithWhereUniqueWithoutVacancyInput[]
+    createMany?: VacancyResponseCreateManyVacancyInputEnvelope
+    set?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    disconnect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    delete?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    connect?: VacancyResponseWhereUniqueInput | VacancyResponseWhereUniqueInput[]
+    update?: VacancyResponseUpdateWithWhereUniqueWithoutVacancyInput | VacancyResponseUpdateWithWhereUniqueWithoutVacancyInput[]
+    updateMany?: VacancyResponseUpdateManyWithWhereWithoutVacancyInput | VacancyResponseUpdateManyWithWhereWithoutVacancyInput[]
+    deleteMany?: VacancyResponseScalarWhereInput | VacancyResponseScalarWhereInput[]
   }
 
   export type UserCreateNestedManyWithoutCompaniesInput = {
@@ -18459,6 +20109,65 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumVacancyResponseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.VacancyResponseStatus | EnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVacancyResponseStatusFilter<$PrismaModel> | $Enums.VacancyResponseStatus
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumVacancyResponseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VacancyResponseStatus | EnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VacancyResponseStatus[] | ListEnumVacancyResponseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVacancyResponseStatusWithAggregatesFilter<$PrismaModel> | $Enums.VacancyResponseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVacancyResponseStatusFilter<$PrismaModel>
+    _max?: NestedEnumVacancyResponseStatusFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumApplicationStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ApplicationStatus | EnumApplicationStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ApplicationStatus[] | ListEnumApplicationStatusFieldRefInput<$PrismaModel>
@@ -18567,20 +20276,6 @@ export namespace Prisma {
     not?: NestedEnumTransactionStatusFilter<$PrismaModel> | $Enums.TransactionStatus
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
@@ -18599,34 +20294,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTransactionStatusFilter<$PrismaModel>
     _max?: NestedEnumTransactionStatusFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumSalaryTypeFilter<$PrismaModel = never> = {
@@ -18705,6 +20372,34 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumJobsFilter<$PrismaModel>
     _max?: NestedEnumJobsFilter<$PrismaModel>
+  }
+
+  export type VacancyResponseCreateWithoutUserInput = {
+    id?: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    vacancy: VacancyCreateNestedOneWithoutResponsesInput
+  }
+
+  export type VacancyResponseUncheckedCreateWithoutUserInput = {
+    id?: string
+    vacancyId: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VacancyResponseCreateOrConnectWithoutUserInput = {
+    where: VacancyResponseWhereUniqueInput
+    create: XOR<VacancyResponseCreateWithoutUserInput, VacancyResponseUncheckedCreateWithoutUserInput>
+  }
+
+  export type VacancyResponseCreateManyUserInputEnvelope = {
+    data: VacancyResponseCreateManyUserInput | VacancyResponseCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type ApplicationCreateWithoutUserInput = {
@@ -18962,6 +20657,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type VacancyResponseUpsertWithWhereUniqueWithoutUserInput = {
+    where: VacancyResponseWhereUniqueInput
+    update: XOR<VacancyResponseUpdateWithoutUserInput, VacancyResponseUncheckedUpdateWithoutUserInput>
+    create: XOR<VacancyResponseCreateWithoutUserInput, VacancyResponseUncheckedCreateWithoutUserInput>
+  }
+
+  export type VacancyResponseUpdateWithWhereUniqueWithoutUserInput = {
+    where: VacancyResponseWhereUniqueInput
+    data: XOR<VacancyResponseUpdateWithoutUserInput, VacancyResponseUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VacancyResponseUpdateManyWithWhereWithoutUserInput = {
+    where: VacancyResponseScalarWhereInput
+    data: XOR<VacancyResponseUpdateManyMutationInput, VacancyResponseUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VacancyResponseScalarWhereInput = {
+    AND?: VacancyResponseScalarWhereInput | VacancyResponseScalarWhereInput[]
+    OR?: VacancyResponseScalarWhereInput[]
+    NOT?: VacancyResponseScalarWhereInput | VacancyResponseScalarWhereInput[]
+    id?: StringFilter<"VacancyResponse"> | string
+    userId?: StringFilter<"VacancyResponse"> | string
+    vacancyId?: StringFilter<"VacancyResponse"> | string
+    status?: EnumVacancyResponseStatusFilter<"VacancyResponse"> | $Enums.VacancyResponseStatus
+    coverLetter?: StringNullableFilter<"VacancyResponse"> | string | null
+    createdAt?: DateTimeFilter<"VacancyResponse"> | Date | string
+    updatedAt?: DateTimeFilter<"VacancyResponse"> | Date | string
+  }
+
   export type ApplicationUpsertWithWhereUniqueWithoutUserInput = {
     where: ApplicationWhereUniqueInput
     update: XOR<ApplicationUpdateWithoutUserInput, ApplicationUncheckedUpdateWithoutUserInput>
@@ -19192,6 +20916,166 @@ export namespace Prisma {
     data: XOR<TransactionUpdateManyMutationInput, TransactionUncheckedUpdateManyWithoutConfirmedByBankerInput>
   }
 
+  export type UserCreateWithoutVacancyResponsesInput = {
+    id?: string
+    email: string
+    login: string
+    password: string
+    role?: $Enums.UserRole
+    isVerified?: boolean
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: ApplicationCreateNestedManyWithoutUserInput
+    articles?: ArticleCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    cards?: CardCreateNestedManyWithoutUserInput
+    companies?: CompanyCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyCreateNestedManyWithoutCeoInput
+    initiatedTransactions?: TransactionCreateNestedManyWithoutUserInput
+    confirmedTransactions?: TransactionCreateNestedManyWithoutConfirmedByBankerInput
+  }
+
+  export type UserUncheckedCreateWithoutVacancyResponsesInput = {
+    id?: string
+    email: string
+    login: string
+    password: string
+    role?: $Enums.UserRole
+    isVerified?: boolean
+    jobs?: UserCreatejobsInput | $Enums.Jobs[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
+    articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
+    articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    cards?: CardUncheckedCreateNestedManyWithoutUserInput
+    companies?: CompanyUncheckedCreateNestedManyWithoutEmployeesInput
+    companyCeo?: CompanyUncheckedCreateNestedManyWithoutCeoInput
+    initiatedTransactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
+    confirmedTransactions?: TransactionUncheckedCreateNestedManyWithoutConfirmedByBankerInput
+  }
+
+  export type UserCreateOrConnectWithoutVacancyResponsesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVacancyResponsesInput, UserUncheckedCreateWithoutVacancyResponsesInput>
+  }
+
+  export type VacancyCreateWithoutResponsesInput = {
+    id?: string
+    title: string
+    description: string
+    occupation: $Enums.Jobs
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    salary?: SalaryCreateNestedOneWithoutVacancyInput
+    company: CompanyCreateNestedOneWithoutVacanciesInput
+  }
+
+  export type VacancyUncheckedCreateWithoutResponsesInput = {
+    id?: string
+    title: string
+    description: string
+    occupation: $Enums.Jobs
+    companyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    salary?: SalaryUncheckedCreateNestedOneWithoutVacancyInput
+  }
+
+  export type VacancyCreateOrConnectWithoutResponsesInput = {
+    where: VacancyWhereUniqueInput
+    create: XOR<VacancyCreateWithoutResponsesInput, VacancyUncheckedCreateWithoutResponsesInput>
+  }
+
+  export type UserUpsertWithoutVacancyResponsesInput = {
+    update: XOR<UserUpdateWithoutVacancyResponsesInput, UserUncheckedUpdateWithoutVacancyResponsesInput>
+    create: XOR<UserCreateWithoutVacancyResponsesInput, UserUncheckedCreateWithoutVacancyResponsesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVacancyResponsesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVacancyResponsesInput, UserUncheckedUpdateWithoutVacancyResponsesInput>
+  }
+
+  export type UserUpdateWithoutVacancyResponsesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: ApplicationUpdateManyWithoutUserNestedInput
+    articles?: ArticleUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    cards?: CardUpdateManyWithoutUserNestedInput
+    companies?: CompanyUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUpdateManyWithoutCeoNestedInput
+    initiatedTransactions?: TransactionUpdateManyWithoutUserNestedInput
+    confirmedTransactions?: TransactionUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVacancyResponsesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    jobs?: UserUpdatejobsInput | $Enums.Jobs[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
+    articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
+    articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    cards?: CardUncheckedUpdateManyWithoutUserNestedInput
+    companies?: CompanyUncheckedUpdateManyWithoutEmployeesNestedInput
+    companyCeo?: CompanyUncheckedUpdateManyWithoutCeoNestedInput
+    initiatedTransactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
+    confirmedTransactions?: TransactionUncheckedUpdateManyWithoutConfirmedByBankerNestedInput
+  }
+
+  export type VacancyUpsertWithoutResponsesInput = {
+    update: XOR<VacancyUpdateWithoutResponsesInput, VacancyUncheckedUpdateWithoutResponsesInput>
+    create: XOR<VacancyCreateWithoutResponsesInput, VacancyUncheckedCreateWithoutResponsesInput>
+    where?: VacancyWhereInput
+  }
+
+  export type VacancyUpdateToOneWithWhereWithoutResponsesInput = {
+    where?: VacancyWhereInput
+    data: XOR<VacancyUpdateWithoutResponsesInput, VacancyUncheckedUpdateWithoutResponsesInput>
+  }
+
+  export type VacancyUpdateWithoutResponsesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    salary?: SalaryUpdateOneWithoutVacancyNestedInput
+    company?: CompanyUpdateOneRequiredWithoutVacanciesNestedInput
+  }
+
+  export type VacancyUncheckedUpdateWithoutResponsesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    occupation?: EnumJobsFieldUpdateOperationsInput | $Enums.Jobs
+    companyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    salary?: SalaryUncheckedUpdateOneWithoutVacancyNestedInput
+  }
+
   export type UserCreateWithoutApplicationsInput = {
     id?: string
     email: string
@@ -19202,6 +21086,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
@@ -19222,6 +21107,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
@@ -19258,6 +21144,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
@@ -19278,6 +21165,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -19298,6 +21186,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
@@ -19318,6 +21207,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
@@ -19374,6 +21264,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
@@ -19394,6 +21285,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -19430,6 +21322,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
@@ -19450,6 +21343,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
@@ -19511,6 +21405,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
@@ -19531,6 +21426,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -19606,6 +21502,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
@@ -19626,6 +21523,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
@@ -19689,6 +21587,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
@@ -19709,6 +21608,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -19781,6 +21681,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
@@ -19801,6 +21702,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
@@ -19909,6 +21811,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
@@ -19929,6 +21832,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -19981,6 +21885,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
@@ -20001,6 +21906,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
@@ -20080,6 +21986,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
@@ -20100,6 +22007,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
@@ -20136,6 +22044,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
@@ -20156,6 +22065,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -20253,6 +22163,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
@@ -20273,6 +22184,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -20291,6 +22203,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutVacanciesInput
+    responses?: VacancyResponseCreateNestedManyWithoutVacancyInput
   }
 
   export type VacancyUncheckedCreateWithoutSalaryInput = {
@@ -20301,6 +22214,7 @@ export namespace Prisma {
     companyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    responses?: VacancyResponseUncheckedCreateNestedManyWithoutVacancyInput
   }
 
   export type VacancyCreateOrConnectWithoutSalaryInput = {
@@ -20327,6 +22241,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutVacanciesNestedInput
+    responses?: VacancyResponseUpdateManyWithoutVacancyNestedInput
   }
 
   export type VacancyUncheckedUpdateWithoutSalaryInput = {
@@ -20337,6 +22252,7 @@ export namespace Prisma {
     companyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: VacancyResponseUncheckedUpdateManyWithoutVacancyNestedInput
   }
 
   export type SalaryCreateWithoutVacancyInput = {
@@ -20381,6 +22297,34 @@ export namespace Prisma {
   export type CompanyCreateOrConnectWithoutVacanciesInput = {
     where: CompanyWhereUniqueInput
     create: XOR<CompanyCreateWithoutVacanciesInput, CompanyUncheckedCreateWithoutVacanciesInput>
+  }
+
+  export type VacancyResponseCreateWithoutVacancyInput = {
+    id?: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutVacancyResponsesInput
+  }
+
+  export type VacancyResponseUncheckedCreateWithoutVacancyInput = {
+    id?: string
+    userId: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VacancyResponseCreateOrConnectWithoutVacancyInput = {
+    where: VacancyResponseWhereUniqueInput
+    create: XOR<VacancyResponseCreateWithoutVacancyInput, VacancyResponseUncheckedCreateWithoutVacancyInput>
+  }
+
+  export type VacancyResponseCreateManyVacancyInputEnvelope = {
+    data: VacancyResponseCreateManyVacancyInput | VacancyResponseCreateManyVacancyInput[]
+    skipDuplicates?: boolean
   }
 
   export type SalaryUpsertWithoutVacancyInput = {
@@ -20439,6 +22383,22 @@ export namespace Prisma {
     employees?: UserUncheckedUpdateManyWithoutCompaniesNestedInput
   }
 
+  export type VacancyResponseUpsertWithWhereUniqueWithoutVacancyInput = {
+    where: VacancyResponseWhereUniqueInput
+    update: XOR<VacancyResponseUpdateWithoutVacancyInput, VacancyResponseUncheckedUpdateWithoutVacancyInput>
+    create: XOR<VacancyResponseCreateWithoutVacancyInput, VacancyResponseUncheckedCreateWithoutVacancyInput>
+  }
+
+  export type VacancyResponseUpdateWithWhereUniqueWithoutVacancyInput = {
+    where: VacancyResponseWhereUniqueInput
+    data: XOR<VacancyResponseUpdateWithoutVacancyInput, VacancyResponseUncheckedUpdateWithoutVacancyInput>
+  }
+
+  export type VacancyResponseUpdateManyWithWhereWithoutVacancyInput = {
+    where: VacancyResponseScalarWhereInput
+    data: XOR<VacancyResponseUpdateManyMutationInput, VacancyResponseUncheckedUpdateManyWithoutVacancyInput>
+  }
+
   export type UserCreateWithoutCompaniesInput = {
     id?: string
     email: string
@@ -20449,6 +22409,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
@@ -20469,6 +22430,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
@@ -20494,6 +22456,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeCreateNestedManyWithoutUserInput
@@ -20514,6 +22477,7 @@ export namespace Prisma {
     jobs?: UserCreatejobsInput | $Enums.Jobs[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    vacancyResponses?: VacancyResponseUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutUserInput
     articleLikes?: ArticleLikeUncheckedCreateNestedManyWithoutUserInput
@@ -20537,6 +22501,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     salary?: SalaryCreateNestedOneWithoutVacancyInput
+    responses?: VacancyResponseCreateNestedManyWithoutVacancyInput
   }
 
   export type VacancyUncheckedCreateWithoutCompanyInput = {
@@ -20547,6 +22512,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     salary?: SalaryUncheckedCreateNestedOneWithoutVacancyInput
+    responses?: VacancyResponseUncheckedCreateNestedManyWithoutVacancyInput
   }
 
   export type VacancyCreateOrConnectWithoutCompanyInput = {
@@ -20611,6 +22577,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
@@ -20631,6 +22598,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -20668,6 +22636,15 @@ export namespace Prisma {
     companyId?: StringFilter<"Vacancy"> | string
     createdAt?: DateTimeFilter<"Vacancy"> | Date | string
     updatedAt?: DateTimeFilter<"Vacancy"> | Date | string
+  }
+
+  export type VacancyResponseCreateManyUserInput = {
+    id?: string
+    vacancyId: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ApplicationCreateManyUserInput = {
@@ -20739,6 +22716,33 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type VacancyResponseUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancy?: VacancyUpdateOneRequiredWithoutResponsesNestedInput
+  }
+
+  export type VacancyResponseUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vacancyId?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VacancyResponseUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vacancyId?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ApplicationUpdateWithoutUserInput = {
@@ -21141,6 +23145,42 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type VacancyResponseCreateManyVacancyInput = {
+    id?: string
+    userId: string
+    status?: $Enums.VacancyResponseStatus
+    coverLetter?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VacancyResponseUpdateWithoutVacancyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutVacancyResponsesNestedInput
+  }
+
+  export type VacancyResponseUncheckedUpdateWithoutVacancyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VacancyResponseUncheckedUpdateManyWithoutVacancyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: EnumVacancyResponseStatusFieldUpdateOperationsInput | $Enums.VacancyResponseStatus
+    coverLetter?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VacancyCreateManyCompanyInput = {
     id?: string
     title: string
@@ -21160,6 +23200,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUpdateManyWithoutUserNestedInput
@@ -21180,6 +23221,7 @@ export namespace Prisma {
     jobs?: UserUpdatejobsInput | $Enums.Jobs[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancyResponses?: VacancyResponseUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput
     articleLikes?: ArticleLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -21210,6 +23252,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     salary?: SalaryUpdateOneWithoutVacancyNestedInput
+    responses?: VacancyResponseUpdateManyWithoutVacancyNestedInput
   }
 
   export type VacancyUncheckedUpdateWithoutCompanyInput = {
@@ -21220,6 +23263,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     salary?: SalaryUncheckedUpdateOneWithoutVacancyNestedInput
+    responses?: VacancyResponseUncheckedUpdateManyWithoutVacancyNestedInput
   }
 
   export type VacancyUncheckedUpdateManyWithoutCompanyInput = {

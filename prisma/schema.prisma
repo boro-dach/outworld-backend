@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -27,27 +27,50 @@ enum Jobs {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  login  String
-  password  String
-  role      UserRole @default(USER)
-  isVerified Boolean @default(false)
-  jobs Jobs[]
+  id                      String   @id @default(cuid())
+  email                   String   @unique
+  login                   String
+  password                String
+  role                    UserRole @default(USER)
+  isVerified              Boolean  @default(false)
+  jobs                    Jobs[]
+  vacancyResponses        VacancyResponse[]
 
-  applications Application[]
-  articles Article[]
-  articleLikes ArticleLike[]
-  orders Order[]
-  cards Card[]
-  companies Company[] @relation("employees")
-  companyCeo Company[] @relation("CEO")
+  applications            Application[]
+  articles                Article[]
+  articleLikes            ArticleLike[]
+  orders                  Order[]
+  cards                   Card[]
+  companies               Company[]       @relation("employees")
+  companyCeo              Company[]       @relation("CEO")
+  initiatedTransactions   Transaction[]   @relation("InitiatedByUser")
+  confirmedTransactions   Transaction[]   @relation("ConfirmedByBanker")
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+}
 
-  initiatedTransactions Transaction[] @relation("InitiatedByUser")
-  confirmedTransactions Transaction[] @relation("ConfirmedByBanker")
+enum VacancyResponseStatus {
+  PENDING
+  ACCEPTED
+  REJECTED 
+}
+model VacancyResponse {
+  id     String @id @default(cuid())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  vacancy   Vacancy @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
+  vacancyId String
+
+  status VacancyResponseStatus @default(PENDING)
+
+  coverLetter String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, vacancyId])
 }
 
 enum ApplicationStatus {
@@ -57,15 +80,13 @@ enum ApplicationStatus {
 }
 
 model Application {
-  id String @id @default(cuid())
-  user User @relation(fields: [userId], references: [id])
-  userId String
-
-  status ApplicationStatus @default(PENDING)
-  text String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String            @id @default(cuid())
+  user      User              @relation(fields: [userId], references: [id])
+  userId    String
+  status    ApplicationStatus @default(PENDING)
+  text      String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
 }
 
 enum ArticleType {
@@ -75,19 +96,15 @@ enum ArticleType {
 }
 
 model Article {
-  id String @id @default(cuid())
-
-  user User @relation(fields: [userId], references: [id])
-  userId String
-
-  title String
-  text String
-  type ArticleType
-
-  likes ArticleLike[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String      @id @default(cuid())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  title     String
+  text      String
+  type      ArticleType
+  likes     ArticleLike[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
 model ArticleLike {
@@ -95,7 +112,6 @@ model ArticleLike {
   userId    String
   article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
   articleId String
-  
   createdAt DateTime @default(now())
 
   @@id([userId, articleId])
@@ -110,43 +126,36 @@ enum OrderStatus {
 }
 
 model Order {
-  id String @id @default(cuid())
-
+  id         String      @id @default(cuid())
   playerUuid String
-  status OrderStatus @default(CREATED)
-  items     OrderItem[]
-
-  user User @relation(fields: [userId], references: [id])
-  userId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  status     OrderStatus @default(CREATED)
+  items      OrderItem[]
+  user       User        @relation(fields: [userId], references: [id])
+  userId     String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 }
 
 model OrderItem {
-  id       String  @id @default(cuid())
+  id       String @id @default(cuid())
   name     String
   quantity Int
   price    Float
-  order    Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId  String
 }
 
 model Card {
-  id String @id @default(cuid())
-
-  title String
-  credits Int @default(0)
-  cardNumber String @unique
-
-  user User @relation(fields: [userId], references: [id])
-  userId String
-
-  transactions Transaction[]
-  relatedTransactions   Transaction[] @relation("RelatedCardTransactions")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                  String        @id @default(cuid())
+  title               String
+  credits             Int           @default(0)
+  cardNumber          String        @unique
+  user                User          @relation(fields: [userId], references: [id])
+  userId              String
+  transactions        Transaction[]
+  relatedTransactions Transaction[] @relation("RelatedCardTransactions")
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
 }
 
 enum TransactionType {
@@ -163,27 +172,21 @@ enum TransactionStatus {
 }
 
 model Transaction {
-  id String @id @default(cuid())
-
-  type TransactionType
-  status TransactionStatus @default(PENDING)
-  amount Int
-  confirmationCode String?  @unique 
-
+  id                  String             @id @default(cuid())
+  type                TransactionType
+  status              TransactionStatus  @default(PENDING)
+  amount              Int
+  confirmationCode    String?            @unique
   confirmedByBankerId String?
-  confirmedByBanker   User?  @relation("ConfirmedByBanker", fields: [confirmedByBankerId], references: [id])
-
-  relatedCardId String?
-  relatedCard   Card?    @relation("RelatedCardTransactions", fields: [relatedCardId], references: [id])
-
-  cardId     String
-  card       Card     @relation(fields: [cardId], references: [id])
-  
-  userId     String
-  user       User     @relation("InitiatedByUser", fields: [userId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  confirmedByBanker   User?              @relation("ConfirmedByBanker", fields: [confirmedByBankerId], references: [id])
+  relatedCardId       String?
+  relatedCard         Card?              @relation("RelatedCardTransactions", fields: [relatedCardId], references: [id])
+  cardId              String
+  card                Card               @relation(fields: [cardId], references: [id])
+  userId              String
+  user                User               @relation("InitiatedByUser", fields: [userId], references: [id])
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
 }
 
 enum SalaryType {
@@ -192,54 +195,44 @@ enum SalaryType {
 }
 
 enum PaymentPeriod {
-  PER_TASK  
-  PER_HOUR  
-  PER_DAY   
-  PER_WEEK  
-  PER_MONTH 
+  PER_TASK
+  PER_HOUR
+  PER_DAY
+  PER_WEEK
+  PER_MONTH
 }
 
 model Salary {
-  id String @id @default(cuid())
-
-  type SalaryType
+  id          String        @id @default(cuid())
+  type        SalaryType
   fixedAmount Int?
-  minAmount Int?
-  maxAmount Int?
-
-  period PaymentPeriod
-
-  vacancy   Vacancy @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
-  vacancyId String  @unique
+  minAmount   Int?
+  maxAmount   Int?
+  period      PaymentPeriod
+  vacancy     Vacancy       @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
+  vacancyId   String        @unique
 }
 
 model Vacancy {
-  id String @id @default(cuid())
-
-  title String
+  id          String   @id @default(cuid())
+  title       String
   description String
+  salary      Salary?
+  occupation  Jobs
+  company     Company  @relation(fields: [companyId], references: [id])
+  companyId   String
+  responses   VacancyResponse[]
 
-  salary Salary?
-
-  occupation Jobs
-
-  company   Company @relation(fields: [companyId], references: [id])
-  companyId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Company {
-  id String @id @default(cuid())
-
-  title String
+  id          String    @id @default(cuid())
+  title       String
   description String
-
-  employees User[] @relation("employees")
-
-  ceo User @relation("CEO", fields: [ceoId], references: [id])
-  ceoId String
-
-  vacancies Vacancy[]
+  employees   User[]    @relation("employees")
+  ceo         User      @relation("CEO", fields: [ceoId], references: [id])
+  ceoId       String
+  vacancies   Vacancy[]
 }
